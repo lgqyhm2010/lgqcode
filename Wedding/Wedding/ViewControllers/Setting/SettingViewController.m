@@ -121,11 +121,13 @@ typedef enum {
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section == 0) {
         switch (indexPath.row) {
             case PersonalInformation:
             {
                 PersonalInformationViewController *personalIndromationVC = [[PersonalInformationViewController alloc]init];
+                personalIndromationVC.hidesBottomBarWhenPushed = YES;
                 [self.navigationController pushViewController:personalIndromationVC animated:YES];
                 [personalIndromationVC release];personalIndromationVC = nil;
             }
@@ -144,6 +146,7 @@ typedef enum {
             case UserHelp:
             {
                 UserHelpViewController *userHelpVC = [[UserHelpViewController alloc]init];
+                userHelpVC.hidesBottomBarWhenPushed = YES;
                 [self.navigationController pushViewController:userHelpVC animated:YES];
                 [userHelpVC release];userHelpVC = nil;
             }
@@ -151,6 +154,7 @@ typedef enum {
               case Feedback:
             {
                 FeedbackViewController *feedbaceVC = [[FeedbackViewController alloc]init];
+                feedbaceVC.hidesBottomBarWhenPushed = YES;
                 [self.navigationController pushViewController:feedbaceVC animated:YES];
                 [feedbaceVC release];feedbaceVC = nil;
             }
@@ -163,6 +167,7 @@ typedef enum {
                 case AboutRomantic:
             {
                 AboutRomanticViewController *aboutRomanticVC = [[AboutRomanticViewController alloc]init];
+                aboutRomanticVC.hidesBottomBarWhenPushed = YES;
                 [self.navigationController pushViewController:aboutRomanticVC animated:YES];
                 [aboutRomanticVC release];aboutRomanticVC = nil;
             }

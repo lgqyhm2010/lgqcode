@@ -8,14 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@class SuperViewController;
 @class MCNotification;
+@class WedTabBarViewController;
 
 @interface WeddingDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (strong ,nonatomic) WedTabBarViewController *tabBarViewController;
 
-@property (strong, nonatomic) SuperViewController *viewController;
 @property (strong, nonatomic) MCNotification *notification;
 
 @end

@@ -7,9 +7,8 @@
 //
 
 #import "WeddingDelegate.h"
-
-#import "SuperViewController.h"
 #import "MCNotification.h"
+#import "WedTabBarViewController.h"
 
 @implementation WeddingDelegate
 
@@ -24,12 +23,19 @@
     return _notification;
 }
 
+- (WedTabBarViewController *)tabBarViewController
+{
+    if (!_tabBarViewController) {
+        _tabBarViewController = [[WedTabBarViewController alloc]init];
+    }
+    return _tabBarViewController;
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    self.viewController = [[SuperViewController alloc] init];
-    self.window.rootViewController = self.viewController;
+    self.window.rootViewController = self.tabBarViewController;
     [self.window makeKeyAndVisible];
 //    [uiv]
     return YES;

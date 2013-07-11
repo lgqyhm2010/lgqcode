@@ -27,6 +27,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    [self setNavigationTitle:@"婚纱照"];
+
 }
 
 - (void)didReceiveMemoryWarning

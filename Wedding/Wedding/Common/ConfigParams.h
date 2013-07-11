@@ -65,7 +65,7 @@ return self; \
 //======================全局数据===============================
 
 #define KFontDefault @"HelveticaNeue"
-
+#define FreeMemory(x) [x release],x = nil; 
 
 #ifndef __OPTIMIZE__
 #   define DLog(fmt, ...) {NSLog((@"\n%s [Line %d]\n " fmt @"\n\n"), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);}

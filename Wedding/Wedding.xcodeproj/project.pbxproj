@@ -90,6 +90,7 @@
 		0E5AF9A9178EDB8D00701BBF /* UserHelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E5AF9A8178EDB8D00701BBF /* UserHelpViewController.m */; };
 		0E5AF9AC178EDBC100701BBF /* FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E5AF9AB178EDBC000701BBF /* FeedbackViewController.m */; };
 		0E5AF9AF178EDC0400701BBF /* AboutRomanticViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E5AF9AE178EDC0400701BBF /* AboutRomanticViewController.m */; };
+		0E5AF9B2178F059E00701BBF /* WedTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E5AF9B1178F059E00701BBF /* WedTabBarViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -248,6 +249,8 @@
 		0E5AF9AB178EDBC000701BBF /* FeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackViewController.m; sourceTree = "<group>"; };
 		0E5AF9AD178EDC0400701BBF /* AboutRomanticViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutRomanticViewController.h; sourceTree = "<group>"; };
 		0E5AF9AE178EDC0400701BBF /* AboutRomanticViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutRomanticViewController.m; sourceTree = "<group>"; };
+		0E5AF9B0178F059E00701BBF /* WedTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WedTabBarViewController.h; sourceTree = "<group>"; };
+		0E5AF9B1178F059E00701BBF /* WedTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WedTabBarViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -363,6 +366,8 @@
 				0E2E10C4178C6B1500FEC019 /* PhotoViewController.m */,
 				0E2E10C6178C6B2500FEC019 /* VideoViewController.h */,
 				0E2E10C7178C6B2500FEC019 /* VideoViewController.m */,
+				0E5AF9B0178F059E00701BBF /* WedTabBarViewController.h */,
+				0E5AF9B1178F059E00701BBF /* WedTabBarViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -750,6 +755,7 @@
 				0E5AF9A9178EDB8D00701BBF /* UserHelpViewController.m in Sources */,
 				0E5AF9AC178EDBC100701BBF /* FeedbackViewController.m in Sources */,
 				0E5AF9AF178EDC0400701BBF /* AboutRomanticViewController.m in Sources */,
+				0E5AF9B2178F059E00701BBF /* WedTabBarViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

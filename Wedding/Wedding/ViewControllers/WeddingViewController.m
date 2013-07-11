@@ -27,6 +27,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    [self setNavigationTitle:@"首页"];
 }
 
 - (void)didReceiveMemoryWarning
