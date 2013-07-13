@@ -10,8 +10,8 @@
 
 @interface UIViewController (Additions)
 
-- (void)dismissViewControllerAnimated: (BOOL)flag completionWithBlock: (void (^)(void))completion ;
-
+-(void)presentModalViewControllerMy:(UIViewController *)modalViewController animated:(BOOL)animated;
+-(void)dismissModalViewControllerAnimatedMy:(BOOL)animated;
 -(void)setRightNavigationItemTitle:(NSString*)title selector:(SEL)selector;
 -(void)setLeftNavigationItemTitle:(NSString*)title selector:(SEL)selector;
 -(void)setNavigationTitle:(NSString *)title withColor:(UIColor *)color;

@@ -43,30 +43,6 @@
 
 @implementation UIViewController (Additions)
 
-- (void)dismissViewControllerAnimated: (BOOL)animated completionWithBlock: (void (^)(void))completion {
-    
-    //    if ([self respondsToSelector:@selector(dismissViewControllerAnimated:completion:)]) {
-    //        [self dismissViewControllerAnimated:animated completion:completion];
-    //    } else {
-    void (^animations)(void) = ^(void){
-        if ([self respondsToSelector:@selector(dismissViewControllerAnimated:completion:)]) {
-            [self dismissViewControllerAnimated:animated completion:completion];
-        } else {
-            [self dismissModalViewControllerAnimated:animated];
-        }
-    };
-    
-    void (^comp)(BOOL finish) = ^(BOOL finish) {
-        if (completion) {
-            completion();
-        }
-    };
-    
-    [UIView animateWithDuration:0.38f delay:0 options:0 animations:animations completion:comp];
-    //    }
-}
-
-
 #pragma mark -
 
 -(UIBarButtonItem*)allocBarButtonItem:(NSString*)title selector:(SEL)selector selImg:(NSString*)selImg unselImg:(NSString*)unselImg {
@@ -264,6 +240,33 @@
     } else {
         [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:image]];
     }
+}
+
+-(void)presentModalViewControllerMy:(UIViewController *)modalViewController animated:(BOOL)animated
+{
+    //    NSLog(@"self %@",self);
+#if __IPHONE_OS_VERSION_MAX_ALLOWED>=60000
+        
+[self presentViewController:modalViewController animated:animated completion:Nil];
+           
+    
+#else
+    [self presentModalViewController:modalViewController animated:animated];
+    
+#endif
+    
+    
+}
+
+-(void)dismissModalViewControllerAnimatedMy:(BOOL)animated
+{
+#if __IPHONE_OS_VERSION_MAX_ALLOWED>=60000
+        
+    [self dismissViewControllerAnimated:animated completion:Nil];
+ #else
+    [self dismissModalViewControllerAnimated:animated];
+#endif
+    
 }
 
 -(void)setDefaultNavigationBackground {

@@ -11,8 +11,11 @@
 #import "UserHelpViewController.h"
 #import "FeedbackViewController.h"
 #import "AboutRomanticViewController.h"
+#import <MessageUI/MessageUI.h>
 
-@interface SettingViewController ()<UITableViewDataSource,UITableViewDelegate>
+#define KMessageContent @"爱浪漫"
+
+@interface SettingViewController ()<UITableViewDataSource,UITableViewDelegate,MFMessageComposeViewControllerDelegate>
 @property (nonatomic,retain) UITableView *settingTableView;
 @property (nonatomic,retain) NSArray *titles;   //所有的设置标题文案
 
@@ -135,6 +138,14 @@ typedef enum {
                 case ShareTofriend:
             {
                 
+                if ([MFMessageComposeViewController canSendText]) {
+                    MFMessageComposeViewController *message = [[MFMessageComposeViewController alloc]init];
+                    message.messageComposeDelegate = self;
+                    [message setBody:KMessageContent];
+                    [self presentModalViewControllerMy:message animated:YES];
+                    FreeMemory(message);
+                    
+                }
             }
                 break;
                 
@@ -161,7 +172,12 @@ typedef enum {
                 break;
              case CheckUpdate:
             {
-                
+                [Notification showWaitViewInView:self.view text:@"正在检查新版本" animation:YES];
+                double delayInSeconds = 2.0;
+                dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+                dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                    [Notification hiddenWaitView:NO];
+                });
             }
                 break;
                 case AboutRomantic:
@@ -176,6 +192,13 @@ typedef enum {
                 break;
         }
     }
+}
+
+#pragma mark messageDelegate
+
+- (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result
+{
+    [self dismissModalViewControllerAnimatedMy:YES];
 }
 
 @end
