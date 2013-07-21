@@ -9,6 +9,7 @@
 #import "AboutRomanticViewController.h"
 #import "FeedbackViewController.h"
 #import "IntroducedFunctionViewController.h"
+#import "GuidePhotoViewController.h"
 
 @interface AboutRomanticViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -113,7 +114,7 @@ typedef NS_ENUM(NSInteger, KRow){
         break;
             case RowIntroduceFormation:
         {
-            IntroducedFunctionViewController *introduceVC = [[IntroducedFunctionViewController alloc]init];
+            GuidePhotoViewController *introduceVC = [[GuidePhotoViewController alloc]initWithEntryType:EntryIntroduceType];
             [self.navigationController pushViewController:introduceVC animated:YES];
             [introduceVC release];
         }
