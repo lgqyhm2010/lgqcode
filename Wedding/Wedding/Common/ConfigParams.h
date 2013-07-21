@@ -62,6 +62,11 @@ return NSUIntegerMax; \
 return self; \
 }
 
+#define isJsonDictionaryHasKeyForString(jsonDic, key)   ([jsonDic jsonObjectForKey:key] && [[jsonDic jsonObjectForKey:key] isKindOfClass:[NSString class]] && [(NSString *)[jsonDic jsonObjectForKey:key] length] > 0)
+#define isJsonDictionaryHasKeyForDictionary(jsonDic, key)   ([jsonDic jsonObjectForKey:key] && [[jsonDic jsonObjectForKey:key] isKindOfClass:[NSDictionary class]])
+#define isJsonDictionaryHasKeyForArray(jsonDic, key)   ([jsonDic jsonObjectForKey:key] && [[jsonDic jsonObjectForKey:key] isKindOfClass:[NSArray class]])
+
+
 //======================全局数据===============================
 
 #define KFontDefault @"HelveticaNeue"

@@ -18,4 +18,6 @@
 
 @property (strong, nonatomic) MCNotification *notification;
 
+- (NSString *)documentPath;
+
 @end

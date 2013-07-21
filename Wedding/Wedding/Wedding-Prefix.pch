@@ -17,6 +17,9 @@
     #import "MCNotification.h"
     #import "ToolSet.h"
     #import "UIViewController+Additions.h"
+    #import "UIDeviceHardware.h"
+    #import "JSONKit.h"
+    #import "NSDictionary(Json).h"
 
 #define AppDelegate (WeddingDelegate*)[[UIApplication sharedApplication] delegate]
 #define Notification [(WeddingDelegate*)[UIApplication sharedApplication].delegate notification]

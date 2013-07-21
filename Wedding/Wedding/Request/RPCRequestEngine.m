@@ -30,24 +30,24 @@
 
 - (id) init {
     if (self = [super init]) {
-//        self.serviceURL = kPIMURL;
+        self.serviceURL = KRomanticURL;
     }
     return self;
 }
 
 
 //固定的基本参数
-- (NSDictionary *)baseParams{
-    
-//       NSDictionary *baseParams = @{
-//        @"client_id": @"1",
-//        @"session":[[Owner share] session],
-//        @"from": KStatisticChannel,
-//        @"version": KBundleVersion,
-//        @"device_id": [UIDeviceHardware getDeviceUUID]
-//        };
-//    return baseParams;
-}
+//- (NSDictionary *)baseParams{
+//    
+////       NSDictionary *baseParams = @{
+////        @"client_id": @"1",
+////        @"session":[[Owner share] session],
+////        @"from": KStatisticChannel,
+////        @"version": KBundleVersion,
+////        @"device_id": [UIDeviceHardware getDeviceUUID]
+////        };
+////    return baseParams;
+//}
 
 //  @fn 单个请求
 //  @param method  接口方法名
@@ -55,19 +55,19 @@
 //  @param successBlock(id resultObject)  调用成功才存在
 //  @param errorBlock(int errorCode, NSString *errorMessage)  失败回调
 - (void)singleCallWithMethod:(NSString* )method
-                 OtherParams:(NSDictionary* )otherParams
+                 OtherParams:(NSDictionary* )params
                 onCompletion:(RPCSingleCallSuccessBlock)successBlock
                      onError:(RPCSingleCallErrorBlock)errorBlock
 {
     NSAssert(method, @"not nil");
     
-    NSMutableDictionary *allParams = [NSMutableDictionary dictionaryWithDictionary:[self baseParams] ];
-    if (otherParams) {
-        [allParams addEntriesFromDictionary:otherParams];
-    }
+//    NSMutableDictionary *allParams = [NSMutableDictionary dictionaryWithDictionary:[self baseParams] ];
+//    if (otherParams) {
+//        [allParams addEntriesFromDictionary:otherParams];
+//    }
     
     RPCRequest *request = [RPCRequest requestWithMethod:method
-                                                 params:allParams
+                                                 params:params
                                                callback:^(RPCResponse *response,NSDictionary *responseJson)
                            {
                                DLog(@"response \n%@",responseJson);

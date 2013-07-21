@@ -31,6 +31,23 @@
     return _tabBarViewController;
 }
 
+//文件路径
+
+- (NSString *)documentPath
+{
+    static NSString *_path;
+    
+    if (!_path)
+    {
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        _path = [[paths objectAtIndex:0] copy];
+    }
+    
+    return _path;
+}
+
+
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];

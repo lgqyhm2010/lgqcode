@@ -75,6 +75,11 @@
 		0E1C9590178AEAED00F73021 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E1C958F178AEAED00F73021 /* CFNetwork.framework */; };
 		0E1C9592178AEB0E00F73021 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E1C9591178AEB0E00F73021 /* AudioToolbox.framework */; };
 		0E1C9594178AEB2D00F73021 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E1C9593178AEB2C00F73021 /* Security.framework */; };
+		0E2209A5179C25A3002625A4 /* GetLoginPicEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2209A4179C25A3002625A4 /* GetLoginPicEngine.m */; };
+		0E2209A9179C287B002625A4 /* guide_photo1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E2209A6179C287B002625A4 /* guide_photo1.png */; };
+		0E2209AA179C287B002625A4 /* guide_photo2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E2209A7179C287B002625A4 /* guide_photo2.png */; };
+		0E2209AB179C287B002625A4 /* guide_photo3.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E2209A8179C287B002625A4 /* guide_photo3.png */; };
+		0E2209AE179C2A3D002625A4 /* GuidePhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2209AD179C2A3D002625A4 /* GuidePhotoViewController.m */; };
 		0E27D042179418E7005F310E /* UIHelpViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E27D041179418E7005F310E /* UIHelpViewCell.m */; };
 		0E27D04417941AB5005F310E /* helpCellBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E27D04317941AB5005F310E /* helpCellBackground.png */; };
 		0E27D04617941ACC005F310E /* closed.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E27D04517941ACC005F310E /* closed.png */; };
@@ -243,6 +248,13 @@
 		0E1C958F178AEAED00F73021 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		0E1C9591178AEB0E00F73021 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		0E1C9593178AEB2C00F73021 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		0E2209A3179C25A3002625A4 /* GetLoginPicEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetLoginPicEngine.h; sourceTree = "<group>"; };
+		0E2209A4179C25A3002625A4 /* GetLoginPicEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetLoginPicEngine.m; sourceTree = "<group>"; };
+		0E2209A6179C287B002625A4 /* guide_photo1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guide_photo1.png; sourceTree = "<group>"; };
+		0E2209A7179C287B002625A4 /* guide_photo2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guide_photo2.png; sourceTree = "<group>"; };
+		0E2209A8179C287B002625A4 /* guide_photo3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guide_photo3.png; sourceTree = "<group>"; };
+		0E2209AC179C2A3D002625A4 /* GuidePhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuidePhotoViewController.h; sourceTree = "<group>"; };
+		0E2209AD179C2A3D002625A4 /* GuidePhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuidePhotoViewController.m; sourceTree = "<group>"; };
 		0E27D040179418E7005F310E /* UIHelpViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIHelpViewCell.h; sourceTree = "<group>"; };
 		0E27D041179418E7005F310E /* UIHelpViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIHelpViewCell.m; sourceTree = "<group>"; };
 		0E27D04317941AB5005F310E /* helpCellBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = helpCellBackground.png; sourceTree = "<group>"; };
@@ -412,6 +424,8 @@
 			isa = PBXGroup;
 			children = (
 				0E5AF9A0178EDA9D00701BBF /* Setting */,
+				0E2209AC179C2A3D002625A4 /* GuidePhotoViewController.h */,
+				0E2209AD179C2A3D002625A4 /* GuidePhotoViewController.m */,
 				0E2E10BD178C6A8B00FEC019 /* WeddingViewController.h */,
 				0E2E10BE178C6A8B00FEC019 /* WeddingViewController.m */,
 				0E1C957D178AE34500F73021 /* SuperViewController.h */,
@@ -668,6 +682,9 @@
 		0E34D48817901EA800FB3557 /* WeddingImages */ = {
 			isa = PBXGroup;
 			children = (
+				0E2209A6179C287B002625A4 /* guide_photo1.png */,
+				0E2209A7179C287B002625A4 /* guide_photo2.png */,
+				0E2209A8179C287B002625A4 /* guide_photo3.png */,
 				0EDC758117956EE200E0EAC0 /* feedback_content.png */,
 				0EDC758217956EE200E0EAC0 /* feedback_title.png */,
 				0E27D04917941CA5005F310E /* linecolor.png */,
@@ -693,6 +710,8 @@
 		0E58723917928BF600A197D7 /* Request */ = {
 			isa = PBXGroup;
 			children = (
+				0E2209A3179C25A3002625A4 /* GetLoginPicEngine.h */,
+				0E2209A4179C25A3002625A4 /* GetLoginPicEngine.m */,
 				0E58723A17928C0000A197D7 /* RPCRequestEngine.h */,
 				0E58723B17928C0000A197D7 /* RPCRequestEngine.m */,
 			);
@@ -798,6 +817,9 @@
 				0EDC758317956EE200E0EAC0 /* feedback_content.png in Resources */,
 				0EDC758417956EE200E0EAC0 /* feedback_title.png in Resources */,
 				0EDC758B179570D300E0EAC0 /* FeedbackViewController.xib in Resources */,
+				0E2209A9179C287B002625A4 /* guide_photo1.png in Resources */,
+				0E2209AA179C287B002625A4 /* guide_photo2.png in Resources */,
+				0E2209AB179C287B002625A4 /* guide_photo3.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -876,6 +898,8 @@
 				0E27D042179418E7005F310E /* UIHelpViewCell.m in Sources */,
 				0E27D04D179422C1005F310E /* IntroducedFunctionViewController.m in Sources */,
 				0EDC758A179570D300E0EAC0 /* FeedbackViewController.m in Sources */,
+				0E2209A5179C25A3002625A4 /* GetLoginPicEngine.m in Sources */,
+				0E2209AE179C2A3D002625A4 /* GuidePhotoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
