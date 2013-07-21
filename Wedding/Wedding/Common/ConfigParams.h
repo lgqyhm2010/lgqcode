@@ -65,6 +65,13 @@ return self; \
 //======================全局数据===============================
 
 #define KFontDefault @"HelveticaNeue"
+#define KNotSuppor  @"该设备不支持此功能"
+#define KMsgDefault @"温馨提示"
+
+#define KVersion    @"1.0"  //版本号
+
+#define KRomanticURL    @"http://42.96.170.168:8080/iRomantic/"
+
 #define FreeMemory(x) [x release],x = nil; 
 
 #ifndef __OPTIMIZE__

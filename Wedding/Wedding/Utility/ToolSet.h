@@ -14,5 +14,7 @@
 +(UIFont *)customBoldFontWithSize:(CGFloat) fontsize;
 //默认字体
 +(UIFont *)customNormalFontWithSize:(CGFloat) fontsize;
+// 是否为手机号
++ (BOOL)isPhoneNumber:(NSString *)phoneNumber;
 
 @end

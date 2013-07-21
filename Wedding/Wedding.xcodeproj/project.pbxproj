@@ -75,6 +75,12 @@
 		0E1C9590178AEAED00F73021 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E1C958F178AEAED00F73021 /* CFNetwork.framework */; };
 		0E1C9592178AEB0E00F73021 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E1C9591178AEB0E00F73021 /* AudioToolbox.framework */; };
 		0E1C9594178AEB2D00F73021 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E1C9593178AEB2C00F73021 /* Security.framework */; };
+		0E27D042179418E7005F310E /* UIHelpViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E27D041179418E7005F310E /* UIHelpViewCell.m */; };
+		0E27D04417941AB5005F310E /* helpCellBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E27D04317941AB5005F310E /* helpCellBackground.png */; };
+		0E27D04617941ACC005F310E /* closed.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E27D04517941ACC005F310E /* closed.png */; };
+		0E27D04817941AE1005F310E /* opened.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E27D04717941AE1005F310E /* opened.png */; };
+		0E27D04A17941CA5005F310E /* linecolor.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E27D04917941CA5005F310E /* linecolor.png */; };
+		0E27D04D179422C1005F310E /* IntroducedFunctionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E27D04C179422C1005F310E /* IntroducedFunctionViewController.m */; };
 		0E2E10AA178C332400FEC019 /* UIViewController+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2E10A9178C332400FEC019 /* UIViewController+Additions.m */; };
 		0E2E10AD178C34BA00FEC019 /* UINavigationBar+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2E10AC178C34BA00FEC019 /* UINavigationBar+Additions.m */; };
 		0E2E10B0178C377D00FEC019 /* UIColor+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2E10AF178C377D00FEC019 /* UIColor+Additions.m */; };
@@ -97,13 +103,18 @@
 		0E34D4A0179024C400FB3557 /* setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E34D49B179024C400FB3557 /* setting@2x.png */; };
 		0E34D4A1179024C400FB3557 /* wedding@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E34D49C179024C400FB3557 /* wedding@2x.png */; };
 		0E34D4A317902F1000FB3557 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E34D4A217902F1000FB3557 /* MessageUI.framework */; };
+		0E58723C17928C0000A197D7 /* RPCRequestEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E58723B17928C0000A197D7 /* RPCRequestEngine.m */; };
+		0E58723F17928C3300A197D7 /* NSDictionary(Json).m in Sources */ = {isa = PBXBuildFile; fileRef = 0E58723E17928C3300A197D7 /* NSDictionary(Json).m */; };
 		0E5AF99F178ED12500701BBF /* UIDeviceHardware.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E5AF99E178ED12500701BBF /* UIDeviceHardware.m */; };
 		0E5AF9A3178EDAAA00701BBF /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E5AF9A2178EDAAA00701BBF /* SettingViewController.m */; };
 		0E5AF9A6178EDB2200701BBF /* PersonalInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E5AF9A5178EDB2200701BBF /* PersonalInformationViewController.m */; };
 		0E5AF9A9178EDB8D00701BBF /* UserHelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E5AF9A8178EDB8D00701BBF /* UserHelpViewController.m */; };
-		0E5AF9AC178EDBC100701BBF /* FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E5AF9AB178EDBC000701BBF /* FeedbackViewController.m */; };
 		0E5AF9AF178EDC0400701BBF /* AboutRomanticViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E5AF9AE178EDC0400701BBF /* AboutRomanticViewController.m */; };
 		0E5AF9B2178F059E00701BBF /* WedTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E5AF9B1178F059E00701BBF /* WedTabBarViewController.m */; };
+		0EDC758317956EE200E0EAC0 /* feedback_content.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EDC758117956EE200E0EAC0 /* feedback_content.png */; };
+		0EDC758417956EE200E0EAC0 /* feedback_title.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EDC758217956EE200E0EAC0 /* feedback_title.png */; };
+		0EDC758A179570D300E0EAC0 /* FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EDC7588179570D300E0EAC0 /* FeedbackViewController.m */; };
+		0EDC758B179570D300E0EAC0 /* FeedbackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EDC7589179570D300E0EAC0 /* FeedbackViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -232,6 +243,14 @@
 		0E1C958F178AEAED00F73021 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		0E1C9591178AEB0E00F73021 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		0E1C9593178AEB2C00F73021 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		0E27D040179418E7005F310E /* UIHelpViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIHelpViewCell.h; sourceTree = "<group>"; };
+		0E27D041179418E7005F310E /* UIHelpViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIHelpViewCell.m; sourceTree = "<group>"; };
+		0E27D04317941AB5005F310E /* helpCellBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = helpCellBackground.png; sourceTree = "<group>"; };
+		0E27D04517941ACC005F310E /* closed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = closed.png; sourceTree = "<group>"; };
+		0E27D04717941AE1005F310E /* opened.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = opened.png; sourceTree = "<group>"; };
+		0E27D04917941CA5005F310E /* linecolor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = linecolor.png; sourceTree = "<group>"; };
+		0E27D04B179422C1005F310E /* IntroducedFunctionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroducedFunctionViewController.h; sourceTree = "<group>"; };
+		0E27D04C179422C1005F310E /* IntroducedFunctionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroducedFunctionViewController.m; sourceTree = "<group>"; };
 		0E2E10A8178C332400FEC019 /* UIViewController+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Additions.h"; sourceTree = "<group>"; };
 		0E2E10A9178C332400FEC019 /* UIViewController+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Additions.m"; sourceTree = "<group>"; };
 		0E2E10AB178C34BA00FEC019 /* UINavigationBar+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+Additions.h"; sourceTree = "<group>"; };
@@ -263,6 +282,10 @@
 		0E34D49B179024C400FB3557 /* setting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "setting@2x.png"; sourceTree = "<group>"; };
 		0E34D49C179024C400FB3557 /* wedding@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wedding@2x.png"; sourceTree = "<group>"; };
 		0E34D4A217902F1000FB3557 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		0E58723A17928C0000A197D7 /* RPCRequestEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPCRequestEngine.h; sourceTree = "<group>"; };
+		0E58723B17928C0000A197D7 /* RPCRequestEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPCRequestEngine.m; sourceTree = "<group>"; };
+		0E58723D17928C3300A197D7 /* NSDictionary(Json).h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary(Json).h"; sourceTree = "<group>"; };
+		0E58723E17928C3300A197D7 /* NSDictionary(Json).m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary(Json).m"; sourceTree = "<group>"; };
 		0E5AF99D178ED12500701BBF /* UIDeviceHardware.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIDeviceHardware.h; sourceTree = "<group>"; };
 		0E5AF99E178ED12500701BBF /* UIDeviceHardware.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIDeviceHardware.m; sourceTree = "<group>"; };
 		0E5AF9A1178EDAAA00701BBF /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
@@ -271,12 +294,15 @@
 		0E5AF9A5178EDB2200701BBF /* PersonalInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalInformationViewController.m; sourceTree = "<group>"; };
 		0E5AF9A7178EDB8D00701BBF /* UserHelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserHelpViewController.h; sourceTree = "<group>"; };
 		0E5AF9A8178EDB8D00701BBF /* UserHelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserHelpViewController.m; sourceTree = "<group>"; };
-		0E5AF9AA178EDBC000701BBF /* FeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackViewController.h; sourceTree = "<group>"; };
-		0E5AF9AB178EDBC000701BBF /* FeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackViewController.m; sourceTree = "<group>"; };
 		0E5AF9AD178EDC0400701BBF /* AboutRomanticViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutRomanticViewController.h; sourceTree = "<group>"; };
 		0E5AF9AE178EDC0400701BBF /* AboutRomanticViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutRomanticViewController.m; sourceTree = "<group>"; };
 		0E5AF9B0178F059E00701BBF /* WedTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WedTabBarViewController.h; sourceTree = "<group>"; };
 		0E5AF9B1178F059E00701BBF /* WedTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WedTabBarViewController.m; sourceTree = "<group>"; };
+		0EDC758117956EE200E0EAC0 /* feedback_content.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = feedback_content.png; sourceTree = "<group>"; };
+		0EDC758217956EE200E0EAC0 /* feedback_title.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = feedback_title.png; sourceTree = "<group>"; };
+		0EDC7587179570D300E0EAC0 /* FeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackViewController.h; sourceTree = "<group>"; };
+		0EDC7588179570D300E0EAC0 /* FeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackViewController.m; sourceTree = "<group>"; };
+		0EDC7589179570D300E0EAC0 /* FeedbackViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedbackViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -346,6 +372,7 @@
 		0E1C94BC178AE0AC00F73021 /* Wedding */ = {
 			isa = PBXGroup;
 			children = (
+				0E58723917928BF600A197D7 /* Request */,
 				0E1C94DB178AE19E00F73021 /* ViewControllers */,
 				0E1C957C178AE31300F73021 /* Additions */,
 				0E1C94DC178AE27500F73021 /* Utility */,
@@ -626,6 +653,8 @@
 		0E1C957C178AE31300F73021 /* Additions */ = {
 			isa = PBXGroup;
 			children = (
+				0E58723D17928C3300A197D7 /* NSDictionary(Json).h */,
+				0E58723E17928C3300A197D7 /* NSDictionary(Json).m */,
 				0E2E10A8178C332400FEC019 /* UIViewController+Additions.h */,
 				0E2E10A9178C332400FEC019 /* UIViewController+Additions.m */,
 				0E2E10AB178C34BA00FEC019 /* UINavigationBar+Additions.h */,
@@ -639,6 +668,12 @@
 		0E34D48817901EA800FB3557 /* WeddingImages */ = {
 			isa = PBXGroup;
 			children = (
+				0EDC758117956EE200E0EAC0 /* feedback_content.png */,
+				0EDC758217956EE200E0EAC0 /* feedback_title.png */,
+				0E27D04917941CA5005F310E /* linecolor.png */,
+				0E27D04717941AE1005F310E /* opened.png */,
+				0E27D04517941ACC005F310E /* closed.png */,
+				0E27D04317941AB5005F310E /* helpCellBackground.png */,
 				0E34D498179024C400FB3557 /* photo@2x.png */,
 				0E34D499179024C400FB3557 /* vieo@2x.png */,
 				0E34D49A179024C400FB3557 /* social@2x.png */,
@@ -655,19 +690,33 @@
 			path = WeddingImages;
 			sourceTree = "<group>";
 		};
+		0E58723917928BF600A197D7 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				0E58723A17928C0000A197D7 /* RPCRequestEngine.h */,
+				0E58723B17928C0000A197D7 /* RPCRequestEngine.m */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
 		0E5AF9A0178EDA9D00701BBF /* Setting */ = {
 			isa = PBXGroup;
 			children = (
+				0E27D040179418E7005F310E /* UIHelpViewCell.h */,
+				0E27D041179418E7005F310E /* UIHelpViewCell.m */,
 				0E5AF9A1178EDAAA00701BBF /* SettingViewController.h */,
 				0E5AF9A2178EDAAA00701BBF /* SettingViewController.m */,
 				0E5AF9A4178EDB2100701BBF /* PersonalInformationViewController.h */,
 				0E5AF9A5178EDB2200701BBF /* PersonalInformationViewController.m */,
 				0E5AF9A7178EDB8D00701BBF /* UserHelpViewController.h */,
 				0E5AF9A8178EDB8D00701BBF /* UserHelpViewController.m */,
-				0E5AF9AA178EDBC000701BBF /* FeedbackViewController.h */,
-				0E5AF9AB178EDBC000701BBF /* FeedbackViewController.m */,
 				0E5AF9AD178EDC0400701BBF /* AboutRomanticViewController.h */,
 				0E5AF9AE178EDC0400701BBF /* AboutRomanticViewController.m */,
+				0E27D04B179422C1005F310E /* IntroducedFunctionViewController.h */,
+				0E27D04C179422C1005F310E /* IntroducedFunctionViewController.m */,
+				0EDC7587179570D300E0EAC0 /* FeedbackViewController.h */,
+				0EDC7588179570D300E0EAC0 /* FeedbackViewController.m */,
+				0EDC7589179570D300E0EAC0 /* FeedbackViewController.xib */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -742,6 +791,13 @@
 				0E34D49F179024C400FB3557 /* social@2x.png in Resources */,
 				0E34D4A0179024C400FB3557 /* setting@2x.png in Resources */,
 				0E34D4A1179024C400FB3557 /* wedding@2x.png in Resources */,
+				0E27D04417941AB5005F310E /* helpCellBackground.png in Resources */,
+				0E27D04617941ACC005F310E /* closed.png in Resources */,
+				0E27D04817941AE1005F310E /* opened.png in Resources */,
+				0E27D04A17941CA5005F310E /* linecolor.png in Resources */,
+				0EDC758317956EE200E0EAC0 /* feedback_content.png in Resources */,
+				0EDC758417956EE200E0EAC0 /* feedback_title.png in Resources */,
+				0EDC758B179570D300E0EAC0 /* FeedbackViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -813,9 +869,13 @@
 				0E5AF9A3178EDAAA00701BBF /* SettingViewController.m in Sources */,
 				0E5AF9A6178EDB2200701BBF /* PersonalInformationViewController.m in Sources */,
 				0E5AF9A9178EDB8D00701BBF /* UserHelpViewController.m in Sources */,
-				0E5AF9AC178EDBC100701BBF /* FeedbackViewController.m in Sources */,
 				0E5AF9AF178EDC0400701BBF /* AboutRomanticViewController.m in Sources */,
 				0E5AF9B2178F059E00701BBF /* WedTabBarViewController.m in Sources */,
+				0E58723C17928C0000A197D7 /* RPCRequestEngine.m in Sources */,
+				0E58723F17928C3300A197D7 /* NSDictionary(Json).m in Sources */,
+				0E27D042179418E7005F310E /* UIHelpViewCell.m in Sources */,
+				0E27D04D179422C1005F310E /* IntroducedFunctionViewController.m in Sources */,
+				0EDC758A179570D300E0EAC0 /* FeedbackViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

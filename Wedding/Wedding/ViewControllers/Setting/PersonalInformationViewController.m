@@ -8,11 +8,35 @@
 
 #import "PersonalInformationViewController.h"
 
-@interface PersonalInformationViewController ()
+@interface PersonalInformationViewController ()<UITableViewDataSource,UITableViewDelegate>
+
+@property (nonatomic,retain)UITableView *informationTableView;
+@property (nonatomic,retain)NSArray *titleArray;
 
 @end
 
 @implementation PersonalInformationViewController
+
+- (UITableView *)informationTableView
+{
+    if (!_informationTableView) {
+        CGFloat height = CGRectGetHeight(self.view.frame)-44;
+        _informationTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, height) style:UITableViewStyleGrouped];
+        _informationTableView.backgroundColor = [UIColor clearColor];
+        _informationTableView.backgroundView = nil;
+        _informationTableView.delegate = self;
+        _informationTableView.dataSource = self;
+    }
+    return _informationTableView;
+}
+
+- (NSArray *)titleArray
+{
+    if (!_titleArray) {
+        _titleArray = [[NSArray alloc]initWithObjects:@"头像",@"性别",@"姓名", nil];
+    }
+    return _titleArray;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -36,6 +60,13 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)dealloc
+{
+    self.informationTableView = nil;
+    self.titleArray = nil;
+    [super dealloc];
 }
 
 @end

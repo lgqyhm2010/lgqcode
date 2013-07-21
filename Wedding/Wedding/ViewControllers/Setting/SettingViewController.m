@@ -9,7 +9,6 @@
 #import "SettingViewController.h"
 #import "PersonalInformationViewController.h"
 #import "UserHelpViewController.h"
-#import "FeedbackViewController.h"
 #import "AboutRomanticViewController.h"
 #import <MessageUI/MessageUI.h>
 
@@ -30,7 +29,7 @@
 {
     if (!_titles) {
         NSArray *firstSectonTitle = @[@"个人信息",@"分享给好友"];
-        NSArray *seconSectionTitle = @[@"用户帮助",@"意见反馈",@"检查更新",@"关于爱浪漫"];
+        NSArray *seconSectionTitle = @[@"用户帮助",@"检查更新",@"关于爱浪漫"];
         _titles = [[NSArray alloc]initWithObjects:firstSectonTitle,seconSectionTitle, nil];
     }
     return _titles;
@@ -109,15 +108,14 @@ return _settingTableView;
 #pragma mark tableview delegate
 
 typedef enum {
-    PersonalInformation=0,
-    ShareTofriend
+    PersonalInformation=0,  //个人信息
+    ShareTofriend           //分享给好友
 }FirstSection;
 
 typedef enum {
-    UserHelp = 0,
-    Feedback,
-    CheckUpdate,
-    AboutRomantic
+    UserHelp = 0,       //用户帮助
+    CheckUpdate,        //检查更新
+    AboutRomantic       //关于爱浪漫
 }SecondSection;
 
 //==================================================================
@@ -145,7 +143,8 @@ typedef enum {
                     [self presentModalViewControllerMy:message animated:YES];
                     FreeMemory(message);
                     
-                }
+                }else
+                    [Notification showMsgConfirm:self title:KMsgDefault message:KNotSuppor tag:1];
             }
                 break;
                 
@@ -162,14 +161,7 @@ typedef enum {
                 [userHelpVC release];userHelpVC = nil;
             }
                 break;
-              case Feedback:
-            {
-                FeedbackViewController *feedbaceVC = [[FeedbackViewController alloc]init];
-                feedbaceVC.hidesBottomBarWhenPushed = YES;
-                [self.navigationController pushViewController:feedbaceVC animated:YES];
-                [feedbaceVC release];feedbaceVC = nil;
-            }
-                break;
+        
              case CheckUpdate:
             {
                 [Notification showWaitViewInView:self.view text:@"正在检查新版本" animation:YES];

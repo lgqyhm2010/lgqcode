@@ -22,4 +22,12 @@
     //return [UIFont fontWithName:@"MarkerFelt-Thin" size:fontsize];
 }
 
+// 是否为手机号
++ (BOOL)isPhoneNumber:(NSString *)phoneNumber
+{
+    NSString *phoneRegex = @"1(3[0-9]|4[57]|5[^4]|8[^4])\\d{8}";
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",phoneRegex];
+    return [predicate evaluateWithObject:phoneNumber];
+}
+
 @end
