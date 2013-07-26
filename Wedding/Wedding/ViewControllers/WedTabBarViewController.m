@@ -91,6 +91,7 @@ typedef NSInteger WedTabIndex;
         FreeMemory(settingNav);
         
         [self setViewControllers:controllers];
+        [self setSelectedIndex:PhotoIndex];
         
     }
     return self;

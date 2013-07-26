@@ -51,10 +51,12 @@
 - (GuideScrollerView *)guidePhoto
 {
     if (!_guidePhoto) {
-        CGFloat height = CGRectGetHeight(self.view.frame);
-        _guidePhoto = [[GuideScrollerView alloc]initWithFrame:CGRectMake(0, 0, 320*3, height)];
+        CGFloat height = CGRectGetHeight(self.view.frame)+20;
+        _guidePhoto = [[GuideScrollerView alloc]initWithFrame:CGRectMake(0, 0, 320, height)];
+        _guidePhoto.contentSize = CGSizeMake(320*3, height);
+        _guidePhoto.pagingEnabled = YES;
         for (int index = 1; index<4; index++) {
-            UIImageView *imgView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320*index, height)];
+            UIImageView *imgView = [[UIImageView alloc]initWithFrame:CGRectMake(320*(index -1), 0, 320, height)];
             NSString *imagPath = [NSString stringWithFormat:@"guide_photo%d",index];
             imgView.image = [UIImage imageNamed:imagPath];
             [_guidePhoto addSubview:imgView];
@@ -70,7 +72,7 @@
 
 - (id)initWithEntryType:(EntryType)type
 {
-    if (self==[super init]) {
+    if (self=[super init]) {
         entryType = type;
     }
     return self;
@@ -113,16 +115,18 @@
 
 - (void)hiddenBar:(BOOL)hidden
 {
-    CGFloat height = CGRectGetHeight(self.view.frame);
+//    CGFloat height = CGRectGetHeight(self.view.frame)+20;
     if (hidden) {
         [[UIApplication sharedApplication]setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
         [self.navigationController setNavigationBarHidden:YES animated:YES];
-        [self.view setFrame:CGRectMake(0, 0, 320, height)];
+//        [self.guidePhoto setFrame:CGRectMake(0, 0, 320, height)];
+//        [self.view setFrame:CGRectMake(0, 0, 320, height+44)];
     }else
     {
         [[UIApplication sharedApplication]setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
         [self.navigationController setNavigationBarHidden:NO animated:YES];
-        [self.view setFrame:CGRectMake(0, -100, 320, height)];
+//        [self.guidePhoto setFrame:CGRectMake(0, -20, 320, height)];
+//        [self.view setFrame:<#(CGRect)#>]
     }
 }
 

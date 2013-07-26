@@ -76,6 +76,7 @@ return self; \
 #define KVersion    @"1.0"  //版本号
 
 #define KRomanticURL    @"http://42.96.170.168:8080/iRomantic/"
+#define KUerID  @"e141d3e7-f0b4-4588-9cc2-f8d1d861aef8"
 
 #define FreeMemory(x) [x release],x = nil; 
 
