@@ -8,11 +8,21 @@
 
 #import "VideoViewController.h"
 
-@interface VideoViewController ()
+@interface VideoViewController ()<UITableViewDataSource,UITableViewDelegate>
+
+@property (nonatomic,retain) UITableView *videoTableView;
+@property (nonatomic,retain) NSMutableArray *vieoList;
 
 @end
 
 @implementation VideoViewController
+
+#pragma mark getter
+
+- (NSMutableArray *)vieoList
+{
+    
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -35,6 +45,12 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)dealloc
+{
+    self.videoTableView = nil;
+    [super dealloc];
 }
 
 @end
