@@ -11,6 +11,7 @@
 #import "SDImageCache.h"
 #import "UIImageView+WebCache.h"
 #import "ParsePhotoParams.h"
+#import "PhotoDetailViewController.h"
 
 #define KPhotoTag1      1000
 #define KPhotoTag2      1001
@@ -23,6 +24,7 @@
 @property (nonatomic,strong) UITableView *photoTableView2;
 @property (nonatomic,strong) NSMutableArray *photoArray1;
 @property (nonatomic,strong) NSMutableArray *photoArray2;
+@property (nonatomic,strong) NSMutableArray *photoArray;
 
 @end
 
@@ -73,6 +75,16 @@
 }
 
 
+- (NSMutableArray *)photoArray
+{
+    if (!_photoArray) {
+        _photoArray = [[NSMutableArray alloc]init];
+    }
+    return _photoArray;
+}
+
+
+
 - (void)getPhotoData
 {
     [Notification showWaitView:@"请稍等" animation:YES];
@@ -84,6 +96,7 @@
             for (int i = 0; i<[responseData count]; i++) {
                 ParsePhotoParams *photoParse = [[ParsePhotoParams alloc]init];
                 [photoParse parse:responseData[i]];
+                [self.photoArray addObject:photoParse];
                 if (i%2 == 0) {
                     [self.photoArray1  addObject:photoParse];
                 }else
@@ -195,7 +208,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    int currenIndex = tableView.tag == KPhotoTag1?indexPath.row*2:indexPath.row*2+1;
     
+    PhotoDetailViewController *detailVC = [[PhotoDetailViewController alloc]initWithPhotos:self.photoArray currentPhotoIndex:currenIndex];
+    detailVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:detailVC animated:YES];
 }
 
 #pragma mark scrollerview delegate

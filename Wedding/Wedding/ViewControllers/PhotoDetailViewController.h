@@ -10,4 +10,6 @@
 
 @interface PhotoDetailViewController : SuperViewController
 
+- (id)initWithPhotos:(NSArray *)photos currentPhotoIndex:(int)index;
+
 @end

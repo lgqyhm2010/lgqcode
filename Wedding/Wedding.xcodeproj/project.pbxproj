@@ -139,7 +139,7 @@
 		0E5AF9A9178EDB8D00701BBF /* UserHelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E5AF9A8178EDB8D00701BBF /* UserHelpViewController.m */; };
 		0E5AF9AF178EDC0400701BBF /* AboutRomanticViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E5AF9AE178EDC0400701BBF /* AboutRomanticViewController.m */; };
 		0E5AF9B2178F059E00701BBF /* WedTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E5AF9B1178F059E00701BBF /* WedTabBarViewController.m */; };
-		0EC6C5DC17A2C9A000639E5A /* PhotoDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EC6C5DB17A2C9A000639E5A /* PhotoDetailViewController.m */; };
+		0E9838D817A2D792007CF86D /* PhotoDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E9838D717A2D792007CF86D /* PhotoDetailViewController.m */; };
 		0EDC758317956EE200E0EAC0 /* feedback_content.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EDC758117956EE200E0EAC0 /* feedback_content.png */; };
 		0EDC758417956EE200E0EAC0 /* feedback_title.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EDC758217956EE200E0EAC0 /* feedback_title.png */; };
 		0EDC758A179570D300E0EAC0 /* FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EDC7588179570D300E0EAC0 /* FeedbackViewController.m */; };
@@ -378,8 +378,8 @@
 		0E5AF9AE178EDC0400701BBF /* AboutRomanticViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutRomanticViewController.m; sourceTree = "<group>"; };
 		0E5AF9B0178F059E00701BBF /* WedTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WedTabBarViewController.h; sourceTree = "<group>"; };
 		0E5AF9B1178F059E00701BBF /* WedTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WedTabBarViewController.m; sourceTree = "<group>"; };
-		0EC6C5DA17A2C9A000639E5A /* PhotoDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoDetailViewController.h; sourceTree = "<group>"; };
-		0EC6C5DB17A2C9A000639E5A /* PhotoDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoDetailViewController.m; sourceTree = "<group>"; };
+		0E9838D617A2D792007CF86D /* PhotoDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoDetailViewController.h; sourceTree = "<group>"; };
+		0E9838D717A2D792007CF86D /* PhotoDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoDetailViewController.m; sourceTree = "<group>"; };
 		0EDC758117956EE200E0EAC0 /* feedback_content.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = feedback_content.png; sourceTree = "<group>"; };
 		0EDC758217956EE200E0EAC0 /* feedback_title.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = feedback_title.png; sourceTree = "<group>"; };
 		0EDC7587179570D300E0EAC0 /* FeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackViewController.h; sourceTree = "<group>"; };
@@ -507,6 +507,8 @@
 			isa = PBXGroup;
 			children = (
 				0E5AF9A0178EDA9D00701BBF /* Setting */,
+				0E9838D617A2D792007CF86D /* PhotoDetailViewController.h */,
+				0E9838D717A2D792007CF86D /* PhotoDetailViewController.m */,
 				0E2209AC179C2A3D002625A4 /* GuidePhotoViewController.h */,
 				0E2209AD179C2A3D002625A4 /* GuidePhotoViewController.m */,
 				0E2E10BD178C6A8B00FEC019 /* WeddingViewController.h */,
@@ -517,8 +519,6 @@
 				0E2E10C1178C6AFF00FEC019 /* SocialViewController.m */,
 				0E2E10C3178C6B1500FEC019 /* PhotoViewController.h */,
 				0E2E10C4178C6B1500FEC019 /* PhotoViewController.m */,
-				0EC6C5DA17A2C9A000639E5A /* PhotoDetailViewController.h */,
-				0EC6C5DB17A2C9A000639E5A /* PhotoDetailViewController.m */,
 				0E2E10C6178C6B2500FEC019 /* VideoViewController.h */,
 				0E2E10C7178C6B2500FEC019 /* VideoViewController.m */,
 				0E5AF9B0178F059E00701BBF /* WedTabBarViewController.h */,
@@ -1063,7 +1063,7 @@
 				0E2862F117A2A9C3008D9B03 /* UIImage+WebP.m in Sources */,
 				0E2862F217A2A9C3008D9B03 /* UIImageView+WebCache.m in Sources */,
 				0E2862F817A2AA9E008D9B03 /* ParsePhotoParams.m in Sources */,
-				0EC6C5DC17A2C9A000639E5A /* PhotoDetailViewController.m in Sources */,
+				0E9838D817A2D792007CF86D /* PhotoDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
