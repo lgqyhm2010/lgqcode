@@ -109,6 +109,12 @@
 		0E2862F817A2AA9E008D9B03 /* ParsePhotoParams.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2862F617A2AA9E008D9B03 /* ParsePhotoParams.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		0E2862FA17A2AC8D008D9B03 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E2862F917A2AC8D008D9B03 /* ImageIO.framework */; };
 		0E2862FC17A2ACCA008D9B03 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E2862FB17A2ACCA008D9B03 /* MapKit.framework */; };
+		0E2B33C517A397C100764ECE /* ParseVideoParams.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2B33C417A397C100764ECE /* ParseVideoParams.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		0E2B33C817A3A17C00764ECE /* ParseLoginParams.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2B33C717A3A17C00764ECE /* ParseLoginParams.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		0E2B33CB17A3A19700764ECE /* ParseRegisterParams.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2B33CA17A3A19700764ECE /* ParseRegisterParams.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		0E2B33CE17A3A21800764ECE /* ParseUserUpdateDataParams.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2B33CD17A3A21800764ECE /* ParseUserUpdateDataParams.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		0E2B33D117A3A24D00764ECE /* ParseWishingParsms.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2B33D017A3A24D00764ECE /* ParseWishingParsms.m */; };
+		0E2B33D417A3A2A000764ECE /* ParseGetVersionParams.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2B33D317A3A2A000764ECE /* ParseGetVersionParams.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		0E2E10AA178C332400FEC019 /* UIViewController+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2E10A9178C332400FEC019 /* UIViewController+Additions.m */; };
 		0E2E10AD178C34BA00FEC019 /* UINavigationBar+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2E10AC178C34BA00FEC019 /* UINavigationBar+Additions.m */; };
 		0E2E10B0178C377D00FEC019 /* UIColor+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2E10AF178C377D00FEC019 /* UIColor+Additions.m */; };
@@ -331,6 +337,18 @@
 		0E2862F617A2AA9E008D9B03 /* ParsePhotoParams.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParsePhotoParams.m; sourceTree = "<group>"; };
 		0E2862F917A2AC8D008D9B03 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		0E2862FB17A2ACCA008D9B03 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		0E2B33C317A397C100764ECE /* ParseVideoParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParseVideoParams.h; sourceTree = "<group>"; };
+		0E2B33C417A397C100764ECE /* ParseVideoParams.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParseVideoParams.m; sourceTree = "<group>"; };
+		0E2B33C617A3A17C00764ECE /* ParseLoginParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParseLoginParams.h; sourceTree = "<group>"; };
+		0E2B33C717A3A17C00764ECE /* ParseLoginParams.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParseLoginParams.m; sourceTree = "<group>"; };
+		0E2B33C917A3A19700764ECE /* ParseRegisterParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParseRegisterParams.h; sourceTree = "<group>"; };
+		0E2B33CA17A3A19700764ECE /* ParseRegisterParams.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParseRegisterParams.m; sourceTree = "<group>"; };
+		0E2B33CC17A3A21800764ECE /* ParseUserUpdateDataParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParseUserUpdateDataParams.h; sourceTree = "<group>"; };
+		0E2B33CD17A3A21800764ECE /* ParseUserUpdateDataParams.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParseUserUpdateDataParams.m; sourceTree = "<group>"; };
+		0E2B33CF17A3A24D00764ECE /* ParseWishingParsms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParseWishingParsms.h; sourceTree = "<group>"; };
+		0E2B33D017A3A24D00764ECE /* ParseWishingParsms.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParseWishingParsms.m; sourceTree = "<group>"; };
+		0E2B33D217A3A2A000764ECE /* ParseGetVersionParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParseGetVersionParams.h; sourceTree = "<group>"; };
+		0E2B33D317A3A2A000764ECE /* ParseGetVersionParams.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParseGetVersionParams.m; sourceTree = "<group>"; };
 		0E2E10A8178C332400FEC019 /* UIViewController+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Additions.h"; sourceTree = "<group>"; };
 		0E2E10A9178C332400FEC019 /* UIViewController+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Additions.m"; sourceTree = "<group>"; };
 		0E2E10AB178C34BA00FEC019 /* UINavigationBar+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+Additions.h"; sourceTree = "<group>"; };
@@ -810,6 +828,18 @@
 			children = (
 				0E2862F517A2AA9E008D9B03 /* ParsePhotoParams.h */,
 				0E2862F617A2AA9E008D9B03 /* ParsePhotoParams.m */,
+				0E2B33C317A397C100764ECE /* ParseVideoParams.h */,
+				0E2B33C417A397C100764ECE /* ParseVideoParams.m */,
+				0E2B33C617A3A17C00764ECE /* ParseLoginParams.h */,
+				0E2B33C717A3A17C00764ECE /* ParseLoginParams.m */,
+				0E2B33C917A3A19700764ECE /* ParseRegisterParams.h */,
+				0E2B33CA17A3A19700764ECE /* ParseRegisterParams.m */,
+				0E2B33CC17A3A21800764ECE /* ParseUserUpdateDataParams.h */,
+				0E2B33CD17A3A21800764ECE /* ParseUserUpdateDataParams.m */,
+				0E2B33CF17A3A24D00764ECE /* ParseWishingParsms.h */,
+				0E2B33D017A3A24D00764ECE /* ParseWishingParsms.m */,
+				0E2B33D217A3A2A000764ECE /* ParseGetVersionParams.h */,
+				0E2B33D317A3A2A000764ECE /* ParseGetVersionParams.m */,
 			);
 			path = Modal;
 			sourceTree = "<group>";
@@ -1064,6 +1094,12 @@
 				0E2862F217A2A9C3008D9B03 /* UIImageView+WebCache.m in Sources */,
 				0E2862F817A2AA9E008D9B03 /* ParsePhotoParams.m in Sources */,
 				0E9838D817A2D792007CF86D /* PhotoDetailViewController.m in Sources */,
+				0E2B33C517A397C100764ECE /* ParseVideoParams.m in Sources */,
+				0E2B33C817A3A17C00764ECE /* ParseLoginParams.m in Sources */,
+				0E2B33CB17A3A19700764ECE /* ParseRegisterParams.m in Sources */,
+				0E2B33CE17A3A21800764ECE /* ParseUserUpdateDataParams.m in Sources */,
+				0E2B33D117A3A24D00764ECE /* ParseWishingParsms.m in Sources */,
+				0E2B33D417A3A2A000764ECE /* ParseGetVersionParams.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
