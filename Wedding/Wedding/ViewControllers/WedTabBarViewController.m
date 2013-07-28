@@ -91,7 +91,7 @@ typedef NSInteger WedTabIndex;
         FreeMemory(settingNav);
         
         [self setViewControllers:controllers];
-        [self setSelectedIndex:PhotoIndex];
+        [self setSelectedIndex:WeddingIndex];
         
     }
     return self;
@@ -107,6 +107,16 @@ typedef NSInteger WedTabIndex;
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (BOOL)shouldAutorotate
+{
+    return NO;
 }
 
 @end

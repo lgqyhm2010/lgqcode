@@ -19,6 +19,9 @@
 
 
 @interface PhotoViewController ()<UITableViewDataSource,UITableViewDelegate>
+{
+    BOOL isLoad;
+}
 
 @property (nonatomic,strong) UITableView *photoTableview1;
 @property (nonatomic,strong) UITableView *photoTableView2;
@@ -96,11 +99,11 @@
             for (int i = 0; i<[responseData count]; i++) {
                 ParsePhotoParams *photoParse = [[ParsePhotoParams alloc]init];
                 [photoParse parse:responseData[i]];
-                [self.photoArray addObject:photoParse];
+                [thumbVC.photoArray addObject:photoParse];
                 if (i%2 == 0) {
-                    [self.photoArray1  addObject:photoParse];
+                    [thumbVC.photoArray1  addObject:photoParse];
                 }else
-                    [self.photoArray2 addObject:photoParse];
+                    [thumbVC.photoArray2 addObject:photoParse];
             }
             [Notification hiddenWaitView:NO];
             [thumbVC.photoTableview1 reloadData];
@@ -109,6 +112,17 @@
     } onError:^(int errorCode, NSString *errorMessage) {
         
     }];
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    if (!isLoad) {
+        [self.view addSubview:self.photoTableview1];
+        [self.view addSubview:self.photoTableView2];
+    }
+    isLoad = YES;
+    
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -127,11 +141,6 @@
 	// Do any additional setup after loading the view.
     [self setNavigationTitle:@"婚纱照"];
     [self setRightNavigationItemTitle:@"刷新" selector:@selector(getPhotoData)];
-    
-    [self.view addSubview:self.photoTableview1];
-    [self.view addSubview:self.photoTableView2];
-
-
 }
 
 - (void)didReceiveMemoryWarning

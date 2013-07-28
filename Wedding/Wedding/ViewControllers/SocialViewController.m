@@ -8,11 +8,142 @@
 
 #import "SocialViewController.h"
 #import "RequstEngine.h"
+#import "ParseWishingParsms.h"
+#import <QuartzCore/QuartzCore.h>
+#import "UIImageView+WebCache.h"
+
+#define REFRESH_HEADER_HEIGHT 52.0f
+
+
+@interface SociaCell : UITableViewCell
+
+@property (nonatomic,retain)UIImageView *personImage;
+@property (nonatomic,retain)UILabel *name;
+@property (nonatomic,retain)UIImageView *sex;
+@property (nonatomic,retain)UILabel *content;
+@property (nonatomic,retain)UILabel *createTime;
+@property (nonatomic,retain)UIView *introView;
+@property (nonatomic,retain)UIView *cellContextView;
+
+@end
+
+@implementation SociaCell
+
+#pragma mark getter
+
+- (UIImageView *)personImage
+{
+    if (!_personImage) {
+        _personImage = [[UIImageView alloc]initWithFrame:CGRectMake(5, 5, 30, 30)];
+        
+    }
+    return _personImage;
+}
+
+- (UILabel *)name
+{
+    if (!_name) {
+        _name = [[UILabel alloc]initWithFrame:CGRectMake(40, 10, 40, 15)];
+        _name.textColor = [UIColor blueColor];
+        _name.backgroundColor = [UIColor clearColor];
+        _name.font = [ToolSet customNormalFontWithSize:10];
+    }
+    return _name;
+}
+
+- (UIImageView *)sex
+{
+    if (!_sex) {
+        _sex = [[UIImageView alloc]initWithFrame:CGRectMake(40, 25, 10, 10)];
+    }
+    return _sex;
+}
+
+- (UILabel *)content
+{
+    if (!_content) {
+        _content = [[UILabel alloc]initWithFrame:CGRectMake(10, 30, 300, 20)];
+        _content.textColor = [UIColor whiteColor];
+        _content.backgroundColor = [UIColor clearColor];
+        _content.font = [ToolSet customNormalFontWithSize:10];
+
+    }
+    return _content;
+}
+
+- (UILabel *)createTime
+{
+    if (!_createTime) {
+        _createTime = [[UILabel alloc]initWithFrame:CGRectMake(250, 85, 60, 20)];
+        _createTime.textColor = [UIColor redColor];
+        _createTime.backgroundColor = [UIColor clearColor];
+        _createTime.font = [ToolSet customNormalFontWithSize:10];
+    }
+    return _createTime;
+}
+
+- (UIView *)introView
+{
+    if (!_introView) {
+        _introView = [[UIView alloc]initWithFrame:CGRectMake(10, 10, 80, 40)];
+        _introView.backgroundColor = [UIColor lightGrayColor];
+    }
+    return _introView;
+}
+
+- (UIView *)cellContextView
+{
+    if (!_cellContextView) {
+        _cellContextView = [[UIView alloc]initWithFrame:CGRectMake(20, 30, 290, 60)];
+        _cellContextView.backgroundColor = [UIColor lightGrayColor];
+    }
+    return _cellContextView;
+}
+
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+{
+    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        [self.cellContextView addSubview:self.content];
+        [self.contentView addSubview:self.cellContextView];
+        
+        [self.introView addSubview:self.personImage];
+        [self.introView addSubview:self.name];
+        [self.introView addSubview:self.sex];
+        [self.contentView addSubview:self.introView];
+        
+        [self.contentView addSubview:self.createTime];
+        
+    }
+return self;
+}
+
+- (void)dealloc
+{
+    self.personImage = nil;
+    self.name = nil;
+    self.sex = nil;
+    self.content = nil;
+    self.createTime = nil;
+    self.introView = nil;
+    self.cellContextView = nil;
+    [super dealloc];
+}
+
+@end
 
 @interface SocialViewController ()<UITableViewDataSource,UITableViewDelegate>
+{
+    BOOL isDragging;
+    BOOL isLoad;
+}
 
 @property (nonatomic,retain)UITableView *socialTableView;
 @property (nonatomic,retain)NSMutableArray *context;
+@property (nonatomic,retain)UIView *refreshHeaderView;
+@property (nonatomic,retain)UILabel *refreshLabel;
+@property (nonatomic,retain)UIImageView *refreshArrow;
+@property (nonatomic,retain)UIActivityIndicatorView *refreshSpinner;
+@property (nonatomic) BOOL isLoading;
 
 @end
 
@@ -35,23 +166,76 @@
         _socialTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, height)];
         _socialTableView.delegate = self;
         _socialTableView.dataSource = self;
+        _socialTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         
     }
     return _socialTableView;
 }
 
+- (UIView *)refreshHeaderView
+{
+    if (!_refreshHeaderView) {
+        _refreshHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0 - REFRESH_HEADER_HEIGHT, 320, REFRESH_HEADER_HEIGHT)];
+        _refreshHeaderView.backgroundColor = [UIColor clearColor];
+        
+    }
+    return _refreshHeaderView;
+}
+
+- (UILabel *)refreshLabel
+{
+    if (!_refreshLabel) {
+        _refreshLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, REFRESH_HEADER_HEIGHT)];
+        _refreshLabel.backgroundColor = [UIColor clearColor];
+        _refreshLabel.font = [ToolSet customNormalFontWithSize:14];
+        _refreshLabel.textAlignment = UITextAlignmentCenter;
+
+    }
+    return _refreshLabel;
+}
+
+- (UIImageView *)refreshArrow
+{
+    if (!_refreshArrow) {
+        _refreshArrow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"arrow.png"]];
+        _refreshArrow.frame = CGRectMake(floorf((REFRESH_HEADER_HEIGHT - 27) / 2),
+                                        (floorf(REFRESH_HEADER_HEIGHT - 44) / 2),
+                                        27, 44);
+
+    }
+    return _refreshArrow;
+}
+
+- (UIActivityIndicatorView *)refreshSpinner
+{
+    if (!_refreshSpinner) {
+        _refreshSpinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        _refreshSpinner.frame = CGRectMake(floorf(floorf(REFRESH_HEADER_HEIGHT - 20) / 2), floorf((REFRESH_HEADER_HEIGHT - 20) / 2), 20, 20);
+        _refreshSpinner.hidesWhenStopped = YES;
+
+    }
+    return _refreshSpinner;
+}
+
+#pragma mark view lifestyle
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        
+        __block SocialViewController *sociaVC = self;
         RequstEngine *engine = [[RequstEngine alloc]init];
         NSDictionary *params = @{@"po": @"bless.getAfterTimestamp",@"bless.timeStamp":@"1371743645272",@"bless.weddingId":KUerID};
         [engine getDataWithParam:params url:@"app/bless/getAfterTimestamp" onCompletion:^(id responseData) {
-            DLog(@"%@",responseData);
-            self.context =(NSMutableArray *) responseData;
-            [self.socialTableView reloadData];
+            if ([responseData isKindOfClass:[NSArray class]]) {
+                for (int index= 0; index<[responseData count]; index++) {
+                    ParseWishingParsms *params = [[ParseWishingParsms alloc]init];
+                    [params parseWishingData:responseData[index]];
+                    [sociaVC.context addObject:params];
+                    [params release];
+                }
+            }
+            [sociaVC.socialTableView reloadData];
         } onError:^(int errorCode, NSString *errorMessage) {
             //
         }];
@@ -60,14 +244,31 @@
     return self;
 }
 
+- (void)loadView
+{
+    [super loadView];
+    
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     [self setNavigationTitle:@"亲友圈"];
     
-    [self.view addSubview:self.socialTableView];
 
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    if (!isLoad) {
+        [self.refreshHeaderView addSubview:self.refreshLabel];
+        [self.refreshHeaderView addSubview:self.refreshArrow];
+        [self.refreshHeaderView addSubview:self.refreshSpinner];
+        [self.socialTableView addSubview:self.refreshHeaderView];
+        [self.view addSubview:self.socialTableView];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -80,6 +281,10 @@
 {
     self.socialTableView = nil;
     self.context = nil;
+    self.refreshHeaderView = nil;
+    self.refreshArrow = nil;
+    self.refreshLabel = nil;
+    self.refreshSpinner = nil;
     [super dealloc];
 }
 
@@ -93,15 +298,117 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellIdentifier = @"cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    SociaCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (!cell) {
-        cell = [[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier]autorelease];
+        cell = [[[SociaCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier]autorelease];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-    NSDictionary *contexDic= self.context[indexPath.row];
-    cell.textLabel.text = [contexDic jsonObjectForKey:@"name"];
-    cell.detailTextLabel.text = [contexDic jsonObjectForKey:@"content"];;
+    ParseWishingParsms *params= self.context[indexPath.row];
+    [cell.personImage setImageWithURL:[NSURL URLWithString:params.pictureUrl] placeholderImage:[UIImage imageNamed:@"defaultIcon@2x"]];
+    cell.name.text = params.name;
+    cell.content.text = params.content;
+    cell.createTime.text = params.createTime;
+    
     return cell;
 }
+
+#pragma mark delegate
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 110;
+}
+
+#pragma mark scrollerview delegate
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    if (self.isLoading) return;
+    isDragging = YES;
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (self.isLoading) {
+        // Update the content inset, good for section headers
+        if (scrollView.contentOffset.y > 0)
+            self.socialTableView.contentInset = UIEdgeInsetsZero;
+        else if (scrollView.contentOffset.y >= -REFRESH_HEADER_HEIGHT)
+            self.socialTableView.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, 0, 0, 0);
+    } else if (isDragging && scrollView.contentOffset.y < 0) {
+        // Update the arrow direction and label
+        __block SocialViewController *socialVC = self;
+        [UIView animateWithDuration:0 animations:^{
+            if (scrollView.contentOffset.y < -REFRESH_HEADER_HEIGHT) {
+                // User is scrolling above the header
+                socialVC.refreshLabel.text = @"放开以刷新...";
+                [socialVC.refreshArrow layer].transform = CATransform3DMakeRotation(M_PI, 0, 0, 1);
+            } else { // User is scrolling somewhere within the header
+                socialVC.refreshLabel.text = @"下拉刷新...";
+                [socialVC.refreshArrow layer].transform = CATransform3DMakeRotation(M_PI * 2, 0, 0, 1);
+            }
+
+        }];
+    }
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    if (self.isLoading) return;
+    isDragging = NO;
+    if (scrollView.contentOffset.y <= -REFRESH_HEADER_HEIGHT) {
+        // Released above the header
+        [self startLoading];
+    }
+}
+
+- (void)startLoading {
+    self.isLoading = YES;
+    
+    // Show the header
+    __block SocialViewController *socialVC = self;
+    [UIView animateWithDuration:0.3 animations:^{
+        [socialVC.socialTableView setContentInset:UIEdgeInsetsMake(REFRESH_HEADER_HEIGHT, 0, 0, 0)];
+        socialVC.refreshLabel.text = @"正在刷新...";
+        socialVC.refreshArrow.hidden = YES;
+        [socialVC.refreshSpinner startAnimating];
+
+    }];
+    // Refresh action!
+    [self refresh];
+}
+
+
+- (void)refresh {
+    // This is just a demo. Override this method with your custom reload action.
+    // Don't forget to call stopLoading at the end.
+    __block SocialViewController *sociaVC = self;
+    RequstEngine *engine = [[RequstEngine alloc]init];
+    NSDictionary *params = @{@"po": @"bless.getAfterTimestamp",@"bless.timeStamp":@"1371743645272",@"bless.weddingId":KUerID};
+    [engine getDataWithParam:params url:@"app/bless/getAfterTimestamp" onCompletion:^(id responseData) {
+        if ([responseData isKindOfClass:[NSArray class]]) {
+            for (int index= 0; index<[responseData count]; index++) {
+                ParseWishingParsms *params = [[ParseWishingParsms alloc]init];
+                [params parseWishingData:responseData[index]];
+                [sociaVC.context addObject:params];
+                [params release];
+            }
+        }
+       sociaVC.isLoading = NO;
+        [UIView animateWithDuration:0.3 animations:^{
+            sociaVC.socialTableView.contentInset = UIEdgeInsetsZero;
+            [sociaVC.refreshArrow layer].transform = CATransform3DMakeRotation(M_PI * 2, 0, 0, 1);
+        } completion:^(BOOL finished) {
+            sociaVC.refreshLabel.text = @"下拉刷新...";
+            sociaVC.refreshArrow.hidden = NO;
+            [sociaVC.refreshSpinner stopAnimating];
+            [sociaVC.socialTableView reloadData];
+        }];
+
+    } onError:^(int errorCode, NSString *errorMessage) {
+        //
+    }];
+    [engine release];
+
+}
+
+
 
 @end
