@@ -18,7 +18,7 @@
 }
 
 @property (nonatomic,retain) UITableView *videoTableView;
-@property (nonatomic,retain) NSMutableArray *vieoList;
+@property (nonatomic,retain) NSMutableArray *videoList;
 
 @end
 
@@ -26,12 +26,12 @@
 
 #pragma mark getter
 
-- (NSMutableArray *)vieoList
+- (NSMutableArray *)videoList
 {
-    if (!_vieoList) {
-        _vieoList = [[NSMutableArray alloc]init];
+    if (!_videoList) {
+        _videoList = [[NSMutableArray alloc]init];
     }
-    return _vieoList;
+    return _videoList;
 }
 
 - (UITableView *)videoTableView
@@ -61,6 +61,9 @@
 {
     NSDictionary *param = @{@"op": @"wedding.getVideoList",@"wedding.id":KUerID};
     RequstEngine *engine = [[RequstEngine alloc]init];
+    if (self.videoList) {
+        [self.videoList removeAllObjects];
+    }
     __block VideoViewController *videoVC = self;
     [engine getDataWithParam:param url:@"app/wedding/getVideoList" onCompletion:^(id responseData) {
         if ([responseData isKindOfClass:[NSArray class]]) {
@@ -68,7 +71,7 @@
                 NSDictionary *data = responseData[index];
                 ParseVideoParams *videoParams = [[ParseVideoParams alloc]init];
                 [videoParams parseVideoParmas:data];
-                [videoVC.vieoList addObject:videoParams];
+                [videoVC.videoList addObject:videoParams];
                 [videoParams release];
             }
             [videoVC.videoTableView reloadData];
@@ -92,6 +95,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     [self setNavigationTitle:@"视频集"];
+    [self setNavigationItemNormalImage:@"refresh_icon_normal.png" HightImage:@"refresh_icon_pressed.png" selector:@selector(getvieoData) isRight:YES];
 
 }
 
@@ -104,7 +108,7 @@
 - (void)dealloc
 {
     self.videoTableView = nil;
-    self.vieoList = nil;
+    self.videoList = nil;
     if(movie)
     [movie release];
     [super dealloc];
@@ -120,7 +124,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.vieoList.count;
+    return self.videoList.count;
 }
 
 
@@ -132,7 +136,7 @@
         cell = [[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier]autorelease];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-    ParseVideoParams *params = self.vieoList[indexPath.row];
+    ParseVideoParams *params = self.videoList[indexPath.row];
     UIImage *img = [UIImage imageNamed:@"feedback_content"];
     UIImageView *imgView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 300, 130)];
     [imgView setImageWithURL:[NSURL URLWithString:params.thumbnailUrl] placeholderImage:img];
@@ -169,7 +173,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ParseVideoParams *params = self.vieoList[indexPath.row];
+    ParseVideoParams *params = self.videoList[indexPath.row];
     movie =  [[MPMoviePlayerViewController alloc]initWithContentURL:[NSURL URLWithString:params.url]];
     [movie.moviePlayer setFullscreen:YES];
     [movie.moviePlayer play];

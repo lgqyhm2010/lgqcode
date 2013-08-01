@@ -150,6 +150,23 @@
     
 }
 
+-(void)setNavigationItemNormalImage:(NSString*)imageName HightImage:(NSString *)hightImageName selector:(SEL)selector isRight:(BOOL)right
+{
+    UIButton *button =[UIButton buttonWithType:UIButtonTypeCustom];
+	button.frame=CGRectMake(0, 0, 40, 26);
+    button.imageEdgeInsets=UIEdgeInsetsMake(0,8,0,8);
+	[button addTarget:self action:selector forControlEvents:UIControlEventTouchUpInside];
+	[button setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
+    [button setImage:[UIImage imageNamed:hightImageName] forState:UIControlStateHighlighted];
+	UIBarButtonItem *buttonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+    if (right) {
+        self.navigationItem.rightBarButtonItem = buttonItem;
+    }else
+        self.navigationItem.leftBarButtonItem = buttonItem;
+	[buttonItem release];
+
+}
+
 //设置左NavigationItem的图片
 //该设置会自动添加固定的背景图片
 -(void)setRightNavigationItemImage:(NSString*)imageName target:(id)targer selector:(SEL)selector {

@@ -9,6 +9,17 @@
 #import "WeddingDelegate.h"
 #import "MCNotification.h"
 #import "WedTabBarViewController.h"
+#import "LoginViewController.h"
+#import "RequstEngine.h"
+#import "UIDeviceHardware.h"
+#import "ParseLoginParams.h"
+#import "RegisterViewController.h"
+
+@interface WeddingDelegate ()
+
+@property (nonatomic,retain)LoginViewController *loginVC;
+
+@end
 
 @implementation WeddingDelegate
 
@@ -30,6 +41,15 @@
     }
     return _tabBarViewController;
 }
+
+- (LoginViewController *)loginVC
+{
+    if (!_loginVC) {
+        _loginVC = [[LoginViewController alloc]init];
+    }
+    return _loginVC;
+}
+
 
 //文件路径
 
@@ -53,8 +73,22 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.rootViewController = self.tabBarViewController;
+//    __block WeddingDelegate *weddingDelegate = self;
+//    NSDictionary *param = @{@"op": @"user.login",@"user.simId":[UIDeviceHardware getDeviceUUID]};
+//    RequstEngine *engine = [[RequstEngine alloc]init];
+//    [engine getDataWithParam:param url:@"app/user/login" onCompletion:^(id responseData) {
+//        if ([responseData isKindOfClass:[NSDictionary class]]) {
+//        }
+//    } onError:^(int errorCode, NSString *errorMessage) {
+//        if (!errorMessage) {
+//            RegisterViewController *registerVC = [[RegisterViewController alloc]init];
+//            weddingDelegate.window.rootViewController = registerVC;
+//            [registerVC release];
+//
+//        }
+//    }];
+//    [engine release];
     [self.window makeKeyAndVisible];
-//    [uiv]
     return YES;
 }
 

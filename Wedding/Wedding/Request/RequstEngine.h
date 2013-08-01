@@ -6,7 +6,6 @@
 //  Copyright (c) 2013年 lgqyhm. All rights reserved.
 //
 
-#import "SuperNetworkEngine.h"
 #import "MKNetworkEngine.h"
 
 @interface RequstEngine : MKNetworkEngine
@@ -20,5 +19,10 @@ typedef void (^SuccessBlock)(id responseData);
                                url:(NSString *)url
                       onCompletion:(SuccessBlock)successBlock
                            onError:(ErrorBlock)errorBlock;
+
+- (void)getSelectionPicWithParam:(NSDictionary * )params
+                     url:(NSString *)url
+            onCompletion:(SuccessBlock)successBlock
+                 onError:(ErrorBlock)errorBlock;
 
 @end

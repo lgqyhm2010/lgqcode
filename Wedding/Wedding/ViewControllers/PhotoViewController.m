@@ -92,6 +92,15 @@
 {
     [Notification showWaitView:@"请稍等" animation:YES];
     RequstEngine *engine = [[RequstEngine alloc]init];
+    if (self.photoArray1) {
+        [self.photoArray1 removeAllObjects];
+    }
+    if (self.photoArray2) {
+        [self.photoArray2 removeAllObjects];
+    }
+    if (self.photoArray) {
+        [self.photoArray removeAllObjects];
+    }
     __block PhotoViewController *thumbVC = self;
     NSDictionary *param = @{@"op": @"wedding.getPictureList",@"wedding.id":KUerID};
     [engine getDataWithParam:param url:@"app/wedding/getPictureList" onCompletion:^(id responseData) {
@@ -141,6 +150,7 @@
 	// Do any additional setup after loading the view.
     [self setNavigationTitle:@"婚纱照"];
     [self setRightNavigationItemTitle:@"刷新" selector:@selector(getPhotoData)];
+    [self setNavigationItemNormalImage:@"refresh_icon_normal.png" HightImage:@"refresh_icon_pressed.png" selector:@selector(getPhotoData) isRight:YES];
 }
 
 - (void)didReceiveMemoryWarning

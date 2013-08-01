@@ -11,6 +11,7 @@
 #import "ParseWishingParsms.h"
 #import <QuartzCore/QuartzCore.h>
 #import "UIImageView+WebCache.h"
+#import "SendWishViewController.h"
 
 #define REFRESH_HEADER_HEIGHT 52.0f
 
@@ -250,13 +251,21 @@ return self;
     
 }
 
+- (void)sendWish
+{
+    SendWishViewController *sendWishVC = [[SendWishViewController alloc]init];
+    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:sendWishVC];
+    [self presentModalViewControllerMy:nav animated:YES];
+    [sendWishVC release];
+    [nav release];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     [self setNavigationTitle:@"亲友圈"];
-    
-
+    [self setNavigationItemNormalImage:@"write_icon_normal.png" HightImage:@"write_icon_pressed.png" selector:@selector(sendWish) isRight:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -384,6 +393,9 @@ return self;
     NSDictionary *params = @{@"po": @"bless.getAfterTimestamp",@"bless.timeStamp":@"1371743645272",@"bless.weddingId":KUerID};
     [engine getDataWithParam:params url:@"app/bless/getAfterTimestamp" onCompletion:^(id responseData) {
         if ([responseData isKindOfClass:[NSArray class]]) {
+            if (sociaVC.context) {
+                [sociaVC.context removeAllObjects];
+            }
             for (int index= 0; index<[responseData count]; index++) {
                 ParseWishingParsms *params = [[ParseWishingParsms alloc]init];
                 [params parseWishingData:responseData[index]];

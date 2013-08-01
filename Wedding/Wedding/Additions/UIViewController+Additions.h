@@ -21,6 +21,7 @@
 -(void)setRightNavigationItemImage:(NSString*)imageName target:(id)targer selector:(SEL)selector ;
 -(void)setBackNavigationItemTitle:(NSString*)title selector:(SEL)selector;
 -(void)setBackNavigationItemTitle:(NSString*)title ;
+-(void)setNavigationItemNormalImage:(NSString*)imageName HightImage:(NSString *)hightImageName selector:(SEL)selector isRight:(BOOL)right;
 
 - (void)setNavigationBackgroundImage:(NSString*)image ;
 -(void)setDefaultNavigationBackground ;
