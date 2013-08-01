@@ -70,16 +70,18 @@
 - (void)loadView
 {
     [super loadView];
-    
+    CGFloat heigt = 200;
     UIButton *btn1 = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn1.frame = CGRectMake(0, 220, 158, 100);
-    [btn1 setImage:[UIImage imageNamed:@"wedding_info_hotel"] forState:UIControlStateNormal];
+    btn1.frame = CGRectMake(0, heigt, 158, 100);
+    [btn1 setBackgroundImage:[UIImage imageNamed:@"wedding_info_hotel.jpg"] forState:UIControlStateNormal];
     self.weddingScenceButton = btn1;
+    [self.view addSubview:self.weddingScenceButton];
     
     UIButton *btn2 = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn2.frame = CGRectMake(162, 220, 158, 100);
-    [btn2 setImage:[UIImage imageNamed:@"invitation_card"] forState:UIControlStateNormal];
+    btn2.frame = CGRectMake(162, heigt, 158, 100);
+    [btn2 setBackgroundImage:[UIImage imageNamed:@"invitation_card.jpg"] forState:UIControlStateNormal];
     self.weddingInviteButton = btn2;
+    [self.view addSubview:self.weddingInviteButton];
 
     // Custom initialization
     
@@ -102,8 +104,6 @@
     [self setNavigationTitle:@"爱浪漫"];
     [self setNavigationItemNormalImage:@"about_icon_normal.png" HightImage:@"about_icon_pressed.png" selector:@selector(aboutRomantic) isRight:NO];
     
-    [self.view addSubview:self.weddingScenceButton];
-    [self.view addSubview:self.weddingInviteButton];
     [self.view addSubview:self.selectionScrollerView];
     
 }
