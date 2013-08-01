@@ -11,8 +11,9 @@
 #import "UIButton+WebCache.h"
 #import "ParsePhotoParams.h"
 #import "UIImageView+WebCache.h"
+#import "WeddingPlanViewController.h"
 
-#define KHeight  207
+#define KHeight  150
 
 @interface WeddingViewController ()
 
@@ -33,29 +34,6 @@
     return _selectionScrollerView;
 }
 
-- (void)getWeddingData
-{
-//    NSDictionary *params = @{@"op": @"hotel.getHotelPicture",@"hotelPicture.hotelId":@"c476c2f5-86f3-4fcf-9eb5-89dcec01b71b"};
-//    RequstEngine *engine = [[RequstEngine alloc]init];
-//    [engine getDataWithParam:params url:@"app/hotel/getHotelPicture" onCompletion:^(id responseData) {
-//        if ([responseData isKindOfClass:[NSArray class]]) {
-//            UIImage *img = [UIImage imageNamed:@"defaultIcon@2x"];
-//            
-//            NSDictionary *dic1 = responseData[0];
-//            NSString *url1 = [dic1 jsonObjectForKey:@"url"];
-//            [self.weddingScenceButton setBackgroundImageWithURL:[NSURL URLWithString:url1] forState:UIControlStateNormal placeholderImage:img];
-//            
-//            NSDictionary *dic2 = responseData[1];
-//            NSString *url2 = [dic2 jsonObjectForKey:@"url"];
-//            [self.weddingInviteButton setBackgroundImageWithURL:[NSURL URLWithString:url2] forState:UIControlStateNormal placeholderImage:img];
-//        }
-//    } onError:^(int errorCode, NSString *errorMessage) {
-//        //
-//    }];
-//    [engine release];
-    
-
-}
 
 - (void)getSelectionPicData
 {
@@ -95,28 +73,39 @@
     
     UIButton *btn1 = [UIButton buttonWithType:UIButtonTypeCustom];
     btn1.frame = CGRectMake(0, 220, 158, 100);
+    [btn1 setImage:[UIImage imageNamed:@"wedding_info_hotel"] forState:UIControlStateNormal];
     self.weddingScenceButton = btn1;
     
     UIButton *btn2 = [UIButton buttonWithType:UIButtonTypeCustom];
     btn2.frame = CGRectMake(162, 220, 158, 100);
+    [btn2 setImage:[UIImage imageNamed:@"invitation_card"] forState:UIControlStateNormal];
     self.weddingInviteButton = btn2;
-    
+
     // Custom initialization
     
-    [self getWeddingData];
     [self getSelectionPicData];
    
+}
+
+- (void)aboutRomantic
+{
+    WeddingPlanViewController *weddingPlanVC = [[WeddingPlanViewController alloc]init];
+    weddingPlanVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:weddingPlanVC animated:YES];
+    [weddingPlanVC release];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    [self setNavigationTitle:@"首页"];
+    [self setNavigationTitle:@"爱浪漫"];
+    [self setNavigationItemNormalImage:@"about_icon_normal.png" HightImage:@"about_icon_pressed.png" selector:@selector(aboutRomantic) isRight:NO];
     
     [self.view addSubview:self.weddingScenceButton];
     [self.view addSubview:self.weddingInviteButton];
     [self.view addSubview:self.selectionScrollerView];
+    
 }
 
 - (void)didReceiveMemoryWarning
