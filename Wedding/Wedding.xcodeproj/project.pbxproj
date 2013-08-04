@@ -170,6 +170,7 @@
 		0EAD7ADC17AE3AFE0021A100 /* default_avatar.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EAD7ADB17AE3AFA0021A100 /* default_avatar.png */; };
 		0EAD7ADF17AE3BF40021A100 /* more_icon_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EAD7ADD17AE3BF10021A100 /* more_icon_normal.png */; };
 		0EAD7AE017AE3BF40021A100 /* more_icon_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EAD7ADE17AE3BF30021A100 /* more_icon_pressed.png */; };
+		0EAD7AE317AE58360021A100 /* NSNotificationCenter+Removed.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EAD7AE217AE58360021A100 /* NSNotificationCenter+Removed.m */; };
 		0EDC758317956EE200E0EAC0 /* feedback_content.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EDC758117956EE200E0EAC0 /* feedback_content.png */; };
 		0EDC758417956EE200E0EAC0 /* feedback_title.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EDC758217956EE200E0EAC0 /* feedback_title.png */; };
 		0EDC758A179570D300E0EAC0 /* FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EDC7588179570D300E0EAC0 /* FeedbackViewController.m */; };
@@ -450,6 +451,8 @@
 		0EAD7ADB17AE3AFA0021A100 /* default_avatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default_avatar.png; sourceTree = "<group>"; };
 		0EAD7ADD17AE3BF10021A100 /* more_icon_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = more_icon_normal.png; sourceTree = "<group>"; };
 		0EAD7ADE17AE3BF30021A100 /* more_icon_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = more_icon_pressed.png; sourceTree = "<group>"; };
+		0EAD7AE117AE58360021A100 /* NSNotificationCenter+Removed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNotificationCenter+Removed.h"; sourceTree = "<group>"; };
+		0EAD7AE217AE58360021A100 /* NSNotificationCenter+Removed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNotificationCenter+Removed.m"; sourceTree = "<group>"; };
 		0EDC758117956EE200E0EAC0 /* feedback_content.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = feedback_content.png; sourceTree = "<group>"; };
 		0EDC758217956EE200E0EAC0 /* feedback_title.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = feedback_title.png; sourceTree = "<group>"; };
 		0EDC7587179570D300E0EAC0 /* FeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackViewController.h; sourceTree = "<group>"; };
@@ -840,6 +843,8 @@
 		0E1C957C178AE31300F73021 /* Additions */ = {
 			isa = PBXGroup;
 			children = (
+				0EAD7AE117AE58360021A100 /* NSNotificationCenter+Removed.h */,
+				0EAD7AE217AE58360021A100 /* NSNotificationCenter+Removed.m */,
 				0E58723D17928C3300A197D7 /* NSDictionary(Json).h */,
 				0E58723E17928C3300A197D7 /* NSDictionary(Json).m */,
 				0E2E10A8178C332400FEC019 /* UIViewController+Additions.h */,
@@ -1211,6 +1216,7 @@
 				0EAD7AA417AAB56C0021A100 /* SendWishViewController.m in Sources */,
 				0EAD7AC217AABC560021A100 /* WedTabBarViewController.m in Sources */,
 				0EAD7AD017AABF970021A100 /* WeddingPlanViewController.m in Sources */,
+				0EAD7AE317AE58360021A100 /* NSNotificationCenter+Removed.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

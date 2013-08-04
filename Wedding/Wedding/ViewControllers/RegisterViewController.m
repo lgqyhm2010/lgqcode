@@ -9,7 +9,7 @@
 #import "RegisterViewController.h"
 #import "RequstEngine.h"
 
-@interface RegisterViewController ()<UIActionSheetDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
+@interface RegisterViewController ()<UIActionSheetDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,UITextFieldDelegate>
 {
     NSData *imgeData;
 }
@@ -38,6 +38,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.nameTextField.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning
@@ -64,17 +65,25 @@
     [super viewDidUnload];
 }
 - (IBAction)registerWedding:(id)sender {
-    
+    if (!imgeData) {
+        [self showPromptView:@"请选择图片"];
+        return ;
+    }
+    if (!self.nameTextField.text.length<1) {
+        [self showPromptView:@"请输入姓名"];
+        return ;
+    }
+    [Notification showWaitView:@"正在注册" animation:YES];
     NSString *sexName = self.sex.selectedSegmentIndex == 0?@"男":@"女";
-    NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:@"user.regist",@"op",[UIDeviceHardware getDeviceUUID],@"user.simId",self.nameTextField.text,@"user.name",sexName,@"user.sex",imgeData,@"file", nil];
-//    NSDictionary *param1 = @{@"op": @"user.regist",@"user.simId":self.nameTextField.text,@"user.sex":sexName,@"file":imgeData};
+    NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:@"user.regist",@"op",[UIDeviceHardware getDeviceUUID],@"user.simId",self.nameTextField.text,@"user.name",sexName,@"user.sex", nil];
     RequstEngine *engine = [[RequstEngine alloc]init];
-    [engine getDataWithParam:param url:@"app/user/regist" onCompletion:^(id responseData) {
-        //
+    [engine postDataWithParam:param imgData:imgeData url:@"app/user/regist" onCompletion:^(id responseData) {
+        [Notification hiddenWaitView:NO];
     } onError:^(int errorCode, NSString *errorMessage) {
-        //
+        [Notification hiddenWaitView:NO];
+        [Notification showMsgConfirm:nil title:KMsgDefault message:errorMessage tag:0];
     }];
-    [engine release];
+     [engine release];
 
 }
 
@@ -127,6 +136,12 @@ typedef NS_ENUM(NSInteger, ActionSheetIndex){
         
 }
 
+#pragma mark uitextfield delegate
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [self.nameTextField resignFirstResponder];
+    return YES;
+}
 
 @end

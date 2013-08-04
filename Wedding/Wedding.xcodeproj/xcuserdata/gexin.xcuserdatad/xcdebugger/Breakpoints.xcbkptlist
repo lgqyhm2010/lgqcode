@@ -190,12 +190,38 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Wedding/Request/RequstEngine.m"
-         timestampString = "396802610.295091"
+         timestampString = "397300020.305514"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "59"
-         endingLineNumber = "59"
+         startingLineNumber = "109"
+         endingLineNumber = "109"
          landmarkName = "-getSelectionPicWithParam:url:onCompletion:onError:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Wedding/Request/RequstEngine.m"
+         timestampString = "397300218.758474"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "72"
+         endingLineNumber = "72"
+         landmarkName = "-postDataWithParam:imgData:url:onCompletion:onError:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Wedding/ViewControllers/RegisterViewController.m"
+         timestampString = "397300750.624012"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "69"
+         endingLineNumber = "69"
+         landmarkName = "-registerWedding:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -203,12 +229,25 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Wedding/Request/RequstEngine.m"
-         timestampString = "396977195.387757"
+         timestampString = "397301528.666741"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "133"
-         endingLineNumber = "133"
+         startingLineNumber = "188"
+         endingLineNumber = "188"
          landmarkName = "-getDataWithParam:url:onCompletion:onError:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Wedding/ViewControllers/LoginViewController.m"
+         timestampString = "397301672.565166"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "66"
+         endingLineNumber = "66"
+         landmarkName = "-entranceWedding:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

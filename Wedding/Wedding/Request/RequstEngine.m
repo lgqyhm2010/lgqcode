@@ -54,6 +54,56 @@
     [super dealloc];
 }
 
+- (void)postDataWithParam:(NSDictionary *)params imgData:(NSData *)imgData url:(NSString *)url onCompletion:(SuccessBlock)successBlock onError:(ErrorBlock)errorBlock
+{
+    NSString *urlSting = [NSString stringWithFormat:@"%@%@",KRomanticURL,url];
+    MKNetworkOperation *op = [self operationWithURLString:urlSting params:params httpMethod:@"POST"];
+    [op addData:imgData forKey:@"file"];
+    [op setFreezable:YES];
+    // 保存起以支持取消操作
+    [self.operations addObject:op];
+    
+    DLog(@"%@", op);
+    
+    [op addCompletionHandler:^(MKNetworkOperation *completedOperation)
+     {
+         [self.operations removeObject:op];
+         
+         NSString *responseString = completedOperation.responseString;
+         
+         NSDictionary *responseDictionary = [responseString objectFromJSONString];
+         
+         if ([responseDictionary jsonObjectForKey:@"result"]){
+             id  data = [responseDictionary jsonObjectForKey:@"result"];
+             //成功回调
+             successBlock(data);
+         }else{
+             // 失败
+             NSDictionary *errorDic = (NSDictionary *)[responseDictionary jsonObjectForKey:@"error"];
+             int errorCode = [[errorDic jsonObjectForKey:@"code"] intValue] ;
+             NSString *errorMessage =  [errorDic jsonObjectForKey:@"message"];
+             
+             //失败回调
+             errorBlock(errorCode, errorMessage);
+             
+         }
+         
+         
+     }errorHandler:^(MKNetworkOperation *completedOperation, NSError *error)
+     {
+         // 失败回调
+         [self.operations removeObject:op];
+         
+         // 系统级的错误
+         //         errorBlock(NSNetCodeNetError, KNetErrorDefault);
+     }];
+    
+    [self enqueueOperation:op];
+    
+    
+}
+
+
 - (void)getSelectionPicWithParam:(NSDictionary *)params url:(NSString *)url onCompletion:(SuccessBlock)successBlock onError:(ErrorBlock)errorBlock
 {
     NSString *urlSting = [NSString stringWithFormat:@"%@%@",KRomanticURL,url];

@@ -115,6 +115,9 @@
 
 - (void)hiddenBar:(BOOL)hidden
 {
+    if (entryType == EntryGuideType) {
+        return;
+    }
 //    CGFloat height = CGRectGetHeight(self.view.frame)+20;
     if (hidden) {
         [[UIApplication sharedApplication]setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
@@ -127,6 +130,19 @@
         [self.navigationController setNavigationBarHidden:NO animated:YES];
 //        [self.guidePhoto setFrame:CGRectMake(0, -20, 320, height)];
 //        [self.view setFrame:<#(CGRect)#>]
+    }
+}
+
+#pragma mark uiscroller delegate
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    if (entryType == EntryIntroduceType) {
+        return;
+    }
+    
+    if (scrollView.contentOffset.x > 320*2) {
+        [[NSNotificationCenter defaultCenter]postNotificationName:Guider object:nil];
     }
 }
 

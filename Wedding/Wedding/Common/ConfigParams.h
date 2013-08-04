@@ -88,3 +88,6 @@ return self; \
 #   define ELog(err)
 #endif
 
+//======================通知===============================
+
+#define Guider  @"guider" //引导图

@@ -72,8 +72,8 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    self.window.rootViewController = self.tabBarViewController;
-//    __block WeddingDelegate *weddingDelegate = self;
+    self.window.rootViewController = [[UINavigationController alloc]initWithRootViewController:self.loginVC];
+    __block WeddingDelegate *weddingDelegate = self;
 //    NSDictionary *param = @{@"op": @"user.login",@"user.simId":[UIDeviceHardware getDeviceUUID]};
 //    RequstEngine *engine = [[RequstEngine alloc]init];
 //    [engine getDataWithParam:param url:@"app/user/login" onCompletion:^(id responseData) {
@@ -89,6 +89,9 @@
 //    }];
 //    [engine release];
     [self.window makeKeyAndVisible];
+    [[NSNotificationCenter defaultCenter]addObserver:Guider object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
+        [weddingDelegate.window setRootViewController:self.tabBarViewController];
+    } inClass:self];
     return YES;
 }
 

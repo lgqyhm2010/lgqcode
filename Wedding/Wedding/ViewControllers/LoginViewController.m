@@ -10,7 +10,7 @@
 #import "RequstEngine.h"
 #import "GuidePhotoViewController.h"
 
-@interface LoginViewController ()
+@interface LoginViewController ()<UITextFieldDelegate>
 
 @property (retain, nonatomic) IBOutlet UITextField *InviteWedding;
 - (IBAction)entranceWedding:(id)sender;
@@ -31,12 +31,14 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.InviteWedding.delegate =self;
 }
 
 - (void)didReceiveMemoryWarning
@@ -68,5 +70,11 @@
         //
     }];
     [engine release];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [self.InviteWedding resignFirstResponder];
+    return YES;
 }
 @end

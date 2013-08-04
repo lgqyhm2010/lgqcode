@@ -20,6 +20,7 @@
     #import "UIDeviceHardware.h"
     #import "JSONKit.h"
     #import "NSDictionary(Json).h"
+    #import "NSNotificationCenter+Removed.h"
 
 #define AppDelegate (WeddingDelegate*)[[UIApplication sharedApplication] delegate]
 #define Notification [(WeddingDelegate*)[UIApplication sharedApplication].delegate notification]
