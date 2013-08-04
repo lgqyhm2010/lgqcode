@@ -71,7 +71,6 @@
 	[btn setBackgroundImage:navBtn forState:UIControlStateNormal];
 	[btn setBackgroundImage:navBtnSelect forState:UIControlStateHighlighted];
 	UIBarButtonItem *btnItem=[[UIBarButtonItem alloc] initWithCustomView:btn];
-	[btn release];
     return btnItem;
 }
 
@@ -82,7 +81,6 @@
 {
     UIBarButtonItem *item = [self allocBarButtonItem:title selector:selector selImg:@"blue_selected.png" unselImg:@"blue_unselected.png"];
     self.navigationItem.rightBarButtonItem = item;
-    [item release];
 }
 //设置左Navigation的文字
 //该设置会自动添加固定的背景图片
@@ -90,7 +88,6 @@
 {
     UIBarButtonItem *item = [self allocBarButtonItem:title selector:selector selImg:@"blue_selected" unselImg:@"blue_unselected"];
     self.navigationItem.leftBarButtonItem = item;
-    [item release];
 }
 
 
@@ -126,7 +123,6 @@
 		lbl.textAlignment=UITextAlignmentCenter;
 		lbl.backgroundColor=[UIColor clearColor];
 		self.navigationItem.titleView=lbl;
-		[lbl release];
 	}
 }
 
@@ -145,8 +141,6 @@
     [leftButton setImage:image forState:UIControlStateHighlighted];
 	UIBarButtonItem *leftButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
 	self.navigationItem.leftBarButtonItem = leftButtonItem;
-	[leftButton release];
-	[leftButtonItem release];
     
 }
 
@@ -163,7 +157,6 @@
         self.navigationItem.rightBarButtonItem = buttonItem;
     }else
         self.navigationItem.leftBarButtonItem = buttonItem;
-	[buttonItem release];
 
 }
 
@@ -184,7 +177,6 @@
 	UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
 	self.navigationItem.rightBarButtonItem = rightButtonItem;
 	self.navigationItem.rightBarButtonItem.width=48;
-	[rightButtonItem release];
 }
 
 //设置返回按钮的title
@@ -215,8 +207,6 @@
     
     UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
     self.navigationItem.leftBarButtonItem = leftItem;
-    [leftButton release];
-    [leftItem release];
 }
 
 -(void)setBackNavigationItemTitle:(NSString*)title {

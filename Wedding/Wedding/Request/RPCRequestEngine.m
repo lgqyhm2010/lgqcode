@@ -93,7 +93,6 @@
 
     JSONRPCClient *rpc = [[JSONRPCClient alloc] initWithServiceEndpoint: self.serviceURL];
     [rpc postRequest:request async:YES];
-    [rpc release];
     
     DLog(@"\n\ninterface:%@\n\n", self.serviceURL);
 }
@@ -153,17 +152,10 @@
     {
         JSONRPCClient *rpc = [[JSONRPCClient alloc] initWithServiceEndpoint:self.serviceURL];
         [rpc postRequests:allRequests];
-        [rpc release];
     }
     
-    [allRequests release];
 }
 
-- (void)dealloc {
-    
-    self.serviceURL = nil;
-    [super dealloc];
-}
 
 
 @end

@@ -18,11 +18,11 @@ NSString const *ObserversKey = @"ObserversKey";
 @implementation NSNotificationCenter (Removed)
 
 - (void)setObservers:(NSMutableDictionary *)observers {
-    objc_setAssociatedObject(self, ObserversKey, observers, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, (__bridge const void *)(ObserversKey), observers, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (NSMutableDictionary*)observers {
-    id obj = objc_getAssociatedObject(self, ObserversKey);
+    id obj = objc_getAssociatedObject(self, CFBridgingRetain(ObserversKey));
     if (!obj) {
         obj = [NSMutableDictionary dictionary];
         [self setObservers:obj];
@@ -74,9 +74,5 @@ NSString const *ObserversKey = @"ObserversKey";
     [self removeObserver:obj];
 }
 
-- (void)dealloc {
-    self.observers = nil;
-    [super dealloc];
-}
 
 @end

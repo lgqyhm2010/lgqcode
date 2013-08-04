@@ -49,13 +49,11 @@
                 UIImageView *imgView = [[UIImageView alloc]initWithFrame:CGRectMake(310*index, 0, 310, KHeight)];
                 [imgView setImageWithURL:[NSURL URLWithString:params.url] placeholderImage:[UIImage imageNamed:@"defaultIcon@2x"]];
                 [weddingVC.selectionScrollerView addSubview:imgView];
-                [imgView release];
             }
         }
     } onError:^(int errorCode, NSString *errorMessage) {
         //
     }];
-    [engine release];
 
 }
 
@@ -94,7 +92,6 @@
     WeddingPlanViewController *weddingPlanVC = [[WeddingPlanViewController alloc]init];
     weddingPlanVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:weddingPlanVC animated:YES];
-    [weddingPlanVC release];
 }
 
 - (void)viewDidLoad
@@ -112,14 +109,6 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (void)dealloc
-{
-    self.weddingInviteButton = nil;
-    self.weddingScenceButton = nil;
-    self.selectionScrollerView = nil;
-    [super dealloc];
 }
 
 @end

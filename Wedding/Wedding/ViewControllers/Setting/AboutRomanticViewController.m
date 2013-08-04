@@ -70,12 +70,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)dealloc
-{
-    self.aboutTableView = nil;
-    self.titleArray = nil;
-    [super dealloc];
-}
+
 
 #pragma mark tableview datasource
 
@@ -89,7 +84,7 @@
     static NSString *cellIdentifier = @"cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (!cell) {
-        cell = [[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier]autorelease];
+        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     cell.textLabel.text = self.titleArray[indexPath.row];
@@ -116,14 +111,12 @@ typedef NS_ENUM(NSInteger, KRow){
         {
             GuidePhotoViewController *introduceVC = [[GuidePhotoViewController alloc]initWithEntryType:EntryIntroduceType];
             [self.navigationController pushViewController:introduceVC animated:YES];
-            [introduceVC release];
         }
             break;
             case RowFeedback:
         {
             FeedbackViewController *feedbackVC = [[FeedbackViewController alloc]init];
             [self.navigationController pushViewController:feedbackVC animated:YES];
-            [feedbackVC release];
             
         }
             

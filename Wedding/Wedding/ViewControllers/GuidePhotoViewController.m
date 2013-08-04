@@ -60,7 +60,6 @@
             NSString *imagPath = [NSString stringWithFormat:@"guide_photo%d",index];
             imgView.image = [UIImage imageNamed:imagPath];
             [_guidePhoto addSubview:imgView];
-            [imgView release];
         }
         _guidePhoto.delegate = self;
         _guidePhoto.guideDelegate = self;
@@ -107,11 +106,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)dealloc
-{
-    self.guidePhoto = nil;
-    [super dealloc];
-}
 
 - (void)hiddenBar:(BOOL)hidden
 {

@@ -36,7 +36,6 @@
 			backgroundView.autoresizingMask  = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 			[self addSubview:backgroundView];
 			[self sendSubviewToBack:backgroundView];
-			[backgroundView release];
 		}
 	}
 }

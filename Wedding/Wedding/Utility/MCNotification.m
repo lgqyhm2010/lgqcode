@@ -115,12 +115,12 @@ typedef void (^MCNotificationCompletionBlock)(void);
 #pragma mark - hide method
 
 - (void)removeWaitViewByThread {
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    self.view = self.view ? self.view : self.window;
-    self.view.userInteractionEnabled=YES;
-    [self.waitView stopAnimating];
-    [self.waitView removeFromSuperview];
-    [pool release] ,pool = nil;
+    @autoreleasepool {
+        self.view = self.view ? self.view : self.window;
+        self.view.userInteractionEnabled=YES;
+        [self.waitView stopAnimating];
+        [self.waitView removeFromSuperview];
+    }
 }
 
 - (void)removeWaitView {
@@ -215,102 +215,102 @@ typedef void (^MCNotificationCompletionBlock)(void);
 
 -(void)showWaitViewInViewByThread:(NSMutableDictionary*)params {
     
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    
-    UIView *view = [params objectForKey:@"view"];
-    BOOL animated = [(NSNumber*)[params objectForKey:@"animated"] boolValue];
-    NSString *text = [params objectForKey:@"text"];
-    CGFloat duration = [(NSNumber*)[params objectForKey:@"duration"] floatValue];
-    BOOL hideWhenFinish = [(NSNumber*)[params objectForKey:@"hideWhenFinish"] boolValue];
-    BOOL indicator = [(NSNumber*)[params objectForKey:@"indicator"] boolValue];
-    MCNotificationCompletionBlock completion = [params objectForKey:@"completion"];
-    self.hideWhenFinish = hideWhenFinish;
-    self.view.userInteractionEnabled = YES;
-    self.view = view;
-    self.view.userInteractionEnabled = NO;
-    
-    CGFloat margin = 8;
-	if (!text.length) {
-        [self.indicatorView startAnimating];
-		self.tipsLabel.text=@"请稍候...";
-		self.tipsLabel.numberOfLines=1;
-		self.tipsLabel.frame=CGRectMake(0, 54, 185.0f, 20);
-		self.tipsLabel.textColor = [UIColor grayColor];
+    @autoreleasepool {
+        UIView *view = [params objectForKey:@"view"];
+        BOOL animated = [(NSNumber*)[params objectForKey:@"animated"] boolValue];
+        NSString *text = [params objectForKey:@"text"];
+        CGFloat duration = [(NSNumber*)[params objectForKey:@"duration"] floatValue];
+        BOOL hideWhenFinish = [(NSNumber*)[params objectForKey:@"hideWhenFinish"] boolValue];
+        BOOL indicator = [(NSNumber*)[params objectForKey:@"indicator"] boolValue];
+        MCNotificationCompletionBlock completion = [params objectForKey:@"completion"];
+        self.hideWhenFinish = hideWhenFinish;
+        self.view.userInteractionEnabled = YES;
+        self.view = view;
+        self.view.userInteractionEnabled = NO;
         
-	}else {
+        CGFloat margin = 8;
+        if (!text.length) {
+            [self.indicatorView startAnimating];
+            self.tipsLabel.text=@"请稍候...";
+            self.tipsLabel.numberOfLines=1;
+            self.tipsLabel.frame=CGRectMake(0, 54, 185.0f, 20);
+            self.tipsLabel.textColor = [UIColor grayColor];
+            
+        }else {
+            
+            self.tipsLabel.numberOfLines = 0;
+            CGSize textSize = [text sizeWithFont:self.tipsLabel.font
+                               constrainedToSize:CGSizeMake(185.0f - margin*2, CGFLOAT_MAX)
+                                   lineBreakMode:UILineBreakModeWordWrap];
+            
+            if (indicator) [self.indicatorView startAnimating];
+            else [self.indicatorView stopAnimating];
+            self.tipsLabel.frame = CGRectMake(0,
+                                              indicator ? CGRectGetMaxY(self.indicatorView.frame)+margin : margin*2,
+                                              textSize.width,
+                                              textSize.height);
+            
+            CGFloat height = CGRectGetMaxY(self.tipsLabel.frame) + margin + (indicator ? 0:margin*2);
+            height = height > WAIT_VIEW_MIN_HEIGHT ? height : WAIT_VIEW_MIN_HEIGHT;
+            
+            self.waitView.frame = CGRectMake(CGRectGetMinX(self.waitView.frame),
+                                             CGRectGetMinY(self.waitView.frame),
+                                             CGRectGetWidth(self.waitView.frame),
+                                             height);
+            
+            self.tipsLabel.center = CGPointMake(CGRectGetWidth(self.waitView.frame)/2,
+                                                indicator ? self.tipsLabel.center.y : height/2);
+            
+            self.tipsLabel.text=text;
+            self.tipsLabel.textColor = [UIColor grayColor];
+            
+        }
         
-        self.tipsLabel.numberOfLines = 0;
-		CGSize textSize = [text sizeWithFont:self.tipsLabel.font
-                           constrainedToSize:CGSizeMake(185.0f - margin*2, CGFLOAT_MAX)
-                               lineBreakMode:UILineBreakModeWordWrap];
+        CGPoint point = [self.window convertPoint:self.window.center toView:self.view];
+        self.waitView.center = point;
+        [self.window bringSubviewToFront:self.waitView];
         
-        if (indicator) [self.indicatorView startAnimating];
-        else [self.indicatorView stopAnimating];
-        self.tipsLabel.frame = CGRectMake(0,
-                                          indicator ? CGRectGetMaxY(self.indicatorView.frame)+margin : margin*2,
-                                          textSize.width,
-                                          textSize.height);
+        self.waitView.alpha = 0;
+        if (!animated) self.waitView.alpha = 0.99;
+        [self.view addSubview:self.waitView];
+        self.waitView.hidden=NO;
         
-        CGFloat height = CGRectGetMaxY(self.tipsLabel.frame) + margin + (indicator ? 0:margin*2);
-        height = height > WAIT_VIEW_MIN_HEIGHT ? height : WAIT_VIEW_MIN_HEIGHT;
+        /*
+         [UIView beginAnimations:nil context:nil];
+         [UIView setAnimationDuration:kTransitionDuration];
+         //    if (hideWhenFinish) {
+         //        [UIView setAnimationDelegate:self];
+         //        [UIView setAnimationDidStopSelector:@selector(hiddenWaitViewByThread)];
+         //    }
+         self.waitView.alpha = 1;
+         [UIView commitAnimations];
+         */
         
-        self.waitView.frame = CGRectMake(CGRectGetMinX(self.waitView.frame),
-                                         CGRectGetMinY(self.waitView.frame),
-                                         CGRectGetWidth(self.waitView.frame),
-                                         height);
+        __block MCNotification *tmp = self;
+        [UIView animateWithDuration:kTransitionDuration animations:^{
+            tmp.waitView.alpha = 1;
+        } completion:^(BOOL finished) {
+            
+        }];
         
-        self.tipsLabel.center = CGPointMake(CGRectGetWidth(self.waitView.frame)/2,
-                                            indicator ? self.tipsLabel.center.y : height/2);
         
-		self.tipsLabel.text=text;
-		self.tipsLabel.textColor = [UIColor grayColor];
+        if (hideWhenFinish) {
+            double delayInSeconds = duration > 0 ? duration :  kDuration;
+            NSLog(@"delay:%f" ,delayInSeconds);
+            delayInSeconds = delayInSeconds > kTransitionDuration ? delayInSeconds :kTransitionDuration;
+            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                [self hiddenWaitViewByThread];
+                if (completion) completion();
+            });
+        }
         
-	}
-    
-    CGPoint point = [self.window convertPoint:self.window.center toView:self.view];
-    self.waitView.center = point;
-	[self.window bringSubviewToFront:self.waitView];
-    
-    self.waitView.alpha = 0;
-    if (!animated) self.waitView.alpha = 0.99;
-    [self.view addSubview:self.waitView];
-	self.waitView.hidden=NO;
-    
-    /*
-     [UIView beginAnimations:nil context:nil];
-     [UIView setAnimationDuration:kTransitionDuration];
-     //    if (hideWhenFinish) {
-     //        [UIView setAnimationDelegate:self];
-     //        [UIView setAnimationDidStopSelector:@selector(hiddenWaitViewByThread)];
-     //    }
-     self.waitView.alpha = 1;
-     [UIView commitAnimations];
-     */
-    
-    __block MCNotification *tmp = self;
-    [UIView animateWithDuration:kTransitionDuration animations:^{
-        tmp.waitView.alpha = 1;
-    } completion:^(BOOL finished) {
-        
-    }];
-    
-    
-    if (hideWhenFinish) {
-        double delayInSeconds = duration > 0 ? duration :  kDuration;
-        NSLog(@"delay:%f" ,delayInSeconds);
-        delayInSeconds = delayInSeconds > kTransitionDuration ? delayInSeconds :kTransitionDuration;
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            [self hiddenWaitViewByThread];
-            if (completion) completion();
-        });
+        if (animated) {
+        } else {
+            self.waitView.alpha = 1;
+        }
+
     }
-    
-    if (animated) {
-	} else {
-		self.waitView.alpha = 1;
-	}
-    [pool release] ,pool = nil;
     
 }
 
@@ -333,7 +333,6 @@ typedef void (^MCNotificationCompletionBlock)(void);
     if (inMainThread) [self performSelectorOnMainThread:@selector(showWaitViewInViewByThread:) withObject:params waitUntilDone:NO];
     else [self showWaitViewInViewByThread:params];
     
-	[params release] ,params = nil;
 }
 
 
@@ -365,7 +364,6 @@ typedef void (^MCNotificationCompletionBlock)(void);
 	UIAlertView *alertView=[[UIAlertView alloc] initWithTitle:title message:msg delegate:delegate cancelButtonTitle:@"取消" otherButtonTitles:@"确定",nil];
 	alertView.tag=tag;
 	[alertView show];
-	[alertView release];
 }
 
 
@@ -374,7 +372,6 @@ typedef void (^MCNotificationCompletionBlock)(void);
 	UIAlertView *alertView=[[UIAlertView alloc] initWithTitle:title message:msg delegate:delegate cancelButtonTitle:nil otherButtonTitles:@"确定",nil];
 	alertView.tag=tag;
 	[alertView show];
-	[alertView release];
 }
 
 -(void)showMsgWithBtnStr:(id)delegate title:(NSString*)title message:(NSString*)msg leftBtn:leftStr rightBtn:rightStr tag:(NSInteger)tag
@@ -382,7 +379,6 @@ typedef void (^MCNotificationCompletionBlock)(void);
 	UIAlertView *alertView=[[UIAlertView alloc] initWithTitle:title message:msg delegate:delegate cancelButtonTitle:leftStr otherButtonTitles:rightStr,nil];
 	alertView.tag=tag;
 	[alertView show];
-	[alertView release];
 }
 
 
@@ -392,16 +388,6 @@ typedef void (^MCNotificationCompletionBlock)(void);
         
     }
     return self;
-}
-
-
-- (void)dealloc {
-    
-    self.waitView = nil;
-    self.tipsLabel = nil;
-    self.indicatorView = nil;
-    self.view = nil;
-    [super dealloc];
 }
 
 @end

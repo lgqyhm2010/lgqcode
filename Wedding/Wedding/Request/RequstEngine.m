@@ -19,14 +19,7 @@
 @implementation RequstEngine
 @synthesize operations = _operations;
 
-- (void)setOperations:(NSMutableArray *)operations
-{
-    if (_operations != operations)
-    {
-        [_operations release];
-        _operations = [operations retain];
-    }
-}
+
 
 - (NSMutableArray *)operations
 {
@@ -48,26 +41,23 @@
     
     self.operations = nil;
 }
-- (void)dealloc
-{
-    [self cancelOperations];
-    [super dealloc];
-}
+
 
 - (void)postDataWithParam:(NSDictionary *)params imgData:(NSData *)imgData url:(NSString *)url onCompletion:(SuccessBlock)successBlock onError:(ErrorBlock)errorBlock
 {
     NSString *urlSting = [NSString stringWithFormat:@"%@%@",KRomanticURL,url];
-    MKNetworkOperation *op = [self operationWithURLString:urlSting params:params httpMethod:@"POST"];
+   __weak  MKNetworkOperation *op = [self operationWithURLString:urlSting params:params httpMethod:@"POST"];
     [op addData:imgData forKey:@"file"];
     [op setFreezable:YES];
     // 保存起以支持取消操作
     [self.operations addObject:op];
     
     DLog(@"%@", op);
+    __block typeof(self) weakEnginge =self;
     
     [op addCompletionHandler:^(MKNetworkOperation *completedOperation)
      {
-         [self.operations removeObject:op];
+         [weakEnginge.operations removeObject:op];
          
          NSString *responseString = completedOperation.responseString;
          
@@ -92,7 +82,7 @@
      }errorHandler:^(MKNetworkOperation *completedOperation, NSError *error)
      {
          // 失败回调
-         [self.operations removeObject:op];
+         [weakEnginge.operations removeObject:op];
          
          // 系统级的错误
          //         errorBlock(NSNetCodeNetError, KNetErrorDefault);
@@ -107,7 +97,7 @@
 - (void)getSelectionPicWithParam:(NSDictionary *)params url:(NSString *)url onCompletion:(SuccessBlock)successBlock onError:(ErrorBlock)errorBlock
 {
     NSString *urlSting = [NSString stringWithFormat:@"%@%@",KRomanticURL,url];
-    MKNetworkOperation *op = [self operationWithURLString:urlSting params:params httpMethod:@"GET"];
+   __weak MKNetworkOperation *op = [self operationWithURLString:urlSting params:params httpMethod:@"GET"];
     [op setPostDataEncoding:MKNKPostDataEncodingTypeCustom];
     [op setCustomPostDataEncodingHandler:^NSString *(NSDictionary *postDataDict) {
         return [postDataDict JSONString];
@@ -117,10 +107,10 @@
     [self.operations addObject:op];
     
     DLog(@"%@", op);
-    
+    __block typeof(self) weakEnginge =self;
     [op addCompletionHandler:^(MKNetworkOperation *completedOperation)
      {
-         [self.operations removeObject:op];
+         [weakEnginge.operations removeObject:op];
          
          NSString *responseString = completedOperation.responseString;
          
@@ -149,7 +139,7 @@
      }errorHandler:^(MKNetworkOperation *completedOperation, NSError *error)
      {
          // 失败回调
-         [self.operations removeObject:op];
+         [weakEnginge.operations removeObject:op];
          
          // 系统级的错误
          //         errorBlock(NSNetCodeNetError, KNetErrorDefault);
@@ -165,7 +155,7 @@
                       onCompletion:(SuccessBlock)successBlock
                            onError:(ErrorBlock)errorBlock{
     NSString *urlSting = [NSString stringWithFormat:@"%@%@",KRomanticURL,url];
-    MKNetworkOperation *op = [self operationWithURLString:urlSting params:params httpMethod:@"GET"];
+   __weak MKNetworkOperation *op = [self operationWithURLString:urlSting params:params httpMethod:@"GET"];
     [op setPostDataEncoding:MKNKPostDataEncodingTypeCustom];
     [op setCustomPostDataEncodingHandler:^NSString *(NSDictionary *postDataDict) {
         return [postDataDict JSONString];
@@ -175,10 +165,11 @@
     [self.operations addObject:op];
     
     DLog(@"%@", op);
+    __block typeof(self) weakEnginge =self;
     
     [op addCompletionHandler:^(MKNetworkOperation *completedOperation)
      {
-         [self.operations removeObject:op];
+         [weakEnginge.operations removeObject:op];
          
          NSString *responseString = completedOperation.responseString;
          
@@ -203,7 +194,7 @@
      }errorHandler:^(MKNetworkOperation *completedOperation, NSError *error)
      {
          // 失败回调
-         [self.operations removeObject:op];
+         [weakEnginge.operations removeObject:op];
          
          // 系统级的错误
 //         errorBlock(NSNetCodeNetError, KNetErrorDefault);

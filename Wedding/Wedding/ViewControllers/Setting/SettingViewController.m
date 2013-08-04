@@ -75,11 +75,7 @@ return _settingTableView;
     // Dispose of any resources that can be recreated.
 }
 
-- (void)dealloc
-{
-    self.settingTableView = nil;
-    [super dealloc];
-}
+
 
 #pragma mark tableview dataSource
 
@@ -98,7 +94,7 @@ return _settingTableView;
     static NSString *cellIdentifier = @"cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (!cell) {
-        cell = [[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier]autorelease];
+        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     cell.textLabel.text = self.titles[indexPath.section][indexPath.row];
@@ -130,7 +126,6 @@ typedef enum {
                 PersonalInformationViewController *personalIndromationVC = [[PersonalInformationViewController alloc]init];
                 personalIndromationVC.hidesBottomBarWhenPushed = YES;
                 [self.navigationController pushViewController:personalIndromationVC animated:YES];
-                [personalIndromationVC release];personalIndromationVC = nil;
             }
                 break;
                 case ShareTofriend:
@@ -141,7 +136,6 @@ typedef enum {
                     message.messageComposeDelegate = self;
                     [message setBody:KMessageContent];
                     [self presentModalViewControllerMy:message animated:YES];
-                    FreeMemory(message);
                     
                 }else
                     [Notification showMsgConfirm:self title:KMsgDefault message:KNotSuppor tag:1];
@@ -158,7 +152,6 @@ typedef enum {
                 UserHelpViewController *userHelpVC = [[UserHelpViewController alloc]init];
                 userHelpVC.hidesBottomBarWhenPushed = YES;
                 [self.navigationController pushViewController:userHelpVC animated:YES];
-                [userHelpVC release];userHelpVC = nil;
             }
                 break;
         
@@ -177,7 +170,6 @@ typedef enum {
                 AboutRomanticViewController *aboutRomanticVC = [[AboutRomanticViewController alloc]init];
                 aboutRomanticVC.hidesBottomBarWhenPushed = YES;
                 [self.navigationController pushViewController:aboutRomanticVC animated:YES];
-                [aboutRomanticVC release];aboutRomanticVC = nil;
             }
                 break;
             default:

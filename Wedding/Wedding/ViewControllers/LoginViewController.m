@@ -47,10 +47,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)dealloc {
-    [_InviteWedding release];
-    [super dealloc];
-}
+
 - (void)viewDidUnload {
     [self setInviteWedding:nil];
     [super viewDidUnload];
@@ -64,12 +61,10 @@
         if ([responseData isKindOfClass:[NSDictionary class]]) {
             GuidePhotoViewController *guiPhotoVC = [[GuidePhotoViewController alloc]init];
             [logingVC.navigationController pushViewController:guiPhotoVC animated:YES];
-            [guiPhotoVC release];
         }
     } onError:^(int errorCode, NSString *errorMessage) {
         //
     }];
-    [engine release];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField

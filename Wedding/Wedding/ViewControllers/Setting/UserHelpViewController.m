@@ -53,15 +53,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)dealloc
-{
-    self.subHelpTextArray = nil;
-    self.tableView = nil;
-    self.selectedCellIndexPath = nil;
-    self.titlesArray = nil;
-    self.subHelpViewArray = nil;
-    [super dealloc];
-}
+
 
 #pragma mark - getter & setter
 
@@ -117,7 +109,6 @@
             UIImageView *line = [[UIImageView alloc]initWithFrame:CGRectMake(15, 0, 2, size.height+20-1)];
             line.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"linecolor"]];
             [helpView addSubview:line];
-            [line release];
             
             // text lable
             UILabel *lable =[[UILabel alloc]initWithFrame:CGRectMake(26, 8, size.width, size.height)];
@@ -126,10 +117,8 @@
             [lable setText:subHelp];
             [lable setBackgroundColor:[UIColor clearColor]];
             [helpView addSubview:lable];
-            [lable release];
             
             [array addObject:helpView];
-            [helpView release];
         }
         
         
@@ -152,8 +141,8 @@
     UIHelpViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (cell == nil) {
-        cell = [[[UIHelpViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                      reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UIHelpViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                      reuseIdentifier:CellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
@@ -233,9 +222,8 @@
     UIImageView *backgroundImageView = [[UIImageView alloc] initWithFrame:cellContentView.frame];
     backgroundImageView.image = [UIImage imageNamed:@"helpCellBackground.png"];
     [cellContentView addSubview:backgroundImageView];
-    [backgroundImageView release];
     
-    UILabel *title = [[[UILabel alloc] initWithFrame:CGRectMake(10, 10, 260, 45)] autorelease];
+    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 260, 45)];
     title.text = [self.titlesArray objectAtIndex:indexPath.row];
     title.font = [ToolSet customBoldFontWithSize:16];
     title.textColor = [UIColor darkGrayColor];
@@ -244,12 +232,12 @@
     [cellContentView addSubview:title];
     
     // 箭头
-    UIImageView *indicate = [[[UIImageView alloc]initWithFrame:CGRectMake(285, 14, 33/2, 33/2)] autorelease];
+    UIImageView *indicate = [[UIImageView alloc]initWithFrame:CGRectMake(285, 14, 33/2, 33/2)];
     indicate.image = [UIImage imageNamed:@"closed.png"];
     indicate.tag = kIndicateTag;
     [cellContentView addSubview:indicate];
     
-    return [cellContentView autorelease];
+    return cellContentView;
 }
 
 

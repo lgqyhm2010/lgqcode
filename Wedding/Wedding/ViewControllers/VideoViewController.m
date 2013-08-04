@@ -72,14 +72,12 @@
                 ParseVideoParams *videoParams = [[ParseVideoParams alloc]init];
                 [videoParams parseVideoParmas:data];
                 [videoVC.videoList addObject:videoParams];
-                [videoParams release];
             }
             [videoVC.videoTableView reloadData];
         }
     } onError:^(int errorCode, NSString *errorMessage) {
         //
     }];
-    [engine release];
 
 }
 
@@ -105,14 +103,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)dealloc
-{
-    self.videoTableView = nil;
-    self.videoList = nil;
-    if(movie)
-    [movie release];
-    [super dealloc];
-}
+
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
@@ -133,7 +124,7 @@
     static NSString *cellIdentifier = @"cell";
     UITableViewCell *cell = [tableView dequeueReusableHeaderFooterViewWithIdentifier:cellIdentifier];
     if (!cell) {
-        cell = [[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier]autorelease];
+        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     ParseVideoParams *params = self.videoList[indexPath.row];
@@ -141,14 +132,12 @@
     UIImageView *imgView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 300, 130)];
     [imgView setImageWithURL:[NSURL URLWithString:params.thumbnailUrl] placeholderImage:img];
     [cell.contentView addSubview:imgView];
-    [imgView release];
     UILabel *lable = [[UILabel alloc]initWithFrame:CGRectMake(15, 120, 200, 10)];
     lable.backgroundColor = [UIColor clearColor];
     lable.textColor = [UIColor blackColor];
     lable.font = [ToolSet customNormalFontWithSize:12];
     lable.text = params.info;
     [cell.contentView addSubview:lable];
-    [lable release];
     return cell;
 }
 
@@ -166,7 +155,7 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
-    UIView *view = [[[UIView alloc]init]autorelease];
+    UIView *view = [[UIView alloc]init];
     view.backgroundColor = [UIColor clearColor];
     return view;
 }

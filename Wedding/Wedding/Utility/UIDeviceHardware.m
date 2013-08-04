@@ -253,9 +253,9 @@ FWVGA（854×480)
 
 +(NSString*)uuid {
 	CFUUIDRef uuidObj = CFUUIDCreate(nil);
-	NSString *uuidString = (NSString*)CFUUIDCreateString(nil, uuidObj);
+	NSString *uuidString = (NSString*)CFBridgingRelease(CFUUIDCreateString(nil, uuidObj));
 	CFRelease(uuidObj);
-	return [uuidString autorelease];
+	return uuidString ;
 }
 
 

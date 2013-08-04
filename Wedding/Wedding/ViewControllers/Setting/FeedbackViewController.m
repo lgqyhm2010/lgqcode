@@ -46,12 +46,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)dealloc {
-    [_phoneNumberTextField release];
-    [_feedbackTextView release];
-    [_feedbackLabel release];
-    [super dealloc];
-}
 - (void)viewDidUnload {
     [self setPhoneNumberTextField:nil];
     [self setFeedbackTextView:nil];

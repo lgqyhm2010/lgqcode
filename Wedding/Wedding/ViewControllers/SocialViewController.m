@@ -118,17 +118,6 @@
 return self;
 }
 
-- (void)dealloc
-{
-    self.personImage = nil;
-    self.name = nil;
-    self.sex = nil;
-    self.content = nil;
-    self.createTime = nil;
-    self.introView = nil;
-    self.cellContextView = nil;
-    [super dealloc];
-}
 
 @end
 
@@ -233,14 +222,12 @@ return self;
                     ParseWishingParsms *params = [[ParseWishingParsms alloc]init];
                     [params parseWishingData:responseData[index]];
                     [sociaVC.context addObject:params];
-                    [params release];
                 }
             }
             [sociaVC.socialTableView reloadData];
         } onError:^(int errorCode, NSString *errorMessage) {
             //
         }];
-        [engine release];
     }
     return self;
 }
@@ -256,8 +243,6 @@ return self;
     SendWishViewController *sendWishVC = [[SendWishViewController alloc]init];
     UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:sendWishVC];
     [self presentModalViewControllerMy:nav animated:YES];
-    [sendWishVC release];
-    [nav release];
 }
 
 - (void)viewDidLoad
@@ -286,16 +271,6 @@ return self;
     // Dispose of any resources that can be recreated.
 }
 
-- (void)dealloc
-{
-    self.socialTableView = nil;
-    self.context = nil;
-    self.refreshHeaderView = nil;
-    self.refreshArrow = nil;
-    self.refreshLabel = nil;
-    self.refreshSpinner = nil;
-    [super dealloc];
-}
 
 #pragma mark tableview datasource
 
@@ -309,7 +284,7 @@ return self;
     static NSString *cellIdentifier = @"cell";
     SociaCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (!cell) {
-        cell = [[[SociaCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier]autorelease];
+        cell = [[SociaCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     ParseWishingParsms *params= self.context[indexPath.row];
@@ -400,7 +375,6 @@ return self;
                 ParseWishingParsms *params = [[ParseWishingParsms alloc]init];
                 [params parseWishingData:responseData[index]];
                 [sociaVC.context addObject:params];
-                [params release];
             }
         }
        sociaVC.isLoading = NO;
@@ -417,7 +391,6 @@ return self;
     } onError:^(int errorCode, NSString *errorMessage) {
         //
     }];
-    [engine release];
 
 }
 

@@ -52,12 +52,7 @@
     UIActionSheet *sheet = [[UIActionSheet alloc]initWithTitle:@"请选择类型" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"选择本地图片", nil];
     [sheet showInView:self.view];
 }
-- (void)dealloc {
-    [_nameTextField release];
-    [_sex release];
-    [_personImage release];
-    [super dealloc];
-}
+
 - (void)viewDidUnload {
     [self setNameTextField:nil];
     [self setSex:nil];
@@ -83,7 +78,6 @@
         [Notification hiddenWaitView:NO];
         [Notification showMsgConfirm:nil title:KMsgDefault message:errorMessage tag:0];
     }];
-     [engine release];
 
 }
 

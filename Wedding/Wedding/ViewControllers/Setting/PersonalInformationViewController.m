@@ -67,12 +67,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)dealloc
-{
-    self.informationTableView = nil;
-    self.titleArray = nil;
-    [super dealloc];
-}
 
 #pragma mark tableview datasourc
 
@@ -98,7 +92,7 @@
     static NSString *cellIdentifier = @"cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (!cell) {
-        cell = [[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier]autorelease];
+        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     cell.textLabel.text = self.titleArray[indexPath.row];
@@ -110,7 +104,6 @@
             UIImageView *imgView = [[UIImageView alloc]initWithFrame:CGRectMake(210, 5, 60, 60)];
             imgView.image = image;
             [cell.contentView addSubview:imgView];
-            [imgView release];
         }
             break;
     case 1:
