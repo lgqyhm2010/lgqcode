@@ -182,7 +182,7 @@
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
         ParsePhotoParams *params = self.photoArray1[indexPath.row];
-        UIImage *img = [UIImage imageNamed:@"feedback_content"];
+        UIImage *img = [UIImage imageNamed:@"default_avatar"];
         UIImageView *imgView = [[UIImageView alloc]init];
         [imgView setImageWithURL:[NSURL URLWithString:params.thumbnailurl] placeholderImage:img];
         cell.backgroundView = imgView;
@@ -197,7 +197,7 @@
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
         ParsePhotoParams *params = self.photoArray2[indexPath.row];
-        UIImage *img = [UIImage imageNamed:@"feedback_content"];
+        UIImage *img = [UIImage imageNamed:@"default_avatar"];
         UIImageView *imgView = [[UIImageView alloc]init];
         [imgView setImageWithURL:[NSURL URLWithString:params.thumbnailurl] placeholderImage:img];
         cell.backgroundView = imgView;

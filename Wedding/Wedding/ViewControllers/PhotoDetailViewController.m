@@ -9,10 +9,11 @@
 #import "PhotoDetailViewController.h"
 #import "ParsePhotoParams.h"
 #import "UIImageView+WebCache.h"
+#define Ktag 1000
 
 #define KHeight  CGRectGetHeight(self.view.frame)-44
 
-@interface PhotoDetailViewController ()<UIScrollViewDelegate>
+@interface PhotoDetailViewController ()<UIScrollViewDelegate,UIActionSheetDelegate>
 {
     int currenCout;
 }
@@ -54,6 +55,12 @@
     return self;
 }
 
+- (void)moreAction
+{
+    UIActionSheet *sheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"保存到手机", nil];
+    [sheet showInView:self.view];
+}
+
 - (void)loadView
 {
     [super loadView];
@@ -66,7 +73,8 @@
         float ratioWidth = (float)params.width/320;
         CGRect frame = CGRectMake(0, 0, 320, params.height/ratioWidth);
         UIImageView *imgView = [[UIImageView alloc]initWithFrame:frame];
-        UIImage *img = [UIImage imageNamed:@"feedback_content"];
+        UIImage *img = [UIImage imageNamed:@"default_avatar"];
+        imgView.tag = Ktag + index;
         imgView.center = CGPointMake(self.view.center.x + 320*index, CGRectGetHeight(self.view.frame)/2-10);
         NSURL *url = [NSURL URLWithString:params.url];
         [imgView setImageWithURL:url placeholderImage:img];
@@ -83,6 +91,7 @@
     NSString *title = [NSString stringWithFormat:@"%d/%d",currenCout+1,self.photos.count ];
     [self setNavigationTitle:title];
     [self setBackNavigationItemTitle:@"返回"];
+    [self setNavigationItemNormalImage:@"more_icon_normal.png" HightImage:@"more_icon_pressed.png" selector:@selector(moreAction) isRight:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -98,6 +107,23 @@
     NSString *title = [NSString stringWithFormat:@"%d/%d",index+1,self.photos.count ];
     [self setNavigationTitle:title];
 
+}
+
+- (void)imageSavedToPhotosAlbum:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
+{
+    [self showPromptView:@"保存图片成功"];
+}
+
+#pragma mark actionsheet delegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0) {
+        int index = self.photoDetailScrollView.contentOffset.x/320;
+        UIImageView *imgView = (UIImageView *)[self.photoDetailScrollView viewWithTag:Ktag + index];
+        UIImage *img = imgView.image;
+        UIImageWriteToSavedPhotosAlbum(img, self,@selector(imageSavedToPhotosAlbum:didFinishSavingWithError:contextInfo:), nil);
+    }
 }
 
 @end

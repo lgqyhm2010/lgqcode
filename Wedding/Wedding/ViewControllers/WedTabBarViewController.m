@@ -34,6 +34,12 @@ typedef NSInteger WedTabIndex;
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        
+        UIImageView *backImg = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
+        backImg.image = [UIImage imageNamed:@"tab_bg"];
+        [self.tabBar addSubview:backImg];
+        FreeMemory(backImg);
+        
         NSMutableArray *controllers = [NSMutableArray array];
         
         WeddingViewController *wedding = [[WeddingViewController alloc]init];

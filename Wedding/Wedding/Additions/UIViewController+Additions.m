@@ -229,7 +229,7 @@
 
 
 - (void)setNavigationBackgroundImage:(NSString*)image {
-    if (!image.length) image = @"topNav_bg.png";
+    if (!image.length) image = @"topbar_bg.png";
     if ([self.navigationController.navigationBar respondsToSelector:@selector(setBackgroundImage:forBarMetrics:)]){
 #if __IPHONE_OS_VERSION_MAX_ALLOWED>=50000
         [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:image] forBarMetrics:UIBarMetricsDefault];
@@ -287,7 +287,7 @@
 }
 
 -(void)setDefaultNavigationBackground {
-    [self setNavigationBackgroundImage:@"topNav_bg.png"];
+    [self setNavigationBackgroundImage:@"topbar_bg.png"];
 }
 
 //by lgq add

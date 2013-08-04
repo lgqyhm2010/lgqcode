@@ -125,11 +125,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Wedding/ViewControllers/WedTabBarViewController.m"
-         timestampString = "397065574.971948"
+         timestampString = "397293313.757716"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "118"
-         endingLineNumber = "118"
+         startingLineNumber = "124"
+         endingLineNumber = "124"
          landmarkName = "-shouldAutorotate"
          landmarkType = "5">
       </FileBreakpoint>
