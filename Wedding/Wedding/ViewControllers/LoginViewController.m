@@ -57,10 +57,10 @@
 }
 - (IBAction)entranceWedding:(id)sender {
     
-    NSDictionary *param = @{@"op": @"user.login",@"user.simId":self.InviteWedding.text};
+    NSDictionary *param = @{@"op": @"wedding.getWedding",@"wedding.number":self.InviteWedding.text};
     __block LoginViewController *logingVC = self;
     RequstEngine *engine = [[RequstEngine alloc]init];
-    [engine getDataWithParam:param url:@"app/user/login" onCompletion:^(id responseData) {
+    [engine getDataWithParam:param url:@"app/wedding/getWedding" onCompletion:^(id responseData) {
         if ([responseData isKindOfClass:[NSDictionary class]]) {
             GuidePhotoViewController *guiPhotoVC = [[GuidePhotoViewController alloc]init];
             [logingVC.navigationController pushViewController:guiPhotoVC animated:YES];

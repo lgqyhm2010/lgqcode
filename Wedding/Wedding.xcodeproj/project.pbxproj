@@ -171,6 +171,8 @@
 		0EAD7ADF17AE3BF40021A100 /* more_icon_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EAD7ADD17AE3BF10021A100 /* more_icon_normal.png */; };
 		0EAD7AE017AE3BF40021A100 /* more_icon_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EAD7ADE17AE3BF30021A100 /* more_icon_pressed.png */; };
 		0EAD7AE317AE58360021A100 /* NSNotificationCenter+Removed.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EAD7AE217AE58360021A100 /* NSNotificationCenter+Removed.m */; };
+		0EAD7AE617AE7C2B0021A100 /* ParseWeddingParams.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EAD7AE517AE7C2B0021A100 /* ParseWeddingParams.m */; };
+		0EAD7AE917AE7C510021A100 /* ParseEnterpriseParams.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EAD7AE817AE7C510021A100 /* ParseEnterpriseParams.m */; };
 		0EDC758317956EE200E0EAC0 /* feedback_content.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EDC758117956EE200E0EAC0 /* feedback_content.png */; };
 		0EDC758417956EE200E0EAC0 /* feedback_title.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EDC758217956EE200E0EAC0 /* feedback_title.png */; };
 		0EDC758A179570D300E0EAC0 /* FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EDC7588179570D300E0EAC0 /* FeedbackViewController.m */; };
@@ -453,6 +455,10 @@
 		0EAD7ADE17AE3BF30021A100 /* more_icon_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = more_icon_pressed.png; sourceTree = "<group>"; };
 		0EAD7AE117AE58360021A100 /* NSNotificationCenter+Removed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNotificationCenter+Removed.h"; sourceTree = "<group>"; };
 		0EAD7AE217AE58360021A100 /* NSNotificationCenter+Removed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNotificationCenter+Removed.m"; sourceTree = "<group>"; };
+		0EAD7AE417AE7C2B0021A100 /* ParseWeddingParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParseWeddingParams.h; sourceTree = "<group>"; };
+		0EAD7AE517AE7C2B0021A100 /* ParseWeddingParams.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParseWeddingParams.m; sourceTree = "<group>"; };
+		0EAD7AE717AE7C510021A100 /* ParseEnterpriseParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParseEnterpriseParams.h; sourceTree = "<group>"; };
+		0EAD7AE817AE7C510021A100 /* ParseEnterpriseParams.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParseEnterpriseParams.m; sourceTree = "<group>"; };
 		0EDC758117956EE200E0EAC0 /* feedback_content.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = feedback_content.png; sourceTree = "<group>"; };
 		0EDC758217956EE200E0EAC0 /* feedback_title.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = feedback_title.png; sourceTree = "<group>"; };
 		0EDC7587179570D300E0EAC0 /* FeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackViewController.h; sourceTree = "<group>"; };
@@ -910,6 +916,10 @@
 				0E2B33D017A3A24D00764ECE /* ParseWishingParsms.m */,
 				0E2B33D217A3A2A000764ECE /* ParseGetVersionParams.h */,
 				0E2B33D317A3A2A000764ECE /* ParseGetVersionParams.m */,
+				0EAD7AE417AE7C2B0021A100 /* ParseWeddingParams.h */,
+				0EAD7AE517AE7C2B0021A100 /* ParseWeddingParams.m */,
+				0EAD7AE717AE7C510021A100 /* ParseEnterpriseParams.h */,
+				0EAD7AE817AE7C510021A100 /* ParseEnterpriseParams.m */,
 			);
 			path = Modal;
 			sourceTree = "<group>";
@@ -1217,6 +1227,8 @@
 				0EAD7AC217AABC560021A100 /* WedTabBarViewController.m in Sources */,
 				0EAD7AD017AABF970021A100 /* WeddingPlanViewController.m in Sources */,
 				0EAD7AE317AE58360021A100 /* NSNotificationCenter+Removed.m in Sources */,
+				0EAD7AE617AE7C2B0021A100 /* ParseWeddingParams.m in Sources */,
+				0EAD7AE917AE7C510021A100 /* ParseEnterpriseParams.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
