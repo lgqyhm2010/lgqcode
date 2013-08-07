@@ -78,6 +78,12 @@ return self; \
 #define KRomanticURL    @"http://42.96.170.168:8080/iRomantic/"
 #define KUerID  @"e141d3e7-f0b4-4588-9cc2-f8d1d861aef8"
 
+#define KWeddingData    @"Weddingdata"
+#define kWedding        @"Wedding"
+#define KPictures       @"Pictures"
+#define KEnterprise     @"Enterprise"
+#define KHotel          @"Hotel"
+#define KInvitation     @"Invitation"
 
 #ifndef __OPTIMIZE__
 #   define DLog(fmt, ...) {NSLog((@"\n%s [Line %d]\n " fmt @"\n\n"), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);}
@@ -90,3 +96,4 @@ return self; \
 //======================通知===============================
 
 #define Guider  @"guider" //引导图
+

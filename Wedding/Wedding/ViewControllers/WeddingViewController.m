@@ -12,10 +12,22 @@
 #import "ParsePhotoParams.h"
 #import "UIImageView+WebCache.h"
 #import "WeddingPlanViewController.h"
+#import "ParseEnterpriseParams.h"
+#import "ParseWeddingParams.h"
+#import "ParseHotelParams.h"
+#import "ParseInvitationParams.h"
 
 #define KHeight  150
 
 @interface WeddingViewController ()
+{
+    ParseEnterpriseParams *enterprise;
+    NSMutableArray *pictures ;
+    ParseWeddingParams *wedding;
+    ParseHotelParams *hotel;
+    ParseInvitationParams *invitation;
+    
+}
 
 @property (nonatomic,retain)UIButton *weddingScenceButton;
 @property (nonatomic,retain)UIButton *weddingInviteButton;
@@ -24,6 +36,8 @@
 @end
 
 @implementation WeddingViewController
+
+
 
 - (UIScrollView *)selectionScrollerView
 {
@@ -37,30 +51,44 @@
 
 - (void)getSelectionPicData
 {
-    __block WeddingViewController *weddingVC = self;
-    NSDictionary *params = @{@"op": @"wedding.getWedding",@"wedding.number":@"12345"};
-    RequstEngine *engine = [[RequstEngine alloc]init];
-    [engine getSelectionPicWithParam:params url:@"app/wedding/getWedding" onCompletion:^(id responseData) {
-        if ([responseData isKindOfClass:[NSArray class]]) {
-            [weddingVC.selectionScrollerView setContentSize:CGSizeMake(310*[responseData count], KHeight)];
-            for (int index = 0; index<[responseData count]; index++) {
-                ParsePhotoParams *params = [[ParsePhotoParams alloc]init];
-                [params parse:responseData[index]];
-                UIImageView *imgView = [[UIImageView alloc]initWithFrame:CGRectMake(310*index, 0, 310, KHeight)];
-                [imgView setImageWithURL:[NSURL URLWithString:params.url] placeholderImage:[UIImage imageNamed:@"defaultIcon@2x"]];
-                [weddingVC.selectionScrollerView addSubview:imgView];
-            }
-        }
-    } onError:^(int errorCode, NSString *errorMessage) {
-        //
-    }];
-
+   [self.selectionScrollerView setContentSize:CGSizeMake(310*[pictures count], KHeight)];
+    for (int index = 0; index<[pictures count]; index++) {
+        ParsePhotoParams *params = pictures[index];
+        UIImageView *imgView = [[UIImageView alloc]initWithFrame:CGRectMake(310*index, 0, 310, KHeight)];
+        [imgView setImageWithURL:[NSURL URLWithString:params.url] placeholderImage:[UIImage imageNamed:@"defaultIcon@2x"]];
+        [self.selectionScrollerView addSubview:imgView];
+    }
+    
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        NSData *data = [[NSUserDefaults standardUserDefaults]objectForKey:KWeddingData];
+        NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc]initForReadingWithData:data];
+        NSDictionary *weddingDic = [[unarchiver decodeObjectForKey:kWedding]copy];
+        wedding = [[ParseWeddingParams alloc]initWithParase:weddingDic];
+        
+        NSArray *picturesArray = [[unarchiver decodeObjectForKey:KPictures]copy];
+        pictures = [[NSMutableArray alloc]initWithCapacity:pictures.count];
+        for (int index = 0; index<[picturesArray count]; index ++) {
+            NSDictionary *pictureDic = picturesArray[index];
+            ParsePhotoParams *photo = [[ParsePhotoParams alloc]init];
+            [photo parse:pictureDic];
+            [pictures addObject:photo];
+        }
+        
+        NSDictionary *enterpriseDic = [unarchiver decodeObjectForKey:KEnterprise];
+        enterprise = [[ParseEnterpriseParams alloc]initWithParse:enterpriseDic];
+        
+        NSDictionary *hotelDic = [unarchiver decodeObjectForKey:KHotel];
+        hotel = [[ParseHotelParams alloc]initWithParseData:hotelDic];
+        
+        NSDictionary *invitationDic = [unarchiver decodeObjectForKey:KInvitation];
+        invitation = [[ParseInvitationParams alloc]initWithParseData:invitationDic];
+        
+        [unarchiver finishDecoding];
            }
     return self;
 }

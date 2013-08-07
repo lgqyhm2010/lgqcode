@@ -163,32 +163,6 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "Wedding/ViewControllers/WeddingViewController.m"
-         timestampString = "397066757.933538"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "49"
-         endingLineNumber = "49"
-         landmarkName = "-getSelectionPicData"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Wedding/ViewControllers/WeddingViewController.m"
-         timestampString = "397066757.933538"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "41"
-         endingLineNumber = "41"
-         landmarkName = "-getSelectionPicData"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "Wedding/Request/RequstEngine.m"
          timestampString = "397315369.271019"
          startingColumnNumber = "9223372036854775807"
@@ -229,11 +203,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Wedding/ViewControllers/LoginViewController.m"
-         timestampString = "397315369.271019"
+         timestampString = "397410906.464814"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "63"
-         endingLineNumber = "63"
+         startingLineNumber = "77"
+         endingLineNumber = "77"
          landmarkName = "-entranceWedding:"
          landmarkType = "5">
       </FileBreakpoint>

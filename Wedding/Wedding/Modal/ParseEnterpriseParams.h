@@ -22,4 +22,6 @@
 @property (nonatomic,strong) NSString *discount;
 @property (nonatomic,strong) NSString *info;
 
+- (id)initWithParse:(NSDictionary *)data;
+
 @end

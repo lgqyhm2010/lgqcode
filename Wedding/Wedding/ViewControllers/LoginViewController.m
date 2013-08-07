@@ -55,10 +55,36 @@
 - (IBAction)entranceWedding:(id)sender {
     
     NSDictionary *param = @{@"op": @"wedding.getWedding",@"wedding.number":self.InviteWedding.text};
-    __block LoginViewController *logingVC = self;
+    __weak LoginViewController *logingVC = self;
     RequstEngine *engine = [[RequstEngine alloc]init];
     [engine getDataWithParam:param url:@"app/wedding/getWedding" onCompletion:^(id responseData) {
         if ([responseData isKindOfClass:[NSDictionary class]]) {
+            NSMutableData *data = [[NSMutableData alloc]init];
+            NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc]initForWritingWithMutableData:data];
+            NSUserDefaults *defauls = [NSUserDefaults standardUserDefaults];
+            if ([responseData jsonObjectForKey:@"wedding"]) {
+                NSDictionary *weddingDic = [responseData jsonObjectForKey:@"wedding"];
+                [archiver encodeObject:weddingDic forKey:kWedding];
+            }
+            if ([responseData jsonObjectForKey:@"pictures"]) {
+                NSArray *photosArray = [responseData jsonObjectForKey:@"pictures"];
+                [archiver encodeObject:photosArray forKey:KPictures];
+            }
+            if ([responseData jsonObjectForKey:@"enterprise"]) {
+                NSDictionary *enterpriseDic = [responseData jsonObjectForKey:@"enterprise"];
+                [archiver encodeObject:enterpriseDic forKey:KEnterprise];
+            }
+            if ([responseData jsonObjectForKey:@"hotel"]) {
+                NSDictionary *hotelDic = [responseData jsonObjectForKey:@"hotel"];
+                [archiver encodeObject:hotelDic forKey:KHotel];
+            }
+            if ([responseData jsonObjectForKey:@"invitation"]) {
+                NSDictionary *invitationDic = [responseData jsonObjectForKey:@"invitation"];
+                [archiver encodeObject:invitationDic forKey:KInvitation];
+            }
+            [archiver finishEncoding];
+            [defauls setObject:data forKey:KWeddingData];
+            [defauls synchronize];
             GuidePhotoViewController *guiPhotoVC = [[GuidePhotoViewController alloc]init];
             [logingVC.navigationController pushViewController:guiPhotoVC animated:YES];
         }

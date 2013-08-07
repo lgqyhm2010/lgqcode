@@ -139,6 +139,9 @@
 		0E5AF9A6178EDB2200701BBF /* PersonalInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E5AF9A5178EDB2200701BBF /* PersonalInformationViewController.m */; };
 		0E5AF9A9178EDB8D00701BBF /* UserHelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E5AF9A8178EDB8D00701BBF /* UserHelpViewController.m */; };
 		0E5AF9AF178EDC0400701BBF /* AboutRomanticViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E5AF9AE178EDC0400701BBF /* AboutRomanticViewController.m */; };
+		0E9395CF17B29A09006D8EB3 /* ParseHotelParams.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E9395CE17B29A09006D8EB3 /* ParseHotelParams.m */; };
+		0E9395D217B29A32006D8EB3 /* ParseInvitationParams.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E9395D117B29A32006D8EB3 /* ParseInvitationParams.m */; };
+		0E9395D517B2A09B006D8EB3 /* InvitationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E9395D417B2A09B006D8EB3 /* InvitationViewController.m */; };
 		0E9838D817A2D792007CF86D /* PhotoDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E9838D717A2D792007CF86D /* PhotoDetailViewController.m */; };
 		0EAD7A9F17AAB2400021A100 /* about_content_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EAD7A9C17AAB2400021A100 /* about_content_bg.png */; };
 		0EAD7AA017AAB2400021A100 /* write_icon_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EAD7A9D17AAB2400021A100 /* write_icon_normal.png */; };
@@ -417,6 +420,12 @@
 		0E5AF9AD178EDC0400701BBF /* AboutRomanticViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutRomanticViewController.h; sourceTree = "<group>"; };
 		0E5AF9AE178EDC0400701BBF /* AboutRomanticViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutRomanticViewController.m; sourceTree = "<group>"; };
 		0E5AF9B0178F059E00701BBF /* WedTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WedTabBarViewController.h; sourceTree = "<group>"; };
+		0E9395CD17B29A09006D8EB3 /* ParseHotelParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParseHotelParams.h; sourceTree = "<group>"; };
+		0E9395CE17B29A09006D8EB3 /* ParseHotelParams.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParseHotelParams.m; sourceTree = "<group>"; };
+		0E9395D017B29A32006D8EB3 /* ParseInvitationParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParseInvitationParams.h; sourceTree = "<group>"; };
+		0E9395D117B29A32006D8EB3 /* ParseInvitationParams.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParseInvitationParams.m; sourceTree = "<group>"; };
+		0E9395D317B2A09B006D8EB3 /* InvitationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvitationViewController.h; sourceTree = "<group>"; };
+		0E9395D417B2A09B006D8EB3 /* InvitationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvitationViewController.m; sourceTree = "<group>"; };
 		0E9838D617A2D792007CF86D /* PhotoDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoDetailViewController.h; sourceTree = "<group>"; };
 		0E9838D717A2D792007CF86D /* PhotoDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoDetailViewController.m; sourceTree = "<group>"; };
 		0EAD7A9C17AAB2400021A100 /* about_content_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = about_content_bg.png; sourceTree = "<group>"; };
@@ -615,6 +624,8 @@
 				0EE450E817A6C1C900842FB9 /* LoginViewController.xib */,
 				0EAD7ACE17AABF970021A100 /* WeddingPlanViewController.h */,
 				0EAD7ACF17AABF970021A100 /* WeddingPlanViewController.m */,
+				0E9395D317B2A09B006D8EB3 /* InvitationViewController.h */,
+				0E9395D417B2A09B006D8EB3 /* InvitationViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -917,6 +928,10 @@
 				0EAD7AE517AE7C2B0021A100 /* ParseWeddingParams.m */,
 				0EAD7AE717AE7C510021A100 /* ParseEnterpriseParams.h */,
 				0EAD7AE817AE7C510021A100 /* ParseEnterpriseParams.m */,
+				0E9395CD17B29A09006D8EB3 /* ParseHotelParams.h */,
+				0E9395CE17B29A09006D8EB3 /* ParseHotelParams.m */,
+				0E9395D017B29A32006D8EB3 /* ParseInvitationParams.h */,
+				0E9395D117B29A32006D8EB3 /* ParseInvitationParams.m */,
 			);
 			path = Modal;
 			sourceTree = "<group>";
@@ -1223,6 +1238,9 @@
 				0EAD7AE317AE58360021A100 /* NSNotificationCenter+Removed.m in Sources */,
 				0EAD7AE617AE7C2B0021A100 /* ParseWeddingParams.m in Sources */,
 				0EAD7AE917AE7C510021A100 /* ParseEnterpriseParams.m in Sources */,
+				0E9395CF17B29A09006D8EB3 /* ParseHotelParams.m in Sources */,
+				0E9395D217B29A32006D8EB3 /* ParseInvitationParams.m in Sources */,
+				0E9395D517B2A09B006D8EB3 /* InvitationViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
