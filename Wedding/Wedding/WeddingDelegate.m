@@ -72,26 +72,46 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    self.window.rootViewController = [[UINavigationController alloc]initWithRootViewController:self.loginVC];
+//    self.window.rootViewController =self.tabBarViewController;// [[UINavigationController alloc]initWithRootViewController:self.tabBarViewController];
+    BOOL isLogin = [[NSUserDefaults standardUserDefaults]boolForKey:KIsLogin];
     __block WeddingDelegate *weddingDelegate = self;
-//    NSDictionary *param = @{@"op": @"user.login",@"user.simId":[UIDeviceHardware getDeviceUUID]};
-//    RequstEngine *engine = [[RequstEngine alloc]init];
-//    [engine getDataWithParam:param url:@"app/user/login" onCompletion:^(id responseData) {
-//        if ([responseData isKindOfClass:[NSDictionary class]]) {
-//        }
-//    } onError:^(int errorCode, NSString *errorMessage) {
-//        if (!errorMessage) {
-//            RegisterViewController *registerVC = [[RegisterViewController alloc]init];
-//            weddingDelegate.window.rootViewController = registerVC;
-//            [registerVC release];
-//
-//        }
-//    }];
-//    [engine release];
+    if (isLogin) {
+        self.window.rootViewController = self.tabBarViewController;
+    }else   {
+    NSDictionary *param = @{@"op": @"user.login",@"user.simId":[UIDeviceHardware getDeviceUUID]};
+    RequstEngine *engine = [[RequstEngine alloc]init];
+    [engine getDataWithParam:param url:@"app/user/login" onCompletion:^(id responseData) {
+        if ([responseData isKindOfClass:[NSDictionary class]]) {
+            
+            NSMutableData *data = [[NSMutableData alloc]init];
+            NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc]initForWritingWithMutableData:data];
+            [archiver encodeObject:responseData forKey:kLoginData];
+            [archiver finishEncoding];
+            [[NSUserDefaults standardUserDefaults]setObject:data forKey:KEnduringLoginData];
+            ParseLoginParams *loginParams = [[ParseLoginParams alloc]init];
+            [loginParams parseLogin:responseData];
+            [[NSUserDefaults standardUserDefaults]setObject:loginParams.userID forKey:KUerID];
+            [[NSUserDefaults standardUserDefaults]synchronize];
+            
+            weddingDelegate.window.rootViewController = [[UINavigationController alloc]initWithRootViewController:weddingDelegate.loginVC];
+        }
+    } onError:^(int errorCode, NSString *errorMessage) {
+        if (!errorMessage) {
+            RegisterViewController *registerVC = [[RegisterViewController alloc]init];
+            weddingDelegate.window.rootViewController = [[UINavigationController alloc]initWithRootViewController:registerVC];
+
+        }
+    }];
+    }
     [self.window makeKeyAndVisible];
     [[NSNotificationCenter defaultCenter]addObserver:Guider object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
-        [weddingDelegate.window setRootViewController:self.tabBarViewController];
+        [weddingDelegate.window setRootViewController:weddingDelegate.tabBarViewController];
     } inClass:self];
+    
+    [[NSNotificationCenter defaultCenter]addObserver:KCancelWedding object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
+        [weddingDelegate.window setRootViewController:[[UINavigationController alloc]initWithRootViewController:weddingDelegate.loginVC]];
+    } inClass:self];
+    
     return YES;
 }
 

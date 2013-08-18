@@ -7,12 +7,16 @@
 //
 
 #import "SendWishViewController.h"
+#import "RequstEngine.h"
 
 #define KToolBarHeight 44
 #define KPickerTag  1000
 #define KPlaceHolderTag 1001
 
 @interface SendWishViewController ()<UITextViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+{
+    NSData *imgData;
+}
 
 @property (nonatomic,strong) UITextView *contentView;
 @property (nonatomic,strong) UIView *toolBar;
@@ -30,11 +34,11 @@
         CGFloat height = CGRectGetHeight(self.view.frame) - 44-KToolBarHeight;
         _contentView = [[UITextView alloc]initWithFrame:CGRectMake(0, 0, 320, height)];
         _contentView.delegate = self;
-        _contentView.backgroundColor = [UIColor blueColor];
+        _contentView.backgroundColor = [UIColor colorWithHexString:@"ebe7dc"];
         UILabel *placeHolder = [[UILabel alloc]initWithFrame:CGRectMake(5, 0, 320, 20)];
         placeHolder.tag = KPlaceHolderTag;
         placeHolder.text = @"请输入祝福";
-        placeHolder.font = [UIFont systemFontOfSize:12];
+        placeHolder.font = [UIFont systemFontOfSize:14];
         placeHolder.textColor = [UIColor lightGrayColor];
         placeHolder.backgroundColor = [UIColor clearColor];
         [_contentView addSubview:placeHolder];
@@ -43,16 +47,18 @@
 }
 
 
-
-
 - (UIView *)toolBar
 {
     if (!_toolBar) {
         _toolBar = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetHeight(self.contentView.frame), 320, KToolBarHeight)];
-        [_toolBar setBackgroundColor:[UIColor yellowColor]];
+        UIImageView *backView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320, KToolBarHeight)];
+        backView.image = [UIImage imageNamed:@"tab_bg"];
+        [_toolBar addSubview:backView];
+        [_toolBar setBackgroundColor:[UIColor clearColor]];
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [btn setTitle:@"选择" forState:UIControlStateNormal];
-        btn.frame = CGRectMake(10, 0, KToolBarHeight, KToolBarHeight);
+        [btn setBackgroundImage:[UIImage imageNamed:@"camera_icon_normal"] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"camera_icon_pressed"] forState:UIControlStateHighlighted];
+        btn.frame = CGRectMake(10, 5, KToolBarHeight-10, KToolBarHeight-10);
         btn.tag = KPickerTag;
         [btn addTarget:self action:@selector(pickerImgView) forControlEvents:UIControlEventTouchUpInside];
         [_toolBar addSubview:btn];
@@ -84,6 +90,23 @@
 
 - (void)sendWish
 {
+    [Notification showWaitView:@"正在发送" animation:YES];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *userID = [defaults objectForKey:KUerID];
+    NSString *weddingID = [defaults objectForKey:KWeddingID];
+    NSDictionary *params = @{@"bless.weddingId": weddingID,@"bless.userId":userID,@"op":@"bless.send",@"bless.content":self.contentView.text};
+    __weak typeof(self) weakWish = self;
+    RequstEngine *engine = [[RequstEngine alloc]init];
+    [engine postDataWithParam:params imgData:imgData url:@"app/bless/send" onCompletion:^(id responseData) {
+        [Notification hiddenWaitView:NO];
+        if (responseData) {
+            [Notification showWaitViewInView:nil animation:YES withText:@"发送成功" withDuration:1.0f hideWhenFinish:YES showIndicator:NO completion:^{
+                [weakWish backClick];
+            }];
+        }
+    } onError:^(int errorCode, NSString *errorMessage) {
+        [Notification hiddenWaitView:NO];
+    }];
     
 }
 
@@ -106,9 +129,9 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    [self setNavigationItemNormalImage:@"send_icon_normal.png" HightImage:@"send_icon_pressed.png" selector:@selector(sendWish) isRight:YES];
-    [self setBackNavigationItemTitle:@"返回" selector:@selector(backClick)];
-    
+    [self setNavigationItemNormalImage:@"send_icon_normal.png" HightImage:@"send_icon_click.png" selector:@selector(sendWish) isRight:YES];
+//    [self setBackNavigationItemTitle:@"返回" selector:@selector(backClick)];
+    [self setDefaultBackClick:@selector(backClick)];
     [self.view addSubview:self.contentView];
     [self.view addSubview:self.toolBar];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(showKeyBoard:) name:UIKeyboardDidShowNotification object:nil];
@@ -164,8 +187,7 @@ typedef NS_ENUM(NSInteger, ActionSheetIndex){
 {
     UIImage *pickerImage = [info objectForKey:UIImagePickerControllerOriginalImage];
     [self dismissModalViewControllerAnimated:YES];
-    //    [self.personImage setImage:pickerImage forState:UIControlStateNormal];
-    //    imgeData = [UIImageJPEGRepresentation(pickerImage, 0.2)copy];
+    imgData = [UIImageJPEGRepresentation(pickerImage, 0.2)copy];
     UIButton *btn =(UIButton *) [self.toolBar viewWithTag:KPickerTag];
     [btn setImage:pickerImage forState:UIControlStateNormal];
 }

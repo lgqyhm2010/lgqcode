@@ -40,6 +40,9 @@
         if ([data jsonObjectForKey:@"info"]) {
             self.info = [data jsonObjectForKey:@"info"];
         }
+        if ([data jsonObjectForKey:@"webUrl"]) {
+            self.webUrl = [data jsonObjectForKey:@"webUrl"];
+        }
     }
     return self;
 }

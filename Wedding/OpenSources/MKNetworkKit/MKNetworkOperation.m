@@ -651,12 +651,18 @@
     [self.request setHTTPMethod:@"POST"];
   }
   
-  NSDictionary *dict = @{@"data": data,
-  @"name": key,
-  @"mimetype": mimeType,
-  @"filename": fileName};
-  
-  [self.dataToBePosted addObject:dict];
+    if (data) {
+        NSDictionary *dict = @{@"data": data,
+                               @"name": key,
+                               @"mimetype": mimeType,
+                               @"filename": fileName};
+
+        [self.dataToBePosted addObject:dict];
+
+    }else   {
+        NSDictionary *notDataDic = @{@"name": key,@"mimetype":mimeType};
+        [self.dataToBePosted addObject:notDataDic];
+    }
 }
 
 -(void) addFile:(NSString*) filePath forKey:(NSString*) key {

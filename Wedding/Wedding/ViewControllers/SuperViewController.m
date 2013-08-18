@@ -30,4 +30,15 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)backClick
+{
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
+- (void)setDefaultBackClick:(SEL)back
+{
+    SEL backClick = back?back:@selector(backClick);
+    [self setNavigationItemNormalImage:@"back_icon_normal.png" HightImage:@"back_icon_pressed.png" selector:backClick isRight:NO];
+}
+
 @end

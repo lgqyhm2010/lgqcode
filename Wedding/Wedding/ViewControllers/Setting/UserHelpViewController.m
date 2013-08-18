@@ -41,8 +41,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    [self setNavigationTitle:@"用户帮助"];
-    [self setBackNavigationItemTitle:@"返回"];
+    [self setNavigationTitle:@"关于爱浪漫"];
+    [self setDefaultBackClick:nil];
     [self.view addSubview:self.tableView];
 
 }
@@ -107,7 +107,7 @@
             
             // blue line
             UIImageView *line = [[UIImageView alloc]initWithFrame:CGRectMake(15, 0, 2, size.height+20-1)];
-            line.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"linecolor"]];
+            line.backgroundColor = [UIColor colorWithHexString:@"c63f7b"];
             [helpView addSubview:line];
             
             // text lable

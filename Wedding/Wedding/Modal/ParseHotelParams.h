@@ -19,6 +19,7 @@
 @property (nonatomic,strong) NSString *name;
 @property (nonatomic,strong) NSString *discount;
 @property (nonatomic,strong) NSString *info;
+@property (nonatomic,strong) NSString *webUrl;
 
 - (id)initWithParseData:(NSDictionary *)data;
 

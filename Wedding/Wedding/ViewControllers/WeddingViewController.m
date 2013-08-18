@@ -16,8 +16,10 @@
 #import "ParseWeddingParams.h"
 #import "ParseHotelParams.h"
 #import "ParseInvitationParams.h"
+#import "WeddingCardViewController.h"
+#import "InvitationViewController.h"
 
-#define KHeight  150
+#define KHeight  200
 
 @interface WeddingViewController ()
 {
@@ -55,7 +57,7 @@
     for (int index = 0; index<[pictures count]; index++) {
         ParsePhotoParams *params = pictures[index];
         UIImageView *imgView = [[UIImageView alloc]initWithFrame:CGRectMake(310*index, 0, 310, KHeight)];
-        [imgView setImageWithURL:[NSURL URLWithString:params.url] placeholderImage:[UIImage imageNamed:@"defaultIcon@2x"]];
+        [imgView setImageWithURL:[NSURL URLWithString:params.url] placeholderImage:[UIImage imageNamed:@"photo_bg"]];
         [self.selectionScrollerView addSubview:imgView];
     }
     
@@ -69,6 +71,7 @@
         NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc]initForReadingWithData:data];
         NSDictionary *weddingDic = [[unarchiver decodeObjectForKey:kWedding]copy];
         wedding = [[ParseWeddingParams alloc]initWithParase:weddingDic];
+        DLog(@"wedding-->%@",weddingDic);
         
         NSArray *picturesArray = [[unarchiver decodeObjectForKey:KPictures]copy];
         pictures = [[NSMutableArray alloc]initWithCapacity:pictures.count];
@@ -79,33 +82,98 @@
             [pictures addObject:photo];
         }
         
-        NSDictionary *enterpriseDic = [unarchiver decodeObjectForKey:KEnterprise];
+        NSDictionary *enterpriseDic = [[unarchiver decodeObjectForKey:KEnterprise]copy];
         enterprise = [[ParseEnterpriseParams alloc]initWithParse:enterpriseDic];
+        DLog(@"enterprise-->%@",enterpriseDic);
         
-        NSDictionary *hotelDic = [unarchiver decodeObjectForKey:KHotel];
+        NSDictionary *hotelDic = [[unarchiver decodeObjectForKey:KHotel]copy];
         hotel = [[ParseHotelParams alloc]initWithParseData:hotelDic];
+        DLog(@"hotel-->%@",hotelDic);
         
-        NSDictionary *invitationDic = [unarchiver decodeObjectForKey:KInvitation];
+        NSDictionary *invitationDic = [[unarchiver decodeObjectForKey:KInvitation]copy];
         invitation = [[ParseInvitationParams alloc]initWithParseData:invitationDic];
+        DLog(@"invitation-->%@",invitationDic);
         
         [unarchiver finishDecoding];
            }
     return self;
 }
 
+- (void)invite
+{
+    InvitationViewController *inviteVC = [[InvitationViewController alloc]init];
+    inviteVC.hotelParams = hotel;
+    [inviteVC setHidesBottomBarWhenPushed:YES];
+    [self.navigationController pushViewController:inviteVC animated:YES];
+}
+
+- (void)weddingCard
+{
+    WeddingCardViewController *weddingCardVC = [[WeddingCardViewController alloc]init];
+    weddingCardVC.weddingParams = wedding;
+    [self presentModalViewControllerMy:weddingCardVC animated:YES];
+}
+
 - (void)loadView
 {
     [super loadView];
-    CGFloat heigt = 200;
+    
+    UIImageView *backView = [[UIImageView alloc]initWithFrame:self.view.frame];
+    backView.image = [UIImage imageNamed:@"message_big_bg3.jpg"];
+    [self.view addSubview:backView];
+    
+    CGFloat heigt = KHeight + 10;
+    UIView *themeView = [[UIView alloc]initWithFrame:CGRectMake(3, heigt, 316, 40)];
+    heigt += 40;
+    themeView.backgroundColor = [UIColor colorWithHexString:@"a05a98"];
+    themeView.alpha = 0.7;
+    UILabel *info = [[UILabel alloc]initWithFrame:CGRectMake(5, 0, 300, 30)];
+    info.textAlignment = UITextAlignmentLeft;
+    info.font = [UIFont systemFontOfSize:12];
+    info.textColor = [UIColor whiteColor];
+    info.text = [wedding info];
+    info.backgroundColor = [UIColor clearColor];
+    [themeView addSubview:info];
+    
+    UILabel *labe = [[UILabel alloc]initWithFrame:CGRectMake(280, 20, 30, 20)];
+    labe.text = @"主题";
+    labe.textAlignment = UITextAlignmentRight;
+    labe.font = [UIFont systemFontOfSize:12];
+    [labe setHighlighted:YES];
+    labe.highlightedTextColor = [UIColor whiteColor];
+    labe.backgroundColor = [UIColor clearColor];
+    [themeView addSubview:labe];
+    
+    [self.view addSubview:themeView];
+    heigt += 5;
     UIButton *btn1 = [UIButton buttonWithType:UIButtonTypeCustom];
     btn1.frame = CGRectMake(0, heigt, 158, 100);
     [btn1 setBackgroundImage:[UIImage imageNamed:@"wedding_info_hotel.jpg"] forState:UIControlStateNormal];
+    [btn1 addTarget:self action:@selector(invite) forControlEvents:UIControlEventTouchUpInside];
+    UILabel *weddingScence = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 60, 20)];
+    weddingScence.text = @"婚礼现场";
+    weddingScence.textAlignment = UITextAlignmentCenter;
+    weddingScence.font = [UIFont systemFontOfSize:12];
+    weddingScence.textColor = [UIColor whiteColor];
+    weddingScence.backgroundColor = [UIColor grayColor];
+    weddingScence.alpha = 0.8;
+    [btn1 addSubview:weddingScence];
+    
     self.weddingScenceButton = btn1;
     [self.view addSubview:self.weddingScenceButton];
     
     UIButton *btn2 = [UIButton buttonWithType:UIButtonTypeCustom];
     btn2.frame = CGRectMake(162, heigt, 158, 100);
-    [btn2 setBackgroundImage:[UIImage imageNamed:@"invitation_card.jpg"] forState:UIControlStateNormal];
+    [btn2 setBackgroundImage:[UIImage imageNamed:@"wedding_info_card.jpg"] forState:UIControlStateNormal];
+    [btn2 addTarget:self action:@selector(weddingCard) forControlEvents:UIControlEventTouchUpInside];
+    UILabel *weddingCard = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 60, 20)];
+    weddingCard.text = @"婚礼请帖";
+    weddingCard.textAlignment = UITextAlignmentCenter;
+    weddingCard.font = [UIFont systemFontOfSize:12];
+    weddingCard.textColor = [UIColor whiteColor];
+    weddingCard.backgroundColor = [UIColor grayColor];
+    weddingCard.alpha = 0.8;
+    [btn2 addSubview:weddingCard];
     self.weddingInviteButton = btn2;
     [self.view addSubview:self.weddingInviteButton];
 
@@ -118,6 +186,7 @@
 - (void)aboutRomantic
 {
     WeddingPlanViewController *weddingPlanVC = [[WeddingPlanViewController alloc]init];
+    weddingPlanVC.enterpriseParams = enterprise;
     weddingPlanVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:weddingPlanVC animated:YES];
 }
@@ -127,7 +196,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     [self setNavigationTitle:@"爱浪漫"];
-    [self setNavigationItemNormalImage:@"about_icon_normal.png" HightImage:@"about_icon_pressed.png" selector:@selector(aboutRomantic) isRight:NO];
+    [self setNavigationItemNormalImage:@"about_icon_normal.png" HightImage:@"about_icon_click.png" selector:@selector(aboutRomantic) isRight:NO];
     
     [self.view addSubview:self.selectionScrollerView];
     

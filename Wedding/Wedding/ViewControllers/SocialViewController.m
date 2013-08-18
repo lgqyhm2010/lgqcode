@@ -23,8 +23,9 @@
 @property (nonatomic,retain)UIImageView *sex;
 @property (nonatomic,retain)UILabel *content;
 @property (nonatomic,retain)UILabel *createTime;
-@property (nonatomic,retain)UIView *introView;
-@property (nonatomic,retain)UIView *cellContextView;
+@property (nonatomic,retain)UIImageView *introView;
+@property (nonatomic,retain)UIImageView *cellContextView;
+@property (nonatomic,strong)UIImageView *creatTimeImg;
 
 @end
 
@@ -45,7 +46,7 @@
 {
     if (!_name) {
         _name = [[UILabel alloc]initWithFrame:CGRectMake(40, 10, 40, 15)];
-        _name.textColor = [UIColor blueColor];
+        _name.textColor = [UIColor colorWithHexString:@"b0e7dc"];
         _name.backgroundColor = [UIColor clearColor];
         _name.font = [ToolSet customNormalFontWithSize:10];
     }
@@ -76,27 +77,29 @@
 {
     if (!_createTime) {
         _createTime = [[UILabel alloc]initWithFrame:CGRectMake(250, 85, 60, 20)];
-        _createTime.textColor = [UIColor redColor];
+        _createTime.textColor = [UIColor colorWithHexString:@"ff91b4"];
         _createTime.backgroundColor = [UIColor clearColor];
         _createTime.font = [ToolSet customNormalFontWithSize:10];
     }
     return _createTime;
 }
 
-- (UIView *)introView
+- (UIImageView *)introView
 {
     if (!_introView) {
-        _introView = [[UIView alloc]initWithFrame:CGRectMake(10, 10, 80, 40)];
-        _introView.backgroundColor = [UIColor lightGrayColor];
+        _introView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 80, 40)];
+        UIImage *img = [[UIImage imageNamed:@"message_item_content_bg"]resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
+        _introView.image =img ;
     }
     return _introView;
 }
 
-- (UIView *)cellContextView
+- (UIImageView *)cellContextView
 {
     if (!_cellContextView) {
-        _cellContextView = [[UIView alloc]initWithFrame:CGRectMake(20, 30, 290, 60)];
-        _cellContextView.backgroundColor = [UIColor lightGrayColor];
+        _cellContextView = [[UIImageView alloc]initWithFrame:CGRectMake(20, 30, 290, 60)];
+        UIImage *img = [[UIImage imageNamed:@"message_item_content_bg"]resizableImageWithCapInsets:UIEdgeInsetsMake(50, 50, 50, 50)];
+        _cellContextView.image = img;
     }
     return _cellContextView;
 }
@@ -124,7 +127,9 @@ return self;
 @interface SocialViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
     BOOL isDragging;
-    BOOL isLoad;
+    BOOL isload;
+   
+    
 }
 
 @property (nonatomic,retain)UITableView *socialTableView;
@@ -134,6 +139,8 @@ return self;
 @property (nonatomic,retain)UIImageView *refreshArrow;
 @property (nonatomic,retain)UIActivityIndicatorView *refreshSpinner;
 @property (nonatomic) BOOL isLoading;
+@property (nonatomic,strong) NSString *beforeTimeStamp;
+@property (nonatomic,strong) NSString *afterTimeStamp;
 
 @end
 
@@ -157,6 +164,8 @@ return self;
         _socialTableView.delegate = self;
         _socialTableView.dataSource = self;
         _socialTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _socialTableView.backgroundView = nil;
+        _socialTableView.backgroundColor = [UIColor clearColor];
         
     }
     return _socialTableView;
@@ -215,13 +224,25 @@ return self;
         // Custom initialization
         __block SocialViewController *sociaVC = self;
         RequstEngine *engine = [[RequstEngine alloc]init];
-        NSDictionary *params = @{@"po": @"bless.getAfterTimestamp",@"bless.timeStamp":@"1371743645272",@"bless.weddingId":KUerID};
-        [engine getDataWithParam:params url:@"app/bless/getAfterTimestamp" onCompletion:^(id responseData) {
+        NSString *weddingID = [[NSUserDefaults standardUserDefaults]objectForKey:KWeddingID];
+        NSDate *date = [NSDate date];
+        NSTimeInterval timeinterval = [date timeIntervalSince1970]*1000;
+        
+        NSString *timestamp = [NSString stringWithFormat:@"%lld",(long long)timeinterval];
+        NSDictionary *params = @{@"op": @"bless.getBefortTimestamp",@"bless.timeStamp":timestamp,@"bless.weddingId":weddingID};
+        [engine getDataWithParam:params url:@"app/bless/getBefortTimestamp" onCompletion:^(id responseData) {
             if ([responseData isKindOfClass:[NSArray class]]) {
                 for (int index= 0; index<[responseData count]; index++) {
                     ParseWishingParsms *params = [[ParseWishingParsms alloc]init];
                     [params parseWishingData:responseData[index]];
                     [sociaVC.context addObject:params];
+                    if (index == 0) {
+                        sociaVC.afterTimeStamp = params.timeStamp;
+                    }
+                    if (index == [responseData count]-1) {
+                       sociaVC.beforeTimeStamp = params.timeStamp;
+
+                    }
                 }
             }
             [sociaVC.socialTableView reloadData];
@@ -251,18 +272,26 @@ return self;
 	// Do any additional setup after loading the view.
     [self setNavigationTitle:@"亲友圈"];
     [self setNavigationItemNormalImage:@"write_icon_normal.png" HightImage:@"write_icon_pressed.png" selector:@selector(sendWish) isRight:YES];
+    
+    CGFloat height = CGRectGetHeight(self.view.frame) - 88;
+    self.socialTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, height)];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    if (!isLoad) {
+    if (!isload) {
+        UIImageView *backView = [[UIImageView alloc]initWithFrame:self.view.frame];
+        backView.image = [UIImage imageNamed:@"message_big_bg3.jpg"];
+        [self.view addSubview:backView];
+//        [self.view sendSubviewToBack:backView];
         [self.refreshHeaderView addSubview:self.refreshLabel];
         [self.refreshHeaderView addSubview:self.refreshArrow];
         [self.refreshHeaderView addSubview:self.refreshSpinner];
         [self.socialTableView addSubview:self.refreshHeaderView];
         [self.view addSubview:self.socialTableView];
     }
+    isload = YES;
 }
 
 - (void)didReceiveMemoryWarning
@@ -288,7 +317,7 @@ return self;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     ParseWishingParsms *params= self.context[indexPath.row];
-    [cell.personImage setImageWithURL:[NSURL URLWithString:params.pictureUrl] placeholderImage:[UIImage imageNamed:@"defaultIcon@2x"]];
+    [cell.personImage setImageWithURL:[NSURL URLWithString:params.pictureUrl] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
     cell.name.text = params.name;
     cell.content.text = params.content;
     cell.createTime.text = params.createTime;
@@ -365,12 +394,14 @@ return self;
     // Don't forget to call stopLoading at the end.
     __block SocialViewController *sociaVC = self;
     RequstEngine *engine = [[RequstEngine alloc]init];
-    NSDictionary *params = @{@"po": @"bless.getAfterTimestamp",@"bless.timeStamp":@"1371743645272",@"bless.weddingId":KUerID};
+    NSString *userID = [[NSUserDefaults standardUserDefaults]objectForKey:KUerID];
+
+    NSDictionary *params = @{@"op": @"bless.getAfterTimestamp",@"bless.timeStamp":self.afterTimeStamp,@"bless.weddingId":userID};
     [engine getDataWithParam:params url:@"app/bless/getAfterTimestamp" onCompletion:^(id responseData) {
         if ([responseData isKindOfClass:[NSArray class]]) {
-            if (sociaVC.context) {
-                [sociaVC.context removeAllObjects];
-            }
+//            if (sociaVC.context) {
+//                [sociaVC.context removeAllObjects];
+//            }
             for (int index= 0; index<[responseData count]; index++) {
                 ParseWishingParsms *params = [[ParseWishingParsms alloc]init];
                 [params parseWishingData:responseData[index]];

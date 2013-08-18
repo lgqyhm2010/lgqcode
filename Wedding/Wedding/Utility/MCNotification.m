@@ -1,9 +1,9 @@
 //
 //  MCNotification.m
-//  Wedding
+//  CaiYun
 //
-//  Created by lgqyhm on 13-7-9.
-//  Copyright (c) 2013年 lgqyhm. All rights reserved.
+//  Created by penghanbin on 12-11-8.
+//
 //
 
 #import "MCNotification.h"
@@ -34,7 +34,7 @@ typedef void (^MCNotificationCompletionBlock)(void);
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     [super touchesBegan:touches withEvent:event];
     if (self.delegate && [self.delegate respondsToSelector:@selector(touchesEnded:withEvent:)]) {
-        //        [self.delegate touchesEnded:touches withEvent:event];
+//        [self.delegate touchesEnded:touches withEvent:event];
     }
 }
 
@@ -93,7 +93,7 @@ typedef void (^MCNotificationCompletionBlock)(void);
         _waitView=[[WaitView alloc] init];
         _waitView.userInteractionEnabled = YES;
         _waitView.backgroundColor = [UIColor colorWithWhite:(CGFloat)42/255 alpha:1.0];
-        //        [_waitView setImage:[UIImage imageNamed:@"loading_bg.png"]];
+//        [_waitView setImage:[UIImage imageNamed:@"loading_bg.png"]];
         _waitView.layer.masksToBounds = YES;
         _waitView.layer.cornerRadius = 10;
 		_waitView.hidden=YES;
@@ -210,7 +210,7 @@ typedef void (^MCNotificationCompletionBlock)(void);
     [self showWaitViewInView:self.window animation:animation withText:text withDuration:kDuration hideWhenFinish:NO showIndicator:YES];
 }
 - (void)showWaitView:(NSString*)text animation:(BOOL)animation completion:(void(^)(void))completion {
-    [self showWaitViewInView:self.window animation:animation withText:text withDuration:kDuration hideWhenFinish:NO showIndicator:YES completion:completion];
+        [self showWaitViewInView:self.window animation:animation withText:text withDuration:kDuration hideWhenFinish:NO showIndicator:YES completion:completion];
 }
 
 -(void)showWaitViewInViewByThread:(NSMutableDictionary*)params {
@@ -290,7 +290,9 @@ typedef void (^MCNotificationCompletionBlock)(void);
         [UIView animateWithDuration:kTransitionDuration animations:^{
             tmp.waitView.alpha = 1;
         } completion:^(BOOL finished) {
-            
+            if (!hideWhenFinish) {
+                if (completion) completion();
+            }
         }];
         
         
@@ -319,7 +321,7 @@ typedef void (^MCNotificationCompletionBlock)(void);
                  withText:(NSString*)text
              withDuration:(CGFloat)duration
            hideWhenFinish:(BOOL)hideWhenFinish
-            showIndicator:(BOOL)indicator runInMainThread:(BOOL)inMainThread completion:(MCNotificationCompletionBlock)completion {
+showIndicator:(BOOL)indicator runInMainThread:(BOOL)inMainThread completion:(MCNotificationCompletionBlock)completion {
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     
     [params setObject:view ? view : self.window forKey:@"view"];
@@ -356,7 +358,12 @@ typedef void (^MCNotificationCompletionBlock)(void);
             showIndicator:(BOOL)indicator
                completion:(void(^)(void))completion {
     
-    [self showWaitViewInView:view animation:animated withText:text withDuration:duration hideWhenFinish:hideWhenFinish showIndicator:indicator runInMainThread:NO completion:completion];
+        [self showWaitViewInView:view animation:animated withText:text withDuration:duration hideWhenFinish:hideWhenFinish showIndicator:indicator runInMainThread:NO completion:completion];
+}
+
+- (void)refreshWaitViewText:(NSString *)text
+{
+    self.tipsLabel.text = text;
 }
 
 -(void)showMsg:(id)delegate title:(NSString*)title message:(NSString*)msg tag:(NSInteger)tag
@@ -382,6 +389,7 @@ typedef void (^MCNotificationCompletionBlock)(void);
 }
 
 
+
 #pragma mark -
 - (id)init {
     if (self = [super init]) {
@@ -389,5 +397,7 @@ typedef void (^MCNotificationCompletionBlock)(void);
     }
     return self;
 }
+
+
 
 @end

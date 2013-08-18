@@ -8,6 +8,10 @@
 
 #import "SuperViewController.h"
 
+@class ParseHotelParams;
+
 @interface InvitationViewController : SuperViewController
+
+@property (nonatomic,strong) ParseHotelParams *hotelParams;
 
 @end

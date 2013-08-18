@@ -59,7 +59,8 @@
 
 -(void)getvieoData
 {
-    NSDictionary *param = @{@"op": @"wedding.getVideoList",@"wedding.id":KUerID};
+    NSString *weddingID = [[NSUserDefaults standardUserDefaults]objectForKey:KWeddingID];
+    NSDictionary *param = @{@"op": @"wedding.getVideoList",@"wedding.id":weddingID};
     RequstEngine *engine = [[RequstEngine alloc]init];
     if (self.videoList) {
         [self.videoList removeAllObjects];
@@ -93,7 +94,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     [self setNavigationTitle:@"视频集"];
-    [self setNavigationItemNormalImage:@"refresh_icon_normal.png" HightImage:@"refresh_icon_pressed.png" selector:@selector(getvieoData) isRight:YES];
+    [self setNavigationItemNormalImage:@"refresh_icon_normal.png" HightImage:@"refresh_icon_click.png" selector:@selector(getvieoData) isRight:YES];
 
 }
 
@@ -122,7 +123,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellIdentifier = @"cell";
-    UITableViewCell *cell = [tableView dequeueReusableHeaderFooterViewWithIdentifier:cellIdentifier];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (!cell) {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;

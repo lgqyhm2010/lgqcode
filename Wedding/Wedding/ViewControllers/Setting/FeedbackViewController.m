@@ -8,7 +8,7 @@
 
 #import "FeedbackViewController.h"
 
-@interface FeedbackViewController ()<UITextFieldDelegate,UITextViewDelegate>
+@interface FeedbackViewController ()<UITextViewDelegate>
 
 @end
 
@@ -33,10 +33,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self setNavigationTitle:@"意见反馈"];
-    [self setBackNavigationItemTitle:@"返回"];
+    [self setDefaultBackClick:nil];
     [self setRightNavigationItemTitle:@"发送" selector:@selector(sendFeedback)];
     
-    self.phoneNumberTextField.delegate = self;
     self.feedbackTextView.delegate = self;
 }
 
@@ -47,22 +46,9 @@
 }
 
 - (void)viewDidUnload {
-    [self setPhoneNumberTextField:nil];
     [self setFeedbackTextView:nil];
     [self setFeedbackLabel:nil];
     [super viewDidUnload];
-}
-
-#pragma mark uitextfield delegate
-
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
-{
-    int len = textField.text.length + string.length - range.length;
-    if (len>11) {
-        return NO;
-    }
-    return YES;
-    
 }
 
 #pragma mark textView delegate

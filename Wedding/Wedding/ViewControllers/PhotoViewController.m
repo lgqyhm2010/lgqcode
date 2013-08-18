@@ -90,7 +90,7 @@
 
 - (void)getPhotoData
 {
-    [Notification showWaitView:@"请稍等" animation:YES];
+//    [Notification showWaitView:@"请稍等" animation:YES];
     RequstEngine *engine = [[RequstEngine alloc]init];
     if (self.photoArray1) {
         [self.photoArray1 removeAllObjects];
@@ -102,7 +102,8 @@
         [self.photoArray removeAllObjects];
     }
     __block PhotoViewController *thumbVC = self;
-    NSDictionary *param = @{@"op": @"wedding.getPictureList",@"wedding.id":KUerID};
+    NSString *weddingID = [[NSUserDefaults standardUserDefaults]objectForKey:KWeddingID];
+    NSDictionary *param = @{@"op": @"wedding.getPictureList",@"wedding.id":weddingID};
     [engine getDataWithParam:param url:@"app/wedding/getPictureList" onCompletion:^(id responseData) {
         if ([responseData isKindOfClass:[NSArray class]]) {
             for (int i = 0; i<[responseData count]; i++) {
@@ -114,12 +115,13 @@
                 }else
                     [thumbVC.photoArray2 addObject:photoParse];
             }
-            [Notification hiddenWaitView:NO];
+//            [Notification hiddenWaitView:NO];
             [thumbVC.photoTableview1 reloadData];
             [thumbVC.photoTableView2 reloadData];
         }
     } onError:^(int errorCode, NSString *errorMessage) {
-        
+//        [Notification hiddenWaitView:NO];
+
     }];
 }
 
@@ -150,7 +152,7 @@
 	// Do any additional setup after loading the view.
     [self setNavigationTitle:@"婚纱照"];
     [self setRightNavigationItemTitle:@"刷新" selector:@selector(getPhotoData)];
-    [self setNavigationItemNormalImage:@"refresh_icon_normal.png" HightImage:@"refresh_icon_pressed.png" selector:@selector(getPhotoData) isRight:YES];
+    [self setNavigationItemNormalImage:@"refresh_icon_normal.png" HightImage:@"refresh_icon_click.png" selector:@selector(getPhotoData) isRight:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -182,11 +184,11 @@
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
         ParsePhotoParams *params = self.photoArray1[indexPath.row];
-        UIImage *img = [UIImage imageNamed:@"default_avatar"];
+        UIImage *img = [UIImage imageNamed:@"photo_bg"];
         UIImageView *imgView = [[UIImageView alloc]init];
         [imgView setImageWithURL:[NSURL URLWithString:params.thumbnailurl] placeholderImage:img];
         cell.backgroundView = imgView;
-        //        imgView setImageWithURL:<#(NSURL *)#> placeholderImage:<#(UIImage *)#> completed:<#^(UIImage *image, NSError *error, SDImageCacheType cacheType)completedBlock#>
+       
         return cell;
         
     }else if (tableView.tag == KPhotoTag2)  {
@@ -197,11 +199,10 @@
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
         ParsePhotoParams *params = self.photoArray2[indexPath.row];
-        UIImage *img = [UIImage imageNamed:@"default_avatar"];
+        UIImage *img = [UIImage imageNamed:@"photo_bg"];
         UIImageView *imgView = [[UIImageView alloc]init];
         [imgView setImageWithURL:[NSURL URLWithString:params.thumbnailurl] placeholderImage:img];
         cell.backgroundView = imgView;
-        //        imgView setImageWithURL:<#(NSURL *)#> placeholderImage:<#(UIImage *)#> completed:<#^(UIImage *image, NSError *error, SDImageCacheType cacheType)completedBlock#>
         return cell;
         
     }

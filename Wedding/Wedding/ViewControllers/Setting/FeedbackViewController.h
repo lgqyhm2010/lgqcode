@@ -9,7 +9,6 @@
 #import "SuperViewController.h"
 
 @interface FeedbackViewController : SuperViewController
-@property (retain, nonatomic) IBOutlet UITextField *phoneNumberTextField;
 @property (retain, nonatomic) IBOutlet UITextView *feedbackTextView;
 
 @property (retain, nonatomic) IBOutlet UILabel *feedbackLabel;

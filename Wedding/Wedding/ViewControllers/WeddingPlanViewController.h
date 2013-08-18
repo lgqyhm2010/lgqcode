@@ -8,6 +8,9 @@
 
 #import "SuperViewController.h"
 
+@class ParseEnterpriseParams;
+
 @interface WeddingPlanViewController : SuperViewController
+@property (nonatomic,strong) ParseEnterpriseParams *enterpriseParams;
 
 @end

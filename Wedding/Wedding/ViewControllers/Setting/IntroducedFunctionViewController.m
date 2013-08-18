@@ -27,7 +27,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    [self setBackNavigationItemTitle:@"返回"];
+    [self setDefaultBackClick:nil];
 }
 
 - (void)didReceiveMemoryWarning

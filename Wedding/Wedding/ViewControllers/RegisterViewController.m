@@ -8,6 +8,8 @@
 
 #import "RegisterViewController.h"
 #import "RequstEngine.h"
+#import "LoginViewController.h"
+#import "ParseLoginParams.h"
 
 @interface RegisterViewController ()<UIActionSheetDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,UITextFieldDelegate>
 {
@@ -41,6 +43,12 @@
     self.nameTextField.delegate = self;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -64,16 +72,30 @@
         [self showPromptView:@"请选择图片"];
         return ;
     }
-    if (!self.nameTextField.text.length<1) {
+    if (self.nameTextField.text.length<1) {
         [self showPromptView:@"请输入姓名"];
         return ;
     }
     [Notification showWaitView:@"正在注册" animation:YES];
-    NSString *sexName = self.sex.selectedSegmentIndex == 0?@"男":@"女";
+    NSString *sexName = self.sex.selectedSegmentIndex == 0?KMan:KWoman;//1代表男，0代表女
     NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:@"user.regist",@"op",[UIDeviceHardware getDeviceUUID],@"user.simId",self.nameTextField.text,@"user.name",sexName,@"user.sex", nil];
+   __weak RegisterViewController *weakRegister = self;
     RequstEngine *engine = [[RequstEngine alloc]init];
     [engine postDataWithParam:param imgData:imgeData url:@"app/user/regist" onCompletion:^(id responseData) {
         [Notification hiddenWaitView:NO];
+        NSMutableData *data = [[NSMutableData alloc]init];
+        NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc]initForWritingWithMutableData:data];
+        [archiver encodeObject:responseData forKey:kLoginData];
+        [archiver finishEncoding];
+        [[NSUserDefaults standardUserDefaults]setObject:data forKey:KEnduringLoginData];
+        
+        ParseLoginParams *loginParams = [[ParseLoginParams alloc]init];
+        [loginParams parseLogin:responseData];
+        [[NSUserDefaults standardUserDefaults]setObject:loginParams.userID forKey:KUerID];
+        [[NSUserDefaults standardUserDefaults]synchronize];
+        
+        LoginViewController *loginVC = [[LoginViewController alloc]init];
+        [weakRegister.navigationController pushViewController:loginVC animated:YES];
     } onError:^(int errorCode, NSString *errorMessage) {
         [Notification hiddenWaitView:NO];
         [Notification showMsgConfirm:nil title:KMsgDefault message:errorMessage tag:0];
@@ -126,7 +148,7 @@ typedef NS_ENUM(NSInteger, ActionSheetIndex){
     UIImage *pickerImage = [info objectForKey:UIImagePickerControllerOriginalImage];
     [self dismissModalViewControllerAnimatedMy:YES];
     [self.personImage setImage:pickerImage forState:UIControlStateNormal];
-    imgeData = [UIImageJPEGRepresentation(pickerImage, 0.2)copy];
+    imgeData = [UIImageJPEGRepresentation(pickerImage, 0.1)copy];
         
 }
 

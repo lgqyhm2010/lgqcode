@@ -148,7 +148,7 @@
 {
     UIButton *button =[UIButton buttonWithType:UIButtonTypeCustom];
 	button.frame=CGRectMake(0, 0, 40, 26);
-    button.imageEdgeInsets=UIEdgeInsetsMake(0,8,0,8);
+//    button.imageEdgeInsets=UIEdgeInsetsMake(0,8,0,8);
 	[button addTarget:self action:selector forControlEvents:UIControlEventTouchUpInside];
 	[button setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
     [button setImage:[UIImage imageNamed:hightImageName] forState:UIControlStateHighlighted];

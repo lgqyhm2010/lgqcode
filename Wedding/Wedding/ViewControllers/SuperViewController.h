@@ -10,4 +10,6 @@
 
 @interface SuperViewController : UIViewController
 
+- (void)setDefaultBackClick:(SEL)back;
+
 @end

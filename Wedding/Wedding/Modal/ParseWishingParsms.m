@@ -48,7 +48,9 @@
     if ([data jsonObjectForKey:@"content"]) {
         self.content = [data jsonObjectForKey:@"content"];
     }
-    
+    if ([data jsonObjectForKey:@"timeStamp"]) {
+        self.timeStamp = [data jsonObjectForKey:@"timeStamp"];
+    }
 
 }
 

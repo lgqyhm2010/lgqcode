@@ -73,7 +73,7 @@
         float ratioWidth = (float)params.width/320;
         CGRect frame = CGRectMake(0, 0, 320, params.height/ratioWidth);
         UIImageView *imgView = [[UIImageView alloc]initWithFrame:frame];
-        UIImage *img = [UIImage imageNamed:@"default_avatar"];
+        UIImage *img = [UIImage imageNamed:@"photo_bg"];
         imgView.tag = Ktag + index;
         imgView.center = CGPointMake(self.view.center.x + 320*index, CGRectGetHeight(self.view.frame)/2-10);
         NSURL *url = [NSURL URLWithString:params.url];
@@ -90,8 +90,8 @@
 	// Do any additional setup after loading the view.
     NSString *title = [NSString stringWithFormat:@"%d/%d",currenCout+1,self.photos.count ];
     [self setNavigationTitle:title];
-    [self setBackNavigationItemTitle:@"返回"];
-    [self setNavigationItemNormalImage:@"more_icon_normal.png" HightImage:@"more_icon_pressed.png" selector:@selector(moreAction) isRight:YES];
+    [self setDefaultBackClick:nil];
+    [self setNavigationItemNormalImage:@"More_Button_normal.png" HightImage:@"More_Button_click.png" selector:@selector(moreAction) isRight:YES];
 }
 
 - (void)didReceiveMemoryWarning

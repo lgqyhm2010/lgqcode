@@ -49,6 +49,7 @@
    __weak  MKNetworkOperation *op = [self operationWithURLString:urlSting params:params httpMethod:@"POST"];
     [op addData:imgData forKey:@"file"];
     [op setFreezable:YES];
+
     // 保存起以支持取消操作
     [self.operations addObject:op];
     
@@ -62,6 +63,7 @@
          NSString *responseString = completedOperation.responseString;
          
          NSDictionary *responseDictionary = [responseString objectFromJSONString];
+         DLog(@"response %@",responseDictionary);
          
          if ([responseDictionary jsonObjectForKey:@"result"]){
              id  data = [responseDictionary jsonObjectForKey:@"result"];
@@ -85,7 +87,7 @@
          [weakEnginge.operations removeObject:op];
          
          // 系统级的错误
-         //         errorBlock(NSNetCodeNetError, KNetErrorDefault);
+        errorBlock(0, nil);
      }];
     
     [self enqueueOperation:op];
@@ -197,7 +199,7 @@
          [weakEnginge.operations removeObject:op];
          
          // 系统级的错误
-//         errorBlock(NSNetCodeNetError, KNetErrorDefault);
+         errorBlock(0, nil);
      }];
     
     [self enqueueOperation:op];

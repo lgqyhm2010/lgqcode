@@ -8,10 +8,17 @@
 
 #import "PersonalInformationViewController.h"
 #import "RPCRequestEngine.h"
+#import "ParseLoginParams.h"
+#import "UIImageView+WebCache.h"
 
 #define KImage @"image"
 
-@interface PersonalInformationViewController ()<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+@interface PersonalInformationViewController ()<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIAlertViewDelegate>
+{
+    ParseLoginParams *loginParams;
+    NSData *imgData;
+    NSString *userName;
+}
 
 @property (nonatomic,retain)UITableView *informationTableView;
 @property (nonatomic,retain)NSArray *titleArray;
@@ -46,8 +53,22 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        
     }
     return self;
+}
+
+- (void)loadView
+{
+    [super loadView];
+    NSMutableData *data = [[NSUserDefaults standardUserDefaults]objectForKey:KEnduringLoginData];
+    NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc]initForReadingWithData:data];
+    NSDictionary *dic = [unarchiver decodeObjectForKey:kLoginData];
+    [unarchiver finishDecoding];
+    loginParams = [[ParseLoginParams alloc]init];
+    [loginParams parseLogin:dic];
+    userName = loginParams.name;
+    
 }
 
 - (void)viewDidLoad
@@ -55,7 +76,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     [self setNavigationTitle:@"个人信息"];
-    [self setBackNavigationItemTitle:@"返回"];
+    [self setDefaultBackClick:nil];
     
     [self.view addSubview:self.informationTableView];
 
@@ -99,21 +120,30 @@
     switch (indexPath.row) {
         case 0:
         {
-            NSData *imageData = [[NSUserDefaults standardUserDefaults]objectForKey:KImage];
-            UIImage *image = [NSKeyedUnarchiver unarchiveObjectWithData:imageData];
-            UIImageView *imgView = [[UIImageView alloc]initWithFrame:CGRectMake(210, 5, 60, 60)];
-            imgView.image = image;
-            [cell.contentView addSubview:imgView];
-        }
+            if (imgData) {
+                UIImage *img = [UIImage imageWithData:imgData];
+                UIImageView *imgView = [[UIImageView alloc]initWithFrame:CGRectMake(210, 5, 60, 60)];
+                imgView.image = img;
+                [cell.contentView addSubview:imgView];
+
+            }else   {
+                UIImageView *imgView = [[UIImageView alloc]initWithFrame:CGRectMake(210, 5, 60, 60)];
+                [imgView setImageWithURL:[NSURL URLWithString:loginParams.pictureUrl] placeholderImage:nil];
+                [cell.contentView addSubview:imgView];
+            }
+            
+                    }
             break;
     case 1:
         {
-            cell.detailTextLabel.text = @"罗国球";
+            cell.detailTextLabel.text = userName;
         }
             break;
     case 2:
         {
-            cell.detailTextLabel.text = @"男";
+            NSString *sexName = [NSString stringWithFormat:@"%@",loginParams.sex];
+            NSString *sex = [sexName isEqualToString:KMan]?@"男":@"女";
+            cell.detailTextLabel.text = sex;
         }
             break;
         default:
@@ -130,6 +160,12 @@
     if (indexPath.row == 0) {
         UIActionSheet *sheet = [[UIActionSheet alloc]initWithTitle:@"请选择类型" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"选择本地图片", nil];
         [sheet showInView:self.view];
+    }else if (indexPath.row == 1)
+    {
+        UIAlertView *changeName = [[UIAlertView alloc]initWithTitle:@"修改名字" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        changeName.alertViewStyle = UIAlertViewStylePlainTextInput;
+        [[changeName textFieldAtIndex:0]setText:userName];
+        [changeName show];
     }
     
     
@@ -177,11 +213,20 @@ typedef NS_ENUM(NSInteger, ActionSheetIndex){
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     UIImage *pickerImage = [info objectForKey:UIImagePickerControllerOriginalImage];
-    NSData *imageData = [NSKeyedArchiver archivedDataWithRootObject:pickerImage];
-    [[NSUserDefaults standardUserDefaults]setObject:imageData forKey:KImage];
+    imgData = UIImageJPEGRepresentation(pickerImage, 0.1f);
+    [self.informationTableView reloadData];
     [self dismissModalViewControllerAnimatedMy:YES];
     
 }
 
+#pragma mark alerview
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1) {
+        userName = [alertView textFieldAtIndex:0].text;
+        [self.informationTableView reloadData];
+    }
+}
 
 @end

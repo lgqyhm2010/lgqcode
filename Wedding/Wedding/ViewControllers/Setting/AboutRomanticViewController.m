@@ -59,7 +59,8 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     [self setNavigationTitle:@"关于爱浪漫"];
-    [self setBackNavigationItemTitle:@"返回"];
+//    [self setBackNavigationItemTitle:@"返回"];
+    [self setDefaultBackClick:nil];
     
     [self.view addSubview:self.aboutTableView];
 }

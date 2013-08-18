@@ -74,9 +74,11 @@ return self; \
 #define KMsgDefault @"温馨提示"
 
 #define KVersion    @"1.0"  //版本号
-
-#define KRomanticURL    @"http://42.96.170.168:8080/iRomantic/"
-#define KUerID  @"e141d3e7-f0b4-4588-9cc2-f8d1d861aef8"
+#define KMan        @"1"    //男
+#define KWoman      @"0"    //女
+#define KRomanticURL    @"http://192.168.1.104:8080/iRomantic/"//@"http://42.96.170.168:8080/iRomantic/"
+#define KUerID  @"userID"
+#define KWeddingID   @"weddingID"
 
 #define KWeddingData    @"Weddingdata"
 #define kWedding        @"Wedding"
@@ -84,6 +86,12 @@ return self; \
 #define KEnterprise     @"Enterprise"
 #define KHotel          @"Hotel"
 #define KInvitation     @"Invitation"
+
+#define KEnduringLoginData      @"EnduringLoginData"
+#define kLoginData              @"loginData"
+
+#define KIsLogin                @"login"
+#define KIsFirst                @"first"
 
 #ifndef __OPTIMIZE__
 #   define DLog(fmt, ...) {NSLog((@"\n%s [Line %d]\n " fmt @"\n\n"), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);}
@@ -96,4 +104,5 @@ return self; \
 //======================通知===============================
 
 #define Guider  @"guider" //引导图
+#define KCancelWedding   @"CancelWedding"
 
