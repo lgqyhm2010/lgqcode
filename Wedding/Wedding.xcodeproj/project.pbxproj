@@ -133,7 +133,6 @@
 		0E5AF9A6178EDB2200701BBF /* PersonalInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E5AF9A5178EDB2200701BBF /* PersonalInformationViewController.m */; };
 		0E5AF9A9178EDB8D00701BBF /* UserHelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E5AF9A8178EDB8D00701BBF /* UserHelpViewController.m */; };
 		0E5AF9AF178EDC0400701BBF /* AboutRomanticViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E5AF9AE178EDC0400701BBF /* AboutRomanticViewController.m */; };
-		0E662A3B17C273E60060D312 /* GzipUtility in Resources */ = {isa = PBXBuildFile; fileRef = 0E662A3A17C273E60060D312 /* GzipUtility */; };
 		0E675AC817B75AE6005539D7 /* send_icon_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E675AC717B75AE6005539D7 /* send_icon_normal.png */; };
 		0E675ACA17B75AF4005539D7 /* send_icon_click.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E675AC917B75AF4005539D7 /* send_icon_click.png */; };
 		0E675ACE17B76EAC005539D7 /* MCNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E675ACD17B76EAC005539D7 /* MCNotification.m */; };
@@ -425,7 +424,6 @@
 		0E5AF9AD178EDC0400701BBF /* AboutRomanticViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutRomanticViewController.h; sourceTree = "<group>"; };
 		0E5AF9AE178EDC0400701BBF /* AboutRomanticViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutRomanticViewController.m; sourceTree = "<group>"; };
 		0E5AF9B0178F059E00701BBF /* WedTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WedTabBarViewController.h; sourceTree = "<group>"; };
-		0E662A3A17C273E60060D312 /* GzipUtility */ = {isa = PBXFileReference; lastKnownFileType = folder; path = GzipUtility; sourceTree = "<group>"; };
 		0E675AC717B75AE6005539D7 /* send_icon_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = send_icon_normal.png; sourceTree = "<group>"; };
 		0E675AC917B75AF4005539D7 /* send_icon_click.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = send_icon_click.png; sourceTree = "<group>"; };
 		0E675ACC17B76EAC005539D7 /* MCNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCNotification.h; sourceTree = "<group>"; };
@@ -668,7 +666,6 @@
 		0E1C94DD178AE2D500F73021 /* OpenSources */ = {
 			isa = PBXGroup;
 			children = (
-				0E662A3A17C273E60060D312 /* GzipUtility */,
 				0E2862C717A2A9C3008D9B03 /* SDWebImage */,
 				0E1C94DE178AE2D500F73021 /* json */,
 				0E1C94EB178AE2D500F73021 /* MKNetworkKit */,
@@ -1173,7 +1170,6 @@
 				0E675ADB17B791F7005539D7 /* refresh_icon_normal.png in Resources */,
 				0E675AE617B79B14005539D7 /* Default@2x.png in Resources */,
 				0E675AE717B79B14005539D7 /* Default-568h@2x.png in Resources */,
-				0E662A3B17C273E60060D312 /* GzipUtility in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
