@@ -76,7 +76,7 @@ return self; \
 #define KVersion    @"1.0"  //版本号
 #define KMan        @"1"    //男
 #define KWoman      @"0"    //女
-#define KRomanticURL    @"http://192.168.1.104:8080/iRomantic/"//@"http://42.96.170.168:8080/iRomantic/"
+#define KRomanticURL   @"http://42.96.170.168:8080/iRomantic/" //@"http://192.168.1.104:8080/iRomantic/"//
 #define KUerID  @"userID"
 #define KWeddingID   @"weddingID"
 

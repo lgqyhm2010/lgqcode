@@ -105,6 +105,7 @@
     }
     [self.window makeKeyAndVisible];
     [[NSNotificationCenter defaultCenter]addObserver:Guider object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
+        weddingDelegate.tabBarViewController = nil;
         [weddingDelegate.window setRootViewController:weddingDelegate.tabBarViewController];
     } inClass:self];
     

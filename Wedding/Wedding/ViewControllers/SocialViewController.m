@@ -270,7 +270,7 @@ return self;
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    [self setNavigationTitle:@"亲友圈"];
+    [self setNavigationTitle:@"祝福墙"];
     [self setNavigationItemNormalImage:@"write_icon_normal.png" HightImage:@"write_icon_pressed.png" selector:@selector(sendWish) isRight:YES];
     
     CGFloat height = CGRectGetHeight(self.view.frame) - 88;

@@ -42,7 +42,7 @@
 - (UITableView *)settingTableView
 {
     if (!_settingTableView) {
-        CGFloat height = CGRectGetHeight(self.view.frame)-108;
+        CGFloat height = CGRectGetHeight(self.view.frame)-88;
         _settingTableView =[[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, height) style:UITableViewStyleGrouped];
         _settingTableView.backgroundColor = [UIColor clearColor];
         _settingTableView.backgroundView =nil;
@@ -87,7 +87,9 @@ return _settingTableView;
 	// Do any additional setup after loading the view.
     
     [self setNavigationTitle:@"设置"];
+    
     [self.view addSubview:self.settingTableView];
+    
     
 }
 

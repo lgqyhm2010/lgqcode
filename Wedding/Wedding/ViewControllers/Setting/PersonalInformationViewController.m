@@ -71,13 +71,21 @@
     
 }
 
+- (void)updateInformation
+{
+    NSString *userID = [[NSUserDefaults standardUserDefaults]objectForKey:KUerID];
+    NSDictionary *params = @{@"op": @"user.update",@"feedback.userId":userID,@"user.simId":[UIDeviceHardware getDeviceUUID],@"user.sex":loginParams.sex};
+    
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     [self setNavigationTitle:@"个人信息"];
     [self setDefaultBackClick:nil];
-    
+    [self setRightNavigationItemTitle:@"更新" selector:@selector(updateInformation)];
+
     [self.view addSubview:self.informationTableView];
 
 }

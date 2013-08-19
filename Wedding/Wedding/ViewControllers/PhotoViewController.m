@@ -153,6 +153,10 @@
     [self setNavigationTitle:@"婚纱照"];
     [self setRightNavigationItemTitle:@"刷新" selector:@selector(getPhotoData)];
     [self setNavigationItemNormalImage:@"refresh_icon_normal.png" HightImage:@"refresh_icon_click.png" selector:@selector(getPhotoData) isRight:YES];
+    
+    CGFloat height = CGRectGetHeight(self.view.frame) - 88;
+    self.photoTableview1 = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 160, height)];
+    self.photoTableView2 = [[UITableView alloc]initWithFrame:CGRectMake(160, 0, 160, height)];
 }
 
 - (void)didReceiveMemoryWarning
