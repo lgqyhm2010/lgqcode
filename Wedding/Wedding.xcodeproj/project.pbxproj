@@ -12,7 +12,6 @@
 		0E0EBE77179D5C080086620F /* RegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E0EBE75179D5C080086620F /* RegisterViewController.xib */; };
 		0E0EBE7A179D69940086620F /* HttpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E0EBE79179D69940086620F /* HttpRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		0E0EBE7D179D69C60086620F /* SuperNetworkEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E0EBE7C179D69C60086620F /* SuperNetworkEngine.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		0E0EBE81179D6A810086620F /* GzipUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E0EBE80179D6A810086620F /* GzipUtility.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		0E0EBE84179D6D5A0086620F /* RequstEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E0EBE83179D6D5A0086620F /* RequstEngine.m */; };
 		0E1C94B7178AE0AC00F73021 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E1C94B6178AE0AC00F73021 /* UIKit.framework */; };
 		0E1C94B9178AE0AC00F73021 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E1C94B8178AE0AC00F73021 /* Foundation.framework */; };
@@ -206,8 +205,6 @@
 		0E0EBE79179D69940086620F /* HttpRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpRequest.m; sourceTree = "<group>"; };
 		0E0EBE7B179D69C60086620F /* SuperNetworkEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuperNetworkEngine.h; sourceTree = "<group>"; };
 		0E0EBE7C179D69C60086620F /* SuperNetworkEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuperNetworkEngine.m; sourceTree = "<group>"; };
-		0E0EBE7F179D6A810086620F /* GzipUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GzipUtility.h; sourceTree = "<group>"; };
-		0E0EBE80179D6A810086620F /* GzipUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GzipUtility.m; sourceTree = "<group>"; };
 		0E0EBE82179D6D5A0086620F /* RequstEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequstEngine.h; sourceTree = "<group>"; };
 		0E0EBE83179D6D5A0086620F /* RequstEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequstEngine.m; sourceTree = "<group>"; };
 		0E1C94B3178AE0AC00F73021 /* Wedding.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wedding.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -533,15 +530,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0E0EBE7E179D6A810086620F /* GzipUtility */ = {
-			isa = PBXGroup;
-			children = (
-				0E0EBE7F179D6A810086620F /* GzipUtility.h */,
-				0E0EBE80179D6A810086620F /* GzipUtility.m */,
-			);
-			path = GzipUtility;
-			sourceTree = "<group>";
-		};
 		0E1C94AA178AE0AC00F73021 = {
 			isa = PBXGroup;
 			children = (
@@ -679,7 +667,6 @@
 			isa = PBXGroup;
 			children = (
 				0E2862C717A2A9C3008D9B03 /* SDWebImage */,
-				0E0EBE7E179D6A810086620F /* GzipUtility */,
 				0E1C94DE178AE2D500F73021 /* json */,
 				0E1C94EB178AE2D500F73021 /* MKNetworkKit */,
 				0E1C94FF178AE2D500F73021 /* RPC Client */,
@@ -1263,7 +1250,6 @@
 				0E0EBE76179D5C080086620F /* RegisterViewController.m in Sources */,
 				0E0EBE7A179D69940086620F /* HttpRequest.m in Sources */,
 				0E0EBE7D179D69C60086620F /* SuperNetworkEngine.m in Sources */,
-				0E0EBE81179D6A810086620F /* GzipUtility.m in Sources */,
 				0E0EBE84179D6D5A0086620F /* RequstEngine.m in Sources */,
 				0E2862E517A2A9C3008D9B03 /* MKAnnotationView+WebCache.m in Sources */,
 				0E2862E617A2A9C3008D9B03 /* NSData+GIF.m in Sources */,
