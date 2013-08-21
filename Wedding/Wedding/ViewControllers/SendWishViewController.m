@@ -98,7 +98,6 @@
     __weak typeof(self) weakWish = self;
     RequstEngine *engine = [[RequstEngine alloc]init];
     [engine postDataWithParam:params imgData:imgData url:@"app/bless/send" onCompletion:^(id responseData) {
-        [Notification hiddenWaitView:NO];
         if (responseData) {
             [Notification showWaitViewInView:nil animation:YES withText:@"发送成功" withDuration:1.0f hideWhenFinish:YES showIndicator:NO completion:^{
                 [weakWish backClick];

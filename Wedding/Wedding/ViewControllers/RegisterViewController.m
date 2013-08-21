@@ -61,6 +61,17 @@
     [sheet showInView:self.view];
 }
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (BOOL)shouldAutorotate
+{
+    return NO;
+}
+
+
 - (void)viewDidUnload {
     [self setNameTextField:nil];
     [self setSex:nil];

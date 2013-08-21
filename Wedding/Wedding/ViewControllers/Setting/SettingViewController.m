@@ -202,16 +202,18 @@ typedef enum {
                 NSDictionary *params = @{@"op": @"version.getNewVersion",@"version.type":@"1"};
                 RequstEngine *checkUpdate = [[RequstEngine alloc]init];
                 __weak typeof(self) weakSelf = self;
-                [checkUpdate getDataWithParam:params url:@"/app/version/getNewVersion" onCompletion:^(id responseData) {
-                    [Notification hiddenWaitView:NO];
+                [checkUpdate getDataWithParam:params url:@"app/version/getNewVersion" onCompletion:^(id responseData) {
                     if ([responseData isKindOfClass:[NSDictionary class]]) {
+                        [Notification hiddenWaitView:NO];
                         NSString *title = [responseData jsonObjectForKey:@"title"];
                         NSString *info = [responseData jsonObjectForKey:@"info"];
                         UIAlertView *alerView = [[UIAlertView alloc]initWithTitle:title message:info delegate:weakSelf cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
                         [alerView show];
-                    }
+                    }else
+                        [Notification showWaitViewInView:nil animation:YES withText:@"暂无新版本" withDuration:1.0 hideWhenFinish:YES showIndicator:NO];
+                    
                 } onError:^(int errorCode, NSString *errorMessage) {
-                    [Notification hiddenWaitView:NO];
+                    [Notification showWaitViewInView:nil animation:YES withText:@"请检查网络" withDuration:1.0 hideWhenFinish:YES showIndicator:NO];
                 }];
                
             }

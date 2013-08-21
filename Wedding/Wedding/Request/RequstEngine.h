@@ -27,5 +27,9 @@ typedef void (^SuccessBlock)(id responseData);
 
 - (void)postDataWithParam:(NSDictionary *)params imgData:(NSData *)imgData url:(NSString *)url onCompletion:(SuccessBlock)successBlock onError:(ErrorBlock)errorBlock;
 
+- (void)PostSendDataWithParam:(NSDictionary * )params
+                          url:(NSString *)url
+                 onCompletion:(SuccessBlock)successBlock
+                      onError:(ErrorBlock)errorBlock;
 
 @end

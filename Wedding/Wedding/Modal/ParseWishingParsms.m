@@ -51,6 +51,9 @@
     if ([data jsonObjectForKey:@"timeStamp"]) {
         self.timeStamp = [data jsonObjectForKey:@"timeStamp"];
     }
+    if ([data jsonObjectForKey:@"pictures"]) {
+        self.pictures = [data jsonObjectForKey:@"pictures"];
+    }
 
 }
 

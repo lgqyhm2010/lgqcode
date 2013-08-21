@@ -39,7 +39,13 @@
 
 - (void)openWebUrl:(UIButton *)sender
 {
-    NSURL *webUrl = [NSURL URLWithString:self.enterpriseParams.webUrl];
+    NSString *url = nil;
+    if (![self.enterpriseParams.webUrl hasPrefix:@"http://"]) {
+        url = [NSString stringWithFormat:@"http://%@",self.enterpriseParams.webUrl];
+    }else
+        url = self.enterpriseParams.webUrl;
+    NSURL *webUrl = [NSURL URLWithString:url];
+
     if ([[UIApplication sharedApplication]canOpenURL:webUrl]) {
         [[UIApplication sharedApplication]openURL:webUrl];
     }

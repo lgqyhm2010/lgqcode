@@ -133,9 +133,19 @@
     UIImageView *imgView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 300, 130)];
     [imgView setImageWithURL:[NSURL URLWithString:params.thumbnailUrl] placeholderImage:img];
     [cell.contentView addSubview:imgView];
-    UILabel *lable = [[UILabel alloc]initWithFrame:CGRectMake(15, 120, 200, 10)];
+    
+    UIImageView *playView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 35, 35)];
+    playView.center = imgView.center;
+    playView.image = [UIImage imageNamed:@"video_play_btn"];
+    [cell.contentView addSubview:playView];
+    
+    UIImageView *tabView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 150-20, 300, 20)];
+    tabView.image = [UIImage imageNamed:@"video_item_bar"];
+    [cell.contentView addSubview:tabView];
+    
+    UILabel *lable = [[UILabel alloc]initWithFrame:CGRectMake(15, 135, 200, 10)];
     lable.backgroundColor = [UIColor clearColor];
-    lable.textColor = [UIColor blackColor];
+    lable.textColor = [UIColor whiteColor];
     lable.font = [ToolSet customNormalFontWithSize:12];
     lable.text = params.info;
     [cell.contentView addSubview:lable];

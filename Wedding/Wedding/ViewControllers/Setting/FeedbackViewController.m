@@ -7,6 +7,7 @@
 //
 
 #import "FeedbackViewController.h"
+#import "RequstEngine.h"
 
 @interface FeedbackViewController ()<UITextViewDelegate>
 
@@ -16,6 +17,17 @@
 
 - (void)sendFeedback
 {
+    NSString *userID = [[NSUserDefaults standardUserDefaults]objectForKey:KUerID];
+    [Notification showWaitView:@"正在提交" animation:YES];
+    NSDictionary *params = @{@"op": @"feedback.send",@"feedback.userId":userID,@"feedback.info":self.feedbackTextView.text};
+    RequstEngine *engine = [[RequstEngine alloc]init];
+    [engine PostSendDataWithParam:params url:@"app/feedback/send" onCompletion:^(id responseData) {
+        if (responseData) {
+            [Notification showWaitViewInView:nil animation:YES withText:@"提交成功" withDuration:1.0 hideWhenFinish:YES showIndicator:NO];
+        }
+    } onError:^(int errorCode, NSString *errorMessage) {
+        [Notification hiddenWaitView:NO];
+    }];
     
 }
 
@@ -34,7 +46,7 @@
     // Do any additional setup after loading the view from its nib.
     [self setNavigationTitle:@"意见反馈"];
     [self setDefaultBackClick:nil];
-    [self setRightNavigationItemTitle:@"发送" selector:@selector(sendFeedback)];
+    [self setNavigationItemNormalImage:@"send_icon_normal.png" HightImage:@"send_icon_click.png" selector:@selector(sendFeedback) isRight:YES];
     
     self.feedbackTextView.delegate = self;
 }

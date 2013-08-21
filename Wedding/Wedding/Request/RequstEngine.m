@@ -65,8 +65,11 @@
          NSDictionary *responseDictionary = [responseString objectFromJSONString];
          DLog(@"response %@",responseDictionary);
          
-         if ([responseDictionary jsonObjectForKey:@"result"]){
+         if ([responseDictionary jsonObjectForKey:@"result"]||[responseDictionary jsonObjectForKey:@"result_code"]){
              id  data = [responseDictionary jsonObjectForKey:@"result"];
+             if (!data) {
+                 data = [responseDictionary jsonObjectForKey:@"result_code"];
+             }
              //成功回调
              successBlock(data);
          }else{
@@ -144,13 +147,68 @@
          [weakEnginge.operations removeObject:op];
          
          // 系统级的错误
-         //         errorBlock(NSNetCodeNetError, KNetErrorDefault);
+         errorBlock(0, nil);
      }];
     
     [self enqueueOperation:op];
     
 
 }
+
+- (void)PostSendDataWithParam:(NSDictionary * )params
+                     url:(NSString *)url
+            onCompletion:(SuccessBlock)successBlock
+                 onError:(ErrorBlock)errorBlock{
+    NSString *urlSting = [NSString stringWithFormat:@"%@%@",KRomanticURL,url];
+    __weak MKNetworkOperation *op = [self operationWithURLString:urlSting params:params httpMethod:@"POST"];
+    [op setPostDataEncoding:MKNKPostDataEncodingTypeCustom];
+    [op setCustomPostDataEncodingHandler:^NSString *(NSDictionary *postDataDict) {
+        return [postDataDict JSONString];
+    } forType:@"application/x-www-form-urlencoded"];
+    
+    // 保存起以支持取消操作
+    [self.operations addObject:op];
+    
+    DLog(@"%@", op);
+    __block typeof(self) weakEnginge =self;
+    
+    [op addCompletionHandler:^(MKNetworkOperation *completedOperation)
+     {
+         [weakEnginge.operations removeObject:op];
+         
+         NSString *responseString = completedOperation.responseString;
+         
+         NSDictionary *responseDictionary = [responseString objectFromJSONString];
+         
+         if ([responseDictionary jsonObjectForKey:@"result_code"]){
+             id  data = [responseDictionary jsonObjectForKey:@"result_code"];
+             //成功回调
+             successBlock(data);
+         }else{
+             // 失败
+             NSDictionary *errorDic = (NSDictionary *)[responseDictionary jsonObjectForKey:@"error"];
+             int errorCode = [[errorDic jsonObjectForKey:@"code"] intValue] ;
+             NSString *errorMessage =  [errorDic jsonObjectForKey:@"message"];
+             
+             //失败回调
+             errorBlock(errorCode, errorMessage);
+             
+         }
+         
+         
+     }errorHandler:^(MKNetworkOperation *completedOperation, NSError *error)
+     {
+         // 失败回调
+         [weakEnginge.operations removeObject:op];
+         
+         // 系统级的错误
+         errorBlock(0, nil);
+     }];
+    
+    [self enqueueOperation:op];
+    
+}
+
 
 - (void)getDataWithParam:(NSDictionary * )params
                                 url:(NSString *)url
@@ -177,8 +235,11 @@
          
          NSDictionary *responseDictionary = [responseString objectFromJSONString];
          
-         if ([responseDictionary jsonObjectForKey:@"result"]){
+         if ([responseDictionary jsonObjectForKey:@"result"]||[responseDictionary jsonObjectForKey:@"result_code"]){
              id  data = [responseDictionary jsonObjectForKey:@"result"];
+             if (!data) {
+                 data = [responseDictionary jsonObjectForKey:@"result_code"];
+             }
              //成功回调
              successBlock(data);
          }else{

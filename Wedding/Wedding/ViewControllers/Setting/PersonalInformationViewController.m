@@ -7,17 +7,19 @@
 //
 
 #import "PersonalInformationViewController.h"
-#import "RPCRequestEngine.h"
 #import "ParseLoginParams.h"
 #import "UIImageView+WebCache.h"
+#import "RequstEngine.h"
 
-#define KImage @"image"
+#define KPickerImgaeTag 1100
+#define KChangeSexTag   1101
 
 @interface PersonalInformationViewController ()<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIAlertViewDelegate>
 {
     ParseLoginParams *loginParams;
     NSData *imgData;
     NSString *userName;
+    NSString *sex;
 }
 
 @property (nonatomic,retain)UITableView *informationTableView;
@@ -68,14 +70,29 @@
     loginParams = [[ParseLoginParams alloc]init];
     [loginParams parseLogin:dic];
     userName = loginParams.name;
-    
+    sex = loginParams.sex;
 }
 
 - (void)updateInformation
 {
     NSString *userID = [[NSUserDefaults standardUserDefaults]objectForKey:KUerID];
-    NSDictionary *params = @{@"op": @"user.update",@"feedback.userId":userID,@"user.simId":[UIDeviceHardware getDeviceUUID],@"user.sex":loginParams.sex};
-    
+    NSDictionary *params = @{@"op": @"user.update",@"user.id":userID,@"user.simId":[UIDeviceHardware getDeviceUUID],@"user.name":userName,@"user.sex":sex};
+    [Notification showWaitView:@"正在更新" animation:YES];
+    RequstEngine *engine = [[RequstEngine alloc]init];
+    [engine postDataWithParam:params imgData:imgData url:@"app/user/update" onCompletion:^(id responseData) {
+        [Notification hiddenWaitView:NO];
+        if ([responseData isKindOfClass:[NSDictionary class]]) {
+            NSMutableData *data = [[NSMutableData alloc]init];
+            NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc]initForWritingWithMutableData:data];
+            [archiver encodeObject:responseData forKey:kLoginData];
+            [archiver finishEncoding];
+            [[NSUserDefaults standardUserDefaults]setObject:data forKey:KEnduringLoginData];
+            [[NSUserDefaults standardUserDefaults]synchronize];
+
+        }
+    } onError:^(int errorCode, NSString *errorMessage) {
+        [Notification hiddenWaitView:NO];
+    }];
 }
 
 - (void)viewDidLoad
@@ -84,7 +101,7 @@
 	// Do any additional setup after loading the view.
     [self setNavigationTitle:@"个人信息"];
     [self setDefaultBackClick:nil];
-    [self setRightNavigationItemTitle:@"更新" selector:@selector(updateInformation)];
+    [self setNavigationItemNormalImage:@"send_icon_normal.png" HightImage:@"send_icon_click.png" selector:@selector(updateInformation) isRight:YES];
 
     [self.view addSubview:self.informationTableView];
 
@@ -149,9 +166,9 @@
             break;
     case 2:
         {
-            NSString *sexName = [NSString stringWithFormat:@"%@",loginParams.sex];
-            NSString *sex = [sexName isEqualToString:KMan]?@"男":@"女";
-            cell.detailTextLabel.text = sex;
+            NSString *sexName = [NSString stringWithFormat:@"%@",sex];
+            NSString *sexDisPlay = [sexName isEqualToString:KMan]?@"男":@"女";
+            cell.detailTextLabel.text = sexDisPlay;
         }
             break;
         default:
@@ -167,6 +184,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.row == 0) {
         UIActionSheet *sheet = [[UIActionSheet alloc]initWithTitle:@"请选择类型" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"选择本地图片", nil];
+        sheet.tag = KPickerImgaeTag;
         [sheet showInView:self.view];
     }else if (indexPath.row == 1)
     {
@@ -174,6 +192,10 @@
         changeName.alertViewStyle = UIAlertViewStylePlainTextInput;
         [[changeName textFieldAtIndex:0]setText:userName];
         [changeName show];
+    }else if (indexPath.row == 2)   {
+        UIActionSheet *changeSex = [[UIActionSheet alloc]initWithTitle:@"修改性别" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"女",@"男", nil];
+        changeSex.tag = KChangeSexTag;
+        [changeSex showInView:self.view];
     }
     
     
@@ -187,34 +209,44 @@ typedef NS_ENUM(NSInteger, ActionSheetIndex){
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    switch (buttonIndex) {
-        case IndexCamera:
-        {
-            if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-                UIImagePickerController *imagPickerVC = [[UIImagePickerController alloc]init];
-                imagPickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
-                imagPickerVC.delegate = self;
-                [self presentModalViewControllerMy:imagPickerVC animated:YES];
-            }else
-                [Notification showMsgConfirm:self title:KMsgDefault message:KNotSuppor tag:1];
-        }
-            break;
-        case IndexAlbum:
-        {
-            if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
-                UIImagePickerController *imagPickerVC = [[UIImagePickerController alloc]init];
-                imagPickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-                imagPickerVC.delegate = self;
-                [self presentModalViewControllerMy:imagPickerVC animated:YES];
+    if (actionSheet.tag == KPickerImgaeTag) {
+        switch (buttonIndex) {
+            case IndexCamera:
+            {
+                if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+                    UIImagePickerController *imagPickerVC = [[UIImagePickerController alloc]init];
+                    imagPickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
+                    imagPickerVC.delegate = self;
+                    [self presentModalViewControllerMy:imagPickerVC animated:YES];
+                }else
+                    [Notification showMsgConfirm:self title:KMsgDefault message:KNotSuppor tag:1];
+            }
+                break;
+            case IndexAlbum:
+            {
+                if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+                    UIImagePickerController *imagPickerVC = [[UIImagePickerController alloc]init];
+                    imagPickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                    imagPickerVC.delegate = self;
+                    [self presentModalViewControllerMy:imagPickerVC animated:YES];
+                    
+                }
                 
             }
-            
+                break;
+            default:
+                break;
         }
-            break;
-        default:
-            break;
+
+    }else if (actionSheet.tag == KChangeSexTag)  {
+        if (buttonIndex != actionSheet.cancelButtonIndex) {
+            sex = [NSString stringWithFormat:@"%d",buttonIndex];
+            [self.informationTableView reloadData];
+        }
+        
     }
-}
+    
+   }
 
 #pragma mark uiimagepicker delegate
 
