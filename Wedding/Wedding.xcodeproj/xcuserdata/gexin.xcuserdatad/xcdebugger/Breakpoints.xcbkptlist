@@ -112,11 +112,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Wedding/ViewControllers/SocialViewController.m"
-         timestampString = "397904945.277222"
+         timestampString = "398791040.787808"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "414"
-         endingLineNumber = "414"
+         startingLineNumber = "435"
+         endingLineNumber = "435"
          landmarkName = "-refresh"
          landmarkType = "5">
       </FileBreakpoint>
@@ -125,24 +125,24 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Wedding/ViewControllers/SocialViewController.m"
-         timestampString = "397904945.277222"
+         timestampString = "398791040.787808"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "392"
-         endingLineNumber = "392"
-         landmarkName = "-refresh"
-         landmarkType = "5">
+         startingLineNumber = "413"
+         endingLineNumber = "413"
+         landmarkName = "@implementation SocialViewController"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Wedding/Request/RequstEngine.m"
-         timestampString = "397896518.579027"
+         timestampString = "398700461.392843"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "101"
-         endingLineNumber = "101"
+         startingLineNumber = "104"
+         endingLineNumber = "104"
          landmarkName = "-getSelectionPicWithParam:url:onCompletion:onError:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -151,11 +151,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Wedding/ViewControllers/RegisterViewController.m"
-         timestampString = "397890213.932259"
+         timestampString = "398697222.135535"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "72"
-         endingLineNumber = "72"
+         startingLineNumber = "83"
+         endingLineNumber = "83"
          landmarkName = "-registerWedding:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -164,11 +164,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Wedding/Request/RequstEngine.m"
-         timestampString = "397896518.579027"
+         timestampString = "398700461.392843"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "181"
-         endingLineNumber = "181"
+         startingLineNumber = "239"
+         endingLineNumber = "239"
          landmarkName = "-getDataWithParam:url:onCompletion:onError:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -177,11 +177,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Wedding/ViewControllers/LoginViewController.m"
-         timestampString = "397891940.967154"
+         timestampString = "398697633.386837"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "81"
-         endingLineNumber = "81"
+         startingLineNumber = "95"
+         endingLineNumber = "95"
          landmarkName = "-entranceWedding:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -190,11 +190,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Wedding/Request/RequstEngine.m"
-         timestampString = "397896518.579027"
+         timestampString = "398700461.392843"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "199"
-         endingLineNumber = "199"
+         startingLineNumber = "260"
+         endingLineNumber = "260"
          landmarkName = "-getDataWithParam:url:onCompletion:onError:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -241,19 +241,6 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "Wedding/ViewControllers/SocialViewController.m"
-         timestampString = "397904945.277222"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "234"
-         endingLineNumber = "234"
-         landmarkName = "-initWithNibName:bundle:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "Wedding/ViewControllers/WeddingCardViewController.m"
          timestampString = "398450015.086197"
          startingColumnNumber = "9223372036854775807"
@@ -261,6 +248,71 @@
          startingLineNumber = "46"
          endingLineNumber = "46"
          landmarkName = "-sendWeddingCard"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Wedding/ViewControllers/SocialViewController.m"
+         timestampString = "398789667.524119"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "265"
+         endingLineNumber = "265"
+         landmarkName = "-initWithNibName:bundle:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Wedding/ViewControllers/SocialViewController.m"
+         timestampString = "398789667.524119"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "260"
+         endingLineNumber = "260"
+         landmarkName = "-initWithNibName:bundle:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Wedding/ViewControllers/SocialViewController.m"
+         timestampString = "398791040.787808"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "421"
+         endingLineNumber = "421"
+         landmarkName = "-refresh"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Wedding/ViewControllers/SocialViewController.m"
+         timestampString = "398791078.574109"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "303"
+         endingLineNumber = "303"
+         landmarkName = "-viewWillAppear:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Wedding/ViewControllers/SocialViewController.m"
+         timestampString = "398791229.868534"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "351"
+         endingLineNumber = "351"
+         landmarkName = "-tableView:heightForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
