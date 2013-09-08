@@ -8,6 +8,7 @@
 
 #import "SendWishViewController.h"
 #import "RequstEngine.h"
+#import <objc/message.h>
 
 #define KToolBarHeight 44
 #define KPickerTag  1000
@@ -101,6 +102,9 @@
         if (responseData) {
             [Notification showWaitViewInView:nil animation:YES withText:@"发送成功" withDuration:1.0f hideWhenFinish:YES showIndicator:NO completion:^{
                 [weakWish backClick];
+                if (weakWish.delegate && [weakWish.delegate respondsToSelector:weakWish.selector]) {
+                    objc_msgSend(weakWish.delegate, weakWish.selector);
+                }
             }];
         }
     } onError:^(int errorCode, NSString *errorMessage) {
@@ -129,6 +133,7 @@
 	// Do any additional setup after loading the view.
     
     [self setNavigationItemNormalImage:@"send_icon_normal.png" HightImage:@"send_icon_click.png" selector:@selector(sendWish) isRight:YES];
+    self.navigationItem.rightBarButtonItem.enabled = NO;
 //    [self setBackNavigationItemTitle:@"返回" selector:@selector(backClick)];
     [self setDefaultBackClick:@selector(backClick)];
     [self.view addSubview:self.contentView];
@@ -197,9 +202,12 @@ typedef NS_ENUM(NSInteger, ActionSheetIndex){
 {
     UILabel *placeHolder = (UILabel *)[textView viewWithTag:KPlaceHolderTag];
     if ([textView hasText]) {
+        self.navigationItem.rightBarButtonItem.enabled = YES;
         placeHolder.hidden = YES;
-    }else
+    }else   {
         placeHolder.hidden = NO;
+        self.navigationItem.rightBarButtonItem.enabled = NO;
+    }
 }
 
 

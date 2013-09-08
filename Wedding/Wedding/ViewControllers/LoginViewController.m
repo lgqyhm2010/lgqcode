@@ -103,6 +103,7 @@
             [archiver finishEncoding];
             [defauls setObject:data forKey:KWeddingData];
             [defauls setBool:YES forKey:KIsLogin];
+            [defauls setObject:self.InviteWedding.text forKey:KWeddingInviteNumber];
             [defauls synchronize];
             GuidePhotoViewController *guiPhotoVC = [[GuidePhotoViewController alloc]init];
             [logingVC.navigationController pushViewController:guiPhotoVC animated:YES];

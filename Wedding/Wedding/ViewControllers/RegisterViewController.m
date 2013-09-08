@@ -103,6 +103,7 @@
         ParseLoginParams *loginParams = [[ParseLoginParams alloc]init];
         [loginParams parseLogin:responseData];
         [[NSUserDefaults standardUserDefaults]setObject:loginParams.userID forKey:KUerID];
+        [[NSUserDefaults standardUserDefaults]setObject:loginParams.name forKey:KuserName];
         [[NSUserDefaults standardUserDefaults]synchronize];
         
         LoginViewController *loginVC = [[LoginViewController alloc]init];

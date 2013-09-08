@@ -34,7 +34,8 @@
 @implementation PhotoViewController
 
 #pragma mark getter
-#define Height CGRectGetHeight(self.view.frame) - 88
+#define Height  CGRectGetHeight([[UIScreen mainScreen]bounds]) - 108
+
 
 - (UITableView *)photoTableview1
 {

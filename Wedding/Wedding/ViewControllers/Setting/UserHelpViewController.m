@@ -225,7 +225,7 @@
     
     UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 260, 45)];
     title.text = [self.titlesArray objectAtIndex:indexPath.row];
-    title.font = [ToolSet customBoldFontWithSize:16];
+    title.font = [ToolSet customBoldFontWithSize:14];
     title.textColor = [UIColor darkGrayColor];
     title.backgroundColor = [UIColor clearColor];
     title.tag = 200;

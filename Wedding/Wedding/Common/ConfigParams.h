@@ -77,7 +77,9 @@ return self; \
 #define KMan        @"1"    //男
 #define KWoman      @"0"    //女
 #define KRomanticURL   @"http://www.iloveuing.com/" //@"http://192.168.1.104:8080/iRomantic/"//
+#define KPicturesUpdate @"http://iromantic.oss.aliyuncs.com/bless/"
 #define KUerID  @"userID"
+#define KuserName   @"username"
 #define KWeddingID   @"weddingID"
 
 #define KWeddingData    @"Weddingdata"
@@ -92,6 +94,7 @@ return self; \
 
 #define KIsLogin                @"login"
 #define KIsFirst                @"first"
+#define KWeddingInviteNumber    @"WeddingInviteNumber"
 
 #ifndef __OPTIMIZE__
 #   define DLog(fmt, ...) {NSLog((@"\n%s [Line %d]\n " fmt @"\n\n"), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);}

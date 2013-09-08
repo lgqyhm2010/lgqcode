@@ -18,6 +18,7 @@
 #import "ParseInvitationParams.h"
 #import "WeddingCardViewController.h"
 #import "InvitationViewController.h"
+#import "UIButton+WebCache.h"
 
 #define KHeight  200
 
@@ -148,7 +149,8 @@
     heigt += 5;
     UIButton *btn1 = [UIButton buttonWithType:UIButtonTypeCustom];
     btn1.frame = CGRectMake(0, heigt, 158, 100);
-    [btn1 setBackgroundImage:[UIImage imageNamed:@"wedding_info_hotel.jpg"] forState:UIControlStateNormal];
+    [btn1 setBackgroundImageWithURL:[NSURL URLWithString:hotel.pictureUrl] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"photo_bg"]];
+//    [btn1 setBackgroundImage:[UIImage imageNamed:@"wedding_info_hotel.jpg"] forState:UIControlStateNormal];
     [btn1 addTarget:self action:@selector(invite) forControlEvents:UIControlEventTouchUpInside];
     UILabel *weddingScence = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 60, 20)];
     weddingScence.text = @"婚礼现场";

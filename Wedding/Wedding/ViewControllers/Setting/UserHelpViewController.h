@@ -13,7 +13,7 @@
 #define kTitle1 @"1、什么是爱浪漫？"
 #define kTitle2 @"2、爱浪漫有什么功能？"
 #define kTitle3 @"3、爱浪漫需要收费吗？"
-#define kTitle4 @"4、爱浪漫的图片和视频数据，在那里管理？"
+#define kTitle4 @"4、关于更多爱浪漫的官方动态，请关注！"
 
 #define Text1   @"\
 爱浪漫是一款绿色安全的婚庆软件，通过它可参与婚庆现场的互动、及时分享现场的每一个精彩瞬间。\n\
@@ -28,7 +28,8 @@
 
 #define Text3   @"你可以免费使用爱浪漫。使用过程中，客户端下载图片和视频所产生的GRPS流量费按照运营商的资费标准，由运营商收取。"
 
-#define Text4   @"你可使用电脑访问http://iRomantic.com.cn后台来管理您的婚礼内容"
+#define Text4   @"爱浪漫产品主页：http://www.iloveuing.com\n\
+微信公众账号：i-romantic"
 
 @interface UserHelpViewController : SuperViewController
 

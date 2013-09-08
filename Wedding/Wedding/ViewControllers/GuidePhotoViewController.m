@@ -51,7 +51,7 @@
 - (GuideScrollerView *)guidePhoto
 {
     if (!_guidePhoto) {
-        CGFloat height = CGRectGetHeight(self.view.frame)+20;
+        CGFloat height = CGRectGetHeight([[UIScreen mainScreen]bounds]);
         _guidePhoto = [[GuideScrollerView alloc]initWithFrame:CGRectMake(0, 0, 320, height)];
         _guidePhoto.contentSize = CGSizeMake(320*3, height);
         _guidePhoto.pagingEnabled = YES;

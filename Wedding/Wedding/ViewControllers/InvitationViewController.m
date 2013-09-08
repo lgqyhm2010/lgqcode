@@ -89,9 +89,9 @@
     infoLabel.textColor = [UIColor blueColor];
     [self.view addSubview:infoLabel];
     
-    CGFloat x = 200;
+    CGFloat x = 100;
     CGFloat height = 20;
-    CGFloat width = 100;
+    CGFloat width = 200;
     CGFloat y = CGRectGetHeight(self.view.frame) - 44-90;
     UILabel *addressLabel = [[UILabel alloc]initWithFrame:CGRectMake(x, y, width, height)];
     addressLabel.textColor = [UIColor blueColor];
@@ -109,7 +109,6 @@
     UIButton *tellPhone = [UIButton linkButtonWithTitle:self.hotelParams.tel tag:2 target:self selector:@selector(tellDial) frame:CGRectMake(x, y, width, height) font:[ToolSet customNormalFontWithSize:12] fontColor:[UIColor blueColor]];
     [self.view addSubview:tellPhone];
     
-
 }
 
 

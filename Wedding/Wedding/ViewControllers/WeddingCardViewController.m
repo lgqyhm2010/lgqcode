@@ -11,7 +11,6 @@
 #import <MessageUI/MessageUI.h>
 #import "ParseWeddingParams.h"
 
-#define KMessageContent @"afdsafdsfadfsd"
 
 @interface WeddingCardViewController ()<MFMessageComposeViewControllerDelegate>
 
@@ -46,7 +45,12 @@
     if ([MFMessageComposeViewController canSendText]) {
         MFMessageComposeViewController *message = [[MFMessageComposeViewController alloc]init];
         message.messageComposeDelegate = self;
-        [message setBody:KMessageContent];
+        NSString *userName = [[NSUserDefaults standardUserDefaults]objectForKey:KuserName];
+        NSString *inviteNumber = [[NSUserDefaults standardUserDefaults]objectForKey:KWeddingInviteNumber];
+        NSString *body = [NSString stringWithFormat:@"你的好友(%@)发了一张喜帖给你，邀请你参加一场婚礼。\n\
+                          爱浪漫下载地址：http://www.iloveuing.com/app/version/download\n\
+                          打开爱浪漫后，请使用婚礼邀请码:%@ 或者通过扫描婚礼二维码进入婚礼，有更多的浪漫事情等着你哦！",userName,inviteNumber];
+        [message setBody:body];
         [self presentModalViewControllerMy:message animated:YES];
         
     }else

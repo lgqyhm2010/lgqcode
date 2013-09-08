@@ -115,19 +115,34 @@
     return _wishImage;
 }
 
+- (void)layoutSubviews
+{
+//    [self.cellContextView addSubview:self.content];
+//    [self.cellContextView addSubview:self.wishImage];
+//    [self.contentView addSubview:self.cellContextView];
+    
+    [self.introView addSubview:self.personImage];
+    [self.introView addSubview:self.name];
+    [self.introView addSubview:self.sex];
+    [self.contentView addSubview:self.introView];
+    
+    [self.contentView addSubview:self.createTime];
+
+}
+
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        [self.cellContextView addSubview:self.content];
-        [self.cellContextView addSubview:self.wishImage];
-        [self.contentView addSubview:self.cellContextView];
-        
-        [self.introView addSubview:self.personImage];
-        [self.introView addSubview:self.name];
-        [self.introView addSubview:self.sex];
-        [self.contentView addSubview:self.introView];
-        
-        [self.contentView addSubview:self.createTime];
+//        [self.cellContextView addSubview:self.content];
+//        [self.cellContextView addSubview:self.wishImage];
+//        [self.contentView addSubview:self.cellContextView];
+//        
+//        [self.introView addSubview:self.personImage];
+//        [self.introView addSubview:self.name];
+//        [self.introView addSubview:self.sex];
+//        [self.contentView addSubview:self.introView];
+//        
+//        [self.contentView addSubview:self.createTime];
         
     }
 return self;
@@ -171,7 +186,7 @@ return self;
 - (UITableView *)socialTableView
 {
     if (!_socialTableView) {
-        CGFloat height = CGRectGetHeight(self.view.frame) - 88;
+        CGFloat height = CGRectGetHeight([[UIScreen mainScreen]bounds]) - 108;
         _socialTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, height)];
         _socialTableView.delegate = self;
         _socialTableView.dataSource = self;
@@ -244,7 +259,7 @@ return self;
         NSDictionary *params = @{@"op": @"bless.getBefortTimestamp",@"bless.timeStamp":timestamp,@"bless.weddingId":weddingID};
         [engine getDataWithParam:params url:@"app/bless/getBefortTimestamp" onCompletion:^(id responseData) {
             if ([responseData isKindOfClass:[NSArray class]]) {
-                for (int index= [responseData count]-1; index>=0; index--) {
+                for (int index= 0; index<[responseData count]; index++) {
                     ParseWishingParsms *params = [[ParseWishingParsms alloc]init];
                     [params parseWishingData:responseData[index]];
                     [sociaVC.context addObject:params];
@@ -274,6 +289,8 @@ return self;
 - (void)sendWish
 {
     SendWishViewController *sendWishVC = [[SendWishViewController alloc]init];
+    sendWishVC.delegate = self;
+    sendWishVC.selector = @selector(refresh);
     UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:sendWishVC];
     [self presentModalViewControllerMy:nav animated:YES];
 }
@@ -285,9 +302,9 @@ return self;
     [self setNavigationTitle:@"祝福墙"];
     [self setNavigationItemNormalImage:@"write_icon_normal.png" HightImage:@"write_icon_pressed.png" selector:@selector(sendWish) isRight:YES];
     
-    CGFloat height = CGRectGetHeight(self.view.frame) - 88;
-    self.socialTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, height)];
-    DLog(@"afer %@,before %@",self.afterTimeStamp,self.beforeTimeStamp);
+//    CGFloat height = CGRectGetHeight(self.view.frame) - 88;
+//    self.socialTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, height)];
+//    DLog(@"afer %@,before %@",self.afterTimeStamp,self.beforeTimeStamp);
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -331,15 +348,45 @@ return self;
     }
     ParseWishingParsms *params= self.context[indexPath.row];
     [cell.personImage setImageWithURL:[NSURL URLWithString:params.pictureUrl] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
-    if (params.pictures.length>0) {
-        cell.wishImage.frame = CGRectMake(100, 90, 80, 100);
-        [cell.wishImage setImageWithURL:[NSURL URLWithString:params.pictures] placeholderImage:[UIImage imageNamed:@"photo_bg"]];
-        cell.createTime.frame = CGRectMake(CGRectGetMidX(cell.createTime.frame), CGRectGetMidY(cell.createTime.frame), CGRectGetWidth(cell.createTime.frame), CGRectGetHeight(cell.createTime.frame) + 100);
-        cell.cellContextView.frame = CGRectMake(CGRectGetMinX(cell.cellContextView.frame), CGRectGetMinY(cell.cellContextView.frame), CGRectGetWidth(cell.cellContextView.frame), CGRectGetHeight(cell.cellContextView.frame)+100);
-    }
     cell.name.text = params.name;
-    cell.content.text = params.content;
-    cell.createTime.text = params.createTime;
+
+    UIImageView *cellContextView = (UIImageView *)[cell.contentView viewWithTag:100];
+    if (cellContextView) {
+        [cellContextView removeFromSuperview];
+    }
+    CGFloat contextHeight = [params.pictures hasSuffix:@"jpg"]?170:100;
+    cellContextView = [[UIImageView alloc]initWithFrame:CGRectMake(20, 30, 290, contextHeight)];
+    cellContextView.tag = 100;
+    UIImage *img = [[UIImage imageNamed:@"message_item_content_bg"]resizableImageWithCapInsets:UIEdgeInsetsMake(50, 50, 50, 50)];
+    cellContextView.image = img;
+    
+    CGFloat wishHeight = [params.pictures hasSuffix:@"jpg"]?70:0;
+    UIImageView *wishImage = [[UIImageView alloc]initWithFrame:CGRectMake(10, 90, 70, wishHeight)];
+    NSString *picturlUrl = [NSString stringWithFormat:@"%@%@",KPicturesUpdate,params.pictures];
+    [wishImage setImageWithURL:[NSURL URLWithString:picturlUrl] placeholderImage:[UIImage imageNamed:@"photo_bg"]];
+    [cellContextView addSubview:wishImage];
+    
+    UILabel *content = [[UILabel alloc]initWithFrame:CGRectMake(10, 20, 280, 70)];
+    content.textColor = [UIColor whiteColor];
+    content.backgroundColor = [UIColor clearColor];
+    content.numberOfLines = 0;
+    content.font = [ToolSet customNormalFontWithSize:10];
+    content.text = params.content;
+    [cellContextView addSubview:content];
+
+    [cell.contentView addSubview:cellContextView];
+    UILabel *createTime = (UILabel *)[cell.contentView viewWithTag:101];
+    if (createTime) {
+        [createTime removeFromSuperview];
+    }
+    CGFloat creatTimeY = [params.pictures hasSuffix:@"jpg"]?195:125;
+    createTime = [[UILabel alloc]initWithFrame:CGRectMake(250, creatTimeY, 60, 20)];
+    createTime.textColor = [UIColor colorWithHexString:@"ff91b4"];
+    createTime.backgroundColor = [UIColor clearColor];
+    createTime.text = params.createTime;
+    createTime.font = [ToolSet customNormalFontWithSize:10];
+    createTime.tag = 101;
+    [cell.contentView addSubview:createTime];
     
     return cell;
 }
@@ -349,8 +396,8 @@ return self;
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ParseWishingParsms *params= self.context[indexPath.row];
-    if (params.pictures.length>0) {
-        return 250;
+    if ([params.pictures hasSuffix:@"jpg"]) {
+        return 220;
     }
     return 150;
 }
@@ -417,18 +464,23 @@ return self;
     // Don't forget to call stopLoading at the end.
     __block SocialViewController *sociaVC = self;
     RequstEngine *engine = [[RequstEngine alloc]init];
-    NSString *userID = [[NSUserDefaults standardUserDefaults]objectForKey:KUerID];
+    NSString *weddingID = [[NSUserDefaults standardUserDefaults]objectForKey:KWeddingID];
 
-    NSDictionary *params = @{@"op": @"bless.getAfterTimestamp",@"bless.timeStamp":self.afterTimeStamp,@"bless.weddingId":userID};
+    NSDictionary *params = @{@"op": @"bless.getAfterTimestamp",@"bless.timeStamp":self.afterTimeStamp,@"bless.weddingId":weddingID};
     [engine getDataWithParam:params url:@"app/bless/getAfterTimestamp" onCompletion:^(id responseData) {
         if ([responseData isKindOfClass:[NSArray class]]) {
 //            if (sociaVC.context) {
 //                [sociaVC.context removeAllObjects];
 //            }
-            for (int index= [responseData count]-1; index>=0; index--) {
+            for (int index= 0; index<[responseData count]; index++) {
                 ParseWishingParsms *params = [[ParseWishingParsms alloc]init];
                 [params parseWishingData:responseData[index]];
-                [sociaVC.context addObject:params];
+                [sociaVC.context insertObject:params atIndex:0];
+                if (index == 0) {
+                    sociaVC.afterTimeStamp = params.timeStamp;
+                    
+                }
+
             }
         }
        sociaVC.isLoading = NO;

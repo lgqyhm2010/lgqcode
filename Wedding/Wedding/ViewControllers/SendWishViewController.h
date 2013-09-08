@@ -10,4 +10,7 @@
 
 @interface SendWishViewController : SuperViewController
 
+@property (nonatomic,assign) id delegate;
+@property (nonatomic,assign) SEL selector;
+
 @end

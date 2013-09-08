@@ -15,12 +15,12 @@
 #import "FeedbackViewController.h"
 #import "RequstEngine.h"
 
-#define KMessageContent @"爱浪漫"
 
-@interface SettingViewController ()<UITableViewDataSource,UITableViewDelegate,MFMessageComposeViewControllerDelegate,UIActionSheetDelegate>
+@interface SettingViewController ()<UITableViewDataSource,UITableViewDelegate,MFMessageComposeViewControllerDelegate,UIActionSheetDelegate,UIAlertViewDelegate>
 @property (nonatomic,retain) UITableView *settingTableView;
 @property (nonatomic,retain) NSArray *titles;   //所有的设置标题文案
 @property (nonatomic,strong) UIView *footView;
+@property (nonatomic,strong) NSString *updateUrl;
 
 @end
 
@@ -175,7 +175,12 @@ typedef enum {
                 if ([MFMessageComposeViewController canSendText]) {
                     MFMessageComposeViewController *message = [[MFMessageComposeViewController alloc]init];
                     message.messageComposeDelegate = self;
-                    [message setBody:KMessageContent];
+                    NSString *userName = [[NSUserDefaults standardUserDefaults]objectForKey:KuserName];
+                    NSString *inviteNumber = [[NSUserDefaults standardUserDefaults]objectForKey:KWeddingInviteNumber];
+                    NSString *body = [NSString stringWithFormat:@"你的好友(%@)发了一张喜帖给你，邀请你参加一场婚礼。\n\
+                                      爱浪漫下载地址：http://www.iloveuing.com/app/version/download\n\
+                                      打开爱浪漫后，请使用婚礼邀请码:%@ 或者通过扫描婚礼二维码进入婚礼，有更多的浪漫事情等着你哦！",userName,inviteNumber];
+                    [message setBody:body];
                     [self presentModalViewControllerMy:message animated:YES];
                     
                 }else
@@ -207,7 +212,8 @@ typedef enum {
                         [Notification hiddenWaitView:NO];
                         NSString *title = [responseData jsonObjectForKey:@"title"];
                         NSString *info = [responseData jsonObjectForKey:@"info"];
-                        UIAlertView *alerView = [[UIAlertView alloc]initWithTitle:title message:info delegate:weakSelf cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+                        weakSelf.updateUrl = [responseData jsonObjectForKey:@"url"];
+                        UIAlertView *alerView = [[UIAlertView alloc]initWithTitle:title message:info delegate:weakSelf cancelButtonTitle:@"取消" otherButtonTitles:@"下载", nil];
                         [alerView show];
                     }else
                         [Notification showWaitViewInView:nil animation:YES withText:@"暂无新版本" withDuration:1.0 hideWhenFinish:YES showIndicator:NO];
@@ -238,7 +244,7 @@ typedef enum {
     [self dismissModalViewControllerAnimatedMy:YES];
 }
 
-#pragma mark actionsheet delegate
+#pragma mark actionsheet and alerview delegate
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -246,6 +252,16 @@ typedef enum {
         [[NSUserDefaults standardUserDefaults]setBool:NO forKey:KIsLogin];
         [[NSUserDefaults standardUserDefaults]synchronize];
         [[NSNotificationCenter defaultCenter]postNotificationName:KCancelWedding object:nil];
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSURL *url = [NSURL URLWithString:self.updateUrl];
+    if (buttonIndex == alertView.firstOtherButtonIndex) {
+        if ([[UIApplication sharedApplication]canOpenURL:url]) {
+            [[UIApplication sharedApplication]openURL:url];
+        }
     }
 }
 
