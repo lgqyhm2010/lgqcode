@@ -410,19 +410,6 @@
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "Wedding/Request/RequstEngine.m"
-         timestampString = "400342798.520629"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "63"
-         endingLineNumber = "63"
-         landmarkName = "-postDataWithParam:imgData:url:onCompletion:onError:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "Wedding/ViewControllers/Setting/PersonalInformationViewController.m"
          timestampString = "400342849.291591"
          startingColumnNumber = "9223372036854775807"
