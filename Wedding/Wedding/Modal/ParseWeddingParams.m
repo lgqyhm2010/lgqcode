@@ -13,6 +13,9 @@
 - (id)initWithParase:(NSDictionary *)data
 {
     if (self = [super init]) {
+        if ([data jsonObjectForKey:@"weddingDate"]) {
+            self.weddingDate = [data jsonObjectForKey:@"weddingDate"];
+        }
         if ([data jsonObjectForKey:@"createTime"]) {
             self.createTime = [data jsonObjectForKey:@"createTime"];
         }

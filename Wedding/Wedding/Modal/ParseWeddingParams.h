@@ -10,6 +10,7 @@
 
 @interface ParseWeddingParams : NSObject
 
+@property (nonatomic,strong) NSString *weddingDate;     //婚礼时间
 @property (nonatomic,strong) NSString *createTime;      //婚礼创建时间
 @property (nonatomic,strong) NSString *skinType;        //默认皮肤
 @property (nonatomic,strong) NSString *state;           //状态
@@ -23,6 +24,8 @@
 @property (nonatomic,strong) NSString *title;           //主题
 @property (nonatomic,strong) NSString *brideInfo;       //新娘信息
 @property (nonatomic,strong) NSString *brideUrl;        //新娘照片
+
+@property (nonatomic,strong) NSString *address;
 
 - (id)initWithParase:(NSDictionary *)data;
 

@@ -89,6 +89,7 @@
         
         NSDictionary *hotelDic = [[unarchiver decodeObjectForKey:KHotel]copy];
         hotel = [[ParseHotelParams alloc]initWithParseData:hotelDic];
+        wedding.address = hotel.name;
         DLog(@"hotel-->%@",hotelDic);
         
         NSDictionary *invitationDic = [[unarchiver decodeObjectForKey:KInvitation]copy];
@@ -132,6 +133,7 @@
     info.textAlignment = UITextAlignmentLeft;
     info.font = [UIFont systemFontOfSize:12];
     info.textColor = [UIColor whiteColor];
+    info.numberOfLines = 0;
     info.text = [wedding info];
     info.backgroundColor = [UIColor clearColor];
     [themeView addSubview:info];

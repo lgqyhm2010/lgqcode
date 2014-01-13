@@ -20,8 +20,48 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     [self addBackImgView];
-    [self setDefaultNavigationBackground];
+    [self setTopNav];
+//    [self setDefaultNavigationBackground];
+    if ([self respondsToSelector:@selector(setEdgesForExtendedLayout:)])
+    {
+        // TODO: 需要适配
+        [self setEdgesForExtendedLayout:UIRectEdgeNone];
+        
+    }
 
+
+}
+
+#define KBackgroundColor [UIColor colorWithHexString:@"a05a98"]
+
+-(void)setTopNav
+{
+    if ([self.navigationController.navigationBar respondsToSelector:@selector(setBarTintColor:)])
+    {
+        // iOS7
+        // navigation bar color
+        [self.navigationController.navigationBar setBarTintColor:KBackgroundColor];
+        // navigation title color
+        [self.navigationController.navigationBar setTitleTextAttributes:@{UITextAttributeTextColor: [UIColor blackColor],
+                                                                          UITextAttributeTextShadowColor: [UIColor clearColor]}];
+        // bar button item color
+        [self.navigationController.navigationBar setTintColor:[UIColor blackColor]];
+        
+        //Default is NO on iOS 6 and earlier. Always YES if barStyle is set to UIBarStyleBlackTranslucent
+        //所以会在IOS7产生黑色边，故在此设为NO
+        [self.navigationController.navigationBar setTranslucent:NO];
+        
+        
+    }
+    else if ([self.navigationController.navigationBar respondsToSelector:@selector(setTintColor:)])
+    {
+        // iOS6
+        // navigation bar color
+        [self.navigationController.navigationBar setTintColor:KBackgroundColor];
+        // navigation title color
+        [self.navigationController.navigationBar setTitleTextAttributes:@{UITextAttributeTextColor: [UIColor blackColor],
+                                                                          UITextAttributeTextShadowColor: [UIColor clearColor]}];
+    }
 }
 
 - (void)didReceiveMemoryWarning

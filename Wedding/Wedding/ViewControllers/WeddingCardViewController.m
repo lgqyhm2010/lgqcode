@@ -92,9 +92,13 @@
     y += 20;
     
     UILabel *infoLable = [[UILabel alloc]initWithFrame:CGRectMake(50, y, 400, 20)];
-    NSString *creatTime = self.weddingParams.createTime;
-    NSString *address = self.weddingParams.info;
-    infoLable.text = [NSString stringWithFormat:@"于 %@在%@举行婚礼",creatTime,address];
+    NSString *weddingDate = self.weddingParams.weddingDate;
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:[weddingDate longLongValue]/1000];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"yyyy年MM月dd日 HH:mm"];
+    NSString *dateString = [formatter stringFromDate:date];
+    NSString *address = self.weddingParams.address;
+    infoLable.text = [NSString stringWithFormat:@"于 %@在%@举行婚礼。",dateString,address];
     infoLable.backgroundColor= [UIColor clearColor];
     infoLable.textColor = [UIColor whiteColor];
     infoLable.font = [ToolSet customNormalFontWithSize:14];

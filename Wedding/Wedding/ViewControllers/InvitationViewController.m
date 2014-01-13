@@ -81,10 +81,12 @@
     nameLabel.textColor = [UIColor blueColor];
     [self.view addSubview:nameLabel];
     
-    UILabel *infoLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, 50, 250, 100)];
+    CGSize size = [self.hotelParams.info sizeWithFont:[ToolSet customNormalFontWithSize:14] constrainedToSize:CGSizeMake(250, CGFLOAT_MAX)];
+
+    UILabel *infoLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, 50, size.width, size.height)];
     infoLabel.numberOfLines = 0;
     infoLabel.text = self.hotelParams.info;
-    infoLabel.font = [ToolSet customNormalFontWithSize:14];
+    infoLabel.font = [ToolSet customNormalFontWithSize:12];
     infoLabel.backgroundColor = [UIColor clearColor];
     infoLabel.textColor = [UIColor blueColor];
     [self.view addSubview:infoLabel];
